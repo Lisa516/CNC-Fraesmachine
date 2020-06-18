@@ -1,9 +1,9 @@
 public class Spindel {
-	public boolean spindelStatus;
+	public boolean spindelStatus = 0;
 	// 0 = aus, 1 = ein
-	public boolean SpindelDrehrichtung;
-	// 0 = im Uhrzeigersinn (Rechtslauf), 1 = gegen den Uhrzeigersinn (Linkslauf)
 	
+	public char spindelDrehrichtung = '0';
+	// 0 = aus, r = im Uhrzeigersinn (Rechtslauf), l = gegen den Uhrzeigersinn (Linkslauf)	
 	
 	public void spindelStopp() {
 		if (status == 1) {
@@ -20,6 +20,36 @@ public class Spindel {
 		}
 		else {
 			//TODO: Fehlermeldung, dass Spindel läuft 
+		}
+	}
+	
+	public String toString() {
+		String statusAusgabe;
+		String drehrichtungAusgabe;
+		if (spindelStatus == 0) {
+			statusAusgabe = "aus";
+		}
+		else {
+			statusAusgabe = "ein";
+		}
+		if (spindelDrehrichtung == 0) {
+			drehrichtungAusgabe = "Rechtslauf";
+		}
+		else {
+			drehrichtungAusgabe = "Linkslauf";
+		}
+		return (Spindelstatus)
+	}
+	
+	public _setSpindelDrehrichtung(char richtung) {
+		if (spindelStatus == 0) {
+			spindelDrehrichtung = '0'
+		}
+		else if (richtung == 'r') {
+			spindelDrehrichtung = 'r';
+		}
+		else if (richtung == 'l') {
+			spindelDrehrichtung = 'l'
 		}
 	}
 
