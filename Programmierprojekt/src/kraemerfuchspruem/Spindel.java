@@ -1,13 +1,14 @@
+package kraemerfuchspruem;
 public class Spindel {
-	public boolean spindelStatus = 0;
-	// 0 = aus, 1 = ein
+	public boolean spindelStatus = false;
+	// false = aus, true = ein
 	
 	public char spindelDrehrichtung = '0';
 	// 0 = aus, r = im Uhrzeigersinn (Rechtslauf), l = gegen den Uhrzeigersinn (Linkslauf)	
 	
 	public void spindelStopp() {
-		if (status == 1) {
-			status == 0;
+		if (spindelStatus == true) {
+			spindelStatus = false;
 		}
 		else {
 			//TODO: Fehlermeldung, dass Spindel nicht läuft
@@ -15,8 +16,8 @@ public class Spindel {
 	}
 	
 	public void spindelStart() {
-		if (status == 0) {
-			status == 0;
+		if (spindelStatus == false) {
+			spindelStatus = true;
 		}
 		else {
 			//TODO: Fehlermeldung, dass Spindel läuft 
@@ -26,7 +27,7 @@ public class Spindel {
 	public String toString() {
 		String statusAusgabe;
 		String drehrichtungAusgabe;
-		if (spindelStatus == 0) {
+		if (spindelStatus == false) {
 			statusAusgabe = "aus";
 		}
 		else {
@@ -38,18 +39,18 @@ public class Spindel {
 		else {
 			drehrichtungAusgabe = "Linkslauf";
 		}
-		return (Spindelstatus)
+		return ("Spindelstatus: " + statusAusgabe + "Drehrichtung" );
 	}
 	
-	public _setSpindelDrehrichtung(char richtung) {
-		if (spindelStatus == 0) {
-			spindelDrehrichtung = '0'
+	public void _setSpindelDrehrichtung(char richtung) {
+		if (spindelStatus == false) {
+			spindelDrehrichtung = '0';
 		}
 		else if (richtung == 'r') {
 			spindelDrehrichtung = 'r';
 		}
 		else if (richtung == 'l') {
-			spindelDrehrichtung = 'l'
+			spindelDrehrichtung = 'l';
 		}
 	}
 
