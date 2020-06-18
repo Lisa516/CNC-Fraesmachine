@@ -1,10 +1,10 @@
 public class Kuehlmittel {
 	
-private boolean _kuehlmittel;
+private boolean _anaus;
 	
-	public boolean Kuehlmittel
+	public boolean AnAus
 	{
-		get {return _kuehlmittel;}
-		set {_kuehlmittel = value;}
+		get {return _anaus;}
+		set {_anaus = value;}
 	}
 }
