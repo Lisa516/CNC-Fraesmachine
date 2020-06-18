@@ -1,6 +1,6 @@
 public class Kuehlmittel {
 	
-private boolean kuehlmittelstatus = 0;
+private boolean kuehlmittelstatus = false;
 	// 0-> Kühlmittel aus; 1-> Kühlmittel an
 	
 	public String toString()
@@ -14,6 +14,6 @@ private boolean kuehlmittelstatus = 0;
 		{
 		statusAusgabe = "ein";	
 		}
-		
+	return "Hallo";	
 	}		
 }
