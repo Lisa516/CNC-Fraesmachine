@@ -1,10 +1,19 @@
 public class Kuehlmittel {
 	
-private boolean _anaus;
+private boolean kuehlmittelstatus = 0;
+	// 0-> Kühlmittel aus; 1-> Kühlmittel an
 	
-	public boolean AnAus
+	public String toString()
 	{
-		get {return _anaus;}
-		set {_anaus = value;}
-	}
+		String statusAusgabe;
+		if (kuehlmittelstatus == 0)
+		{
+		statusAusgabe = "aus";
+		}
+		else
+		{
+		statusAusgabe = "ein";	
+		}
+		
+	}		
 }
