@@ -10,7 +10,7 @@ public class Spindel {
 			status == 0;
 		}
 		else {
-			//TODO: Fehlermeldung, dass Spindel nicht l‰uft
+			//TODO: Fehlermeldung, dass Spindel nicht l√§uft
 		}
 	}
 	
@@ -19,7 +19,7 @@ public class Spindel {
 			status == 0;
 		}
 		else {
-			//TODO: Fehlermeldung, dass Spindel l‰uft 
+			//TODO: Fehlermeldung, dass Spindel l√§uft 
 		}
 	}
 	
