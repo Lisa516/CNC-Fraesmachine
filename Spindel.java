@@ -1,11 +1,11 @@
 public class Spindel {
-	public boolean status;
+	public boolean spindelStatus;
 	// 0 = aus, 1 = ein
-	public boolean drehrichtung;
+	public boolean SpindelDrehrichtung;
 	// 0 = im Uhrzeigersinn (Rechtslauf), 1 = gegen den Uhrzeigersinn (Linkslauf)
 	
 	
-	public void stopp() {
+	public void spindelStopp() {
 		if (status == 1) {
 			status == 0;
 		}
@@ -14,7 +14,7 @@ public class Spindel {
 		}
 	}
 	
-	public void start() {
+	public void spindelStart() {
 		if (status == 0) {
 			status == 0;
 		}
