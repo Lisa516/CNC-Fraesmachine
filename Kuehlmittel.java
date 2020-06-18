@@ -1,10 +1,10 @@
 public class Kuehlmittel {
 	
-private boolean _anaus;
+private boolean _kuehlmittelstatus;
 	
-	public boolean AnAus
+	public boolean Kuehlmittelstatus
 	{
-		get {return _anaus;}
-		set {_anaus = value;}
+		get {return _kuehlmittelstatus;}
+		set {_anaus = kuehlmittelstatus;}
 	}
 }
