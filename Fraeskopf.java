@@ -8,9 +8,9 @@ public class Fraeskopf
 		set {_geschwindigkeit = value;}
 	}
 	
-	private boolean _bohrenAktiv;
+	private boolean _fräsenAktiv;
 	
-	public boolean BohrenAktiv
+	public boolean FräsenAktiv
 	{
 		get {return _bohrenAktiv;}
 		set {_bohrenAktiv = value;}
