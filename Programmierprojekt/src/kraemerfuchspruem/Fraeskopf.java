@@ -1,3 +1,5 @@
+package kraemerfuchspruem;
+
 public class Fraeskopf
 {
 	private double _geschwindigkeit;
@@ -8,9 +10,9 @@ public class Fraeskopf
 		set {_geschwindigkeit = value;}
 	}
 	
-	private boolean _fräsenAktiv;
+	private boolean _fraesenAktiv;
 	
-	public boolean FräsenAktiv
+	public boolean FraesenAktiv
 	{
 		get {return _bohrenAktiv;}
 		set {_bohrenAktiv = value;}

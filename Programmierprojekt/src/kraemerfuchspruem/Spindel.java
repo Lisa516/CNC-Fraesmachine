@@ -1,4 +1,5 @@
 package kraemerfuchspruem;
+
 public class Spindel {
 	public boolean spindelStatus = false;
 	// false = aus, true = ein
@@ -39,7 +40,7 @@ public class Spindel {
 		else {
 			drehrichtungAusgabe = "Linkslauf";
 		}
-		return ("Spindelstatus: " + statusAusgabe + "Drehrichtung" );
+		return ("Spindelstatus: " + statusAusgabe + "Drehrichtung: " + drehrichtungAusgabe);
 	}
 	
 	public void _setSpindelDrehrichtung(char richtung) {
