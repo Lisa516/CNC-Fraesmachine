@@ -2,8 +2,8 @@ package kraemerfuchspruem;
 
 public class Kuehlmittel {
 	
-private boolean kuehlmittelStatus = false;
-	// false -> Kühlmittel aus; true -> Kühlmittel an
+public boolean kuehlmittelStatus = false;
+	// false -> Kuehlmittel aus; true -> Kuehlmittel an
 	
 	public String toString()
 	{
