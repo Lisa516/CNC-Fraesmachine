@@ -40,7 +40,7 @@ public class Spindel {
 		else {
 			drehrichtungAusgabe = "Linkslauf";
 		}
-		return ("Spindelstatus: " + statusAusgabe + "Drehrichtung: " + drehrichtungAusgabe);
+		return ("Spindelstatus: " + statusAusgabe + "\n" + "Drehrichtung: " + drehrichtungAusgabe);
 	}
 	
 	public void _setSpindelDrehrichtung(char richtung) {
