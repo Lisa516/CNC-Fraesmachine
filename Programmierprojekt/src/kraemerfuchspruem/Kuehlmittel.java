@@ -19,3 +19,4 @@ public boolean kuehlmittelStatus = false;
 	return statusAusgabe;	
 	}		
 }
+//Elias

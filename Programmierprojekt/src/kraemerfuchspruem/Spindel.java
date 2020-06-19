@@ -12,7 +12,7 @@ public class Spindel {
 			spindelStatus = false;
 		}
 		else {
-			//TODO: Fehlermeldung, dass Spindel nicht läuft
+			//TODO: Fehlermeldung, dass Spindel nicht laeuft
 		}
 	}
 	
@@ -21,7 +21,7 @@ public class Spindel {
 			spindelStatus = true;
 		}
 		else {
-			//TODO: Fehlermeldung, dass Spindel läuft 
+			//TODO: Fehlermeldung, dass Spindel laeuft 
 		}
 	}
 	
@@ -56,3 +56,5 @@ public class Spindel {
 	}
 
 }
+
+//Lisa

@@ -6,6 +6,9 @@ public class Fraeskopf
 	public int schnittGeschwindigkeit;
 	public boolean fraesenStatus = false;
 	//
+	public double positionX;
+	public double positionY;
+	
 	
 	public double _getFahrGeschwindigkeit() {
 		return fahrGeschwindigkeit;
@@ -54,5 +57,32 @@ public class Fraeskopf
 			//TODO: Fehlermeldung, wenn Fraese gar nicht an war
 		}
 	}
+	
+	public void _setPositionX(double x) {
+		//TODO: Grenzen festlegen
+		positionX = x;
+	}
+	
+	public void _setPositionY(double y) {
+		//TODO: Grenzen festlegen
+		positionY = y;
+	}
+	
+	public void fraeskopfPositionieren(double x, double y) {
+		this._setPositionX(x);
+		this._setPositionY(y);
+	}
+	
+	public double _getPositionX() {
+		return positionX;
+	}
+	
+	public double _getPositionY() {
+		return positionY;
+	}
+	
+	public String _getPosition(double x, double y) {
+		return "(" + this._getPositionX() + ";" + this._getPositionY() + ")";
+	}
 }
-
+//Joshua
