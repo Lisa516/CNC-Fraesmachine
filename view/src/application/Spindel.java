@@ -1,4 +1,4 @@
-package kraemerfuchspruem;
+package application;
 
 public class Spindel {
 	public boolean spindelStatus = false;
