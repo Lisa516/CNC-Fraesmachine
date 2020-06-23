@@ -6,10 +6,12 @@ public class Fraeskopf
 	public int schnittGeschwindigkeit;
 	public boolean fraesenStatus = false;
 	//
-	public double positionX = 0;
-	public double positionY = 0;
+	public double positionX;
+	public double positionY;
 	
 	public Fraeskopf() {
+		positionX = 0;
+		positionY = 0;
 	}
 	
 	public double _getFahrGeschwindigkeit() {

@@ -1,4 +1,4 @@
-package application;
+/**package application;
 	
 
 import javafx.application.Application;
@@ -27,10 +27,4 @@ public class MainFX extends Application {
 		launch(args);
 	}
 }
-
-
-Label label1 = new Label("Name:");
-TextField textField = new TextField ();
-HBox hb = new HBox();
-hb.getChildren().addAll(label1, textField);
-hb.setSpacing(10);
+**/
