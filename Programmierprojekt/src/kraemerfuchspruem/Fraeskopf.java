@@ -6,9 +6,11 @@ public class Fraeskopf
 	public int schnittGeschwindigkeit;
 	public boolean fraesenStatus = false;
 	//
-	public double positionX;
-	public double positionY;
+	public double positionX = 0;
+	public double positionY = 0;
 	
+	public Fraeskopf() {
+	}
 	
 	public double _getFahrGeschwindigkeit() {
 		return fahrGeschwindigkeit;
@@ -81,7 +83,7 @@ public class Fraeskopf
 		return positionY;
 	}
 	
-	public String _getPosition(double x, double y) {
+	public String _getPosition() {
 		return "(" + this._getPositionX() + ";" + this._getPositionY() + ")";
 	}
 }
