@@ -12,6 +12,8 @@ public class Main extends Application {
 		final String HOME;
 		Fraeskopf fraeskopf = new Fraeskopf();
 		Kuehlmittel kuehlmittel = new Kuehlmittel();
+		int test;
+		int test2;
 	}
 	@Override
 	public void start(Stage primaryStage) {
