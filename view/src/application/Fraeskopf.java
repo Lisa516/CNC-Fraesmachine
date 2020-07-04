@@ -1,6 +1,6 @@
 package application;
 
-public class Fraeskopf
+public class Fraeskopf extends Thread
 {
 	public double fahrGeschwindigkeit;
 	public int schnittGeschwindigkeit;
