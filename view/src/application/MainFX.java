@@ -1,4 +1,4 @@
-/**package application;
+package application;
 	
 
 import javafx.application.Application;
@@ -17,7 +17,7 @@ public class MainFX extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			Label position = new Label(fraeskopf._getPosition());
+			Label position = new Label("test");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -27,4 +27,3 @@ public class MainFX extends Application {
 		launch(args);
 	}
 }
-**/
