@@ -21,6 +21,7 @@ public class Main extends Application {
 	
 public static Fraeskopf fraeskopf = new Fraeskopf();
 public static Kuehlmittel kuehlmittel = new Kuehlmittel();
+public static ErrorHandling errorHandling = new ErrorHandling();
 	
 	@Override
 	public void start(Stage primaryStage) {

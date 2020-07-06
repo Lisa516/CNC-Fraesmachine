@@ -49,7 +49,7 @@ public class Fraeskopf extends Thread
 			fraesenStatus = true;
 		}
 		else {
-			//TODO: Fehlermeldung, wenn Fraese bereits angeschaltet
+			ErrorHandling.fraeskopfRunning();
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class Fraeskopf extends Thread
 			fraesenStatus = false;
 		}
 		else {
-			//TODO: Fehlermeldung, wenn Fraese gar nicht an war
+			ErrorHandling.fraeskopfStopped();
 		}
 	}
 	

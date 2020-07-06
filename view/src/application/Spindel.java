@@ -12,7 +12,7 @@ public class Spindel extends Thread{
 			spindelStatus = false;
 		}
 		else {
-			//TODO: Fehlermeldung, dass Spindel nicht laeuft
+			ErrorHandling.spindelStopped();
 		}
 	}
 	
@@ -21,7 +21,7 @@ public class Spindel extends Thread{
 			spindelStatus = true;
 		}
 		else {
-			//TODO: Fehlermeldung, dass Spindel laeuft 
+			ErrorHandling.spindelRunning();
 		}
 	}
 	
