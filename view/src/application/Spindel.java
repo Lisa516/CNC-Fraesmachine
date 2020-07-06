@@ -1,6 +1,6 @@
 package application;
 
-public class Spindel {
+public class Spindel extends Thread{
 	public boolean spindelStatus = false;
 	// false = aus, true = ein
 	
@@ -53,6 +53,10 @@ public class Spindel {
 		else if (richtung == 'l') {
 			spindelDrehrichtung = 'l';
 		}
+	}
+	
+	public void run() {
+		//TODO: Insert Thread Actions here
 	}
 
 }
