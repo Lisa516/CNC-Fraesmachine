@@ -37,6 +37,10 @@ public boolean kuehlmittelStatus = false;
 		}
 	}
 	
+	public void run() {
+		//TODO: Insert Thread Actions here
+	}
+	
 }
 //Elias
 //Joshi

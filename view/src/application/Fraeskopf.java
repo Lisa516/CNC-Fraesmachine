@@ -88,5 +88,9 @@ public class Fraeskopf extends Thread
 	public String _getPosition() {
 		return "(" + this._getPositionX() + ";" + this._getPositionY() + ")";
 	}
+	
+	public void run() {
+		//TODO: Insert Thread Actions here
+	}
 }
 //Joshua
