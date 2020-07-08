@@ -5,7 +5,7 @@ public class Spindel extends Thread{
 	// false = aus, true = ein
 	
 	public char spindelDrehrichtung = '0';
-	// 0 = aus, r = im Uhrzeigersinn (Rechtslauf), l = gegen den Uhrzeigersinn (Linkslauf)	
+	//0 = aus, r = im Uhrzeigersinn (Rechtslauf), l = gegen den Uhrzeigersinn (Linkslauf)	
 	
 	public void spindelStopp() {
 		if (spindelStatus == true) {
