@@ -89,6 +89,15 @@ public class Fraeskopf extends Thread
 		return "(" + this._getPositionX() + ";" + this._getPositionY() + ")";
 	}
 	
+	public String _getGeschwindigkeit() {
+		if (fraesenStatus == true) {
+			return (_getSchnittGeschwindigkeit() + " ");
+		}
+		else {
+			return (_getFahrGeschwindigkeit() + " ");
+		}
+	}
+	
 	public void run() {
 		//TODO: Insert Thread Actions here
 	}
