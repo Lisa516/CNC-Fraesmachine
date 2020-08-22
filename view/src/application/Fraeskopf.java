@@ -1,13 +1,12 @@
 package application;
 
-public class Fraeskopf extends Thread
-{
+public class Fraeskopf implements Runnable {
 	public double fahrGeschwindigkeit;
 	public int schnittGeschwindigkeit;
 	public boolean fraesenStatus = false;
 	//
-	public double positionX;
-	public double positionY;
+	public static double positionX;
+	public static double positionY;
 	
 	public Fraeskopf() {
 		positionX = 0;
@@ -62,14 +61,22 @@ public class Fraeskopf extends Thread
 		}
 	}
 	
-	public void _setPositionX(double x) {
-		//TODO: Grenzen festlegen
-		positionX = x;
+	public static void _setPositionX(double x) {
+		if(x > 0 && x < 1400) {
+			positionX = x;
+		}
+		else {
+			ErrorHandling.OutOfRangeX(x);
+		}
 	}
 	
-	public void _setPositionY(double y) {
-		//TODO: Grenzen festlegen
-		positionY = y;
+	public static void _setPositionY(double y) {
+		if(y > 0 && y < 1050) {
+			positionY = y;
+		}
+		else {
+			ErrorHandling.OutOfRangeY(y);
+		}
 	}
 	
 	public void fraeskopfPositionieren(double x, double y) {

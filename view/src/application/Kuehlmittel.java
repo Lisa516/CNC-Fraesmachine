@@ -1,6 +1,6 @@
 package application;
 
-public class Kuehlmittel extends Thread {
+public class Kuehlmittel implements Runnable {
 	
 public boolean kuehlmittelStatus = false;
 	// false -> Kuehlmittel aus; true -> Kuehlmittel an
