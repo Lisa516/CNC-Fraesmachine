@@ -1,6 +1,6 @@
 package application;
 
-public class Spindel extends Thread{
+public class Spindel implements Runnable {
 	public boolean spindelStatus = false;
 	// false = aus, true = ein
 	
