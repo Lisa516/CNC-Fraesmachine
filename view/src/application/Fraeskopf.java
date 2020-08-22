@@ -48,7 +48,7 @@ public class Fraeskopf implements Runnable {
 			fraesenStatus = true;
 		}
 		else {
-			//TODO: Fehlermeldung, wenn Fraese bereits angeschaltet
+			ErrorHandling.fraeskopfRunning();
 		}
 	}
 	
@@ -57,7 +57,7 @@ public class Fraeskopf implements Runnable {
 			fraesenStatus = false;
 		}
 		else {
-			//TODO: Fehlermeldung, wenn Fraese gar nicht an war
+			ErrorHandling.fraeskopfStopped();
 		}
 	}
 	

@@ -5,14 +5,14 @@ public class Spindel implements Runnable {
 	// false = aus, true = ein
 	
 	public char spindelDrehrichtung = '0';
-	// 0 = aus, r = im Uhrzeigersinn (Rechtslauf), l = gegen den Uhrzeigersinn (Linkslauf)	
+	//0 = aus, r = im Uhrzeigersinn (Rechtslauf), l = gegen den Uhrzeigersinn (Linkslauf)	
 	
 	public void spindelStopp() {
 		if (spindelStatus == true) {
 			spindelStatus = false;
 		}
 		else {
-			//TODO: Fehlermeldung, dass Spindel nicht laeuft
+			ErrorHandling.spindelStopped();
 		}
 	}
 	
@@ -21,7 +21,7 @@ public class Spindel implements Runnable {
 			spindelStatus = true;
 		}
 		else {
-			//TODO: Fehlermeldung, dass Spindel laeuft 
+			ErrorHandling.spindelRunning();
 		}
 	}
 	
