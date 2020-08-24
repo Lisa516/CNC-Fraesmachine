@@ -5,35 +5,57 @@ public class ErrorHandling extends Thread{
   public ErrorHandling() {
   }
 	
-	public static String OutOfRangeX(double value) {
+	public static String OutOfRangeX(int value) {
 		Fraeskopf._setPositionX(0);
-		return value + "Dieser Wert ist horizontal außerhalb der Arbeitsfläche, geben Sie einen Wert unter 1400 ein.";
+		Fraeskopf._setPositionY(0);
+		return value + "Dieser Wert ist horizontal ausserhalb der Arbeitsflaeche, geben Sie einen Wert unter 1400 ein.";
 	}
 	
-	public static String OutOfRangeY(double value) {
+	public static String OutOfRangeY(int value) {
 		Fraeskopf._setPositionY(0);
-		return value + "Dieser Wert ist horizontal außerhalb der Arbeitsfläche, geben Sie einen Wert unter 1050 ein.";
+		Fraeskopf._setPositionX(0);
+		return value + "Dieser Wert ist horizontal ausserhalb der Arbeitsflaeche, geben Sie einen Wert unter 1050 ein.";
+	}
+	
+	public static String OutOfRange() {
+		Fraeskopf._setPositionY(0);
+		Fraeskopf._setPositionX(0);
+		return "Dieser Ort ist ausserhalb der Arbeitsflaeche";
+	}
 
 	
 	public static String fraeskopfRunning() {
-		//TODO: Rephrase following
-		return "Der Fraeskopf wurde versucht anzuschalten, obwohl er bereits läuft.";
+		return "Der Fraeskopf wurde versucht anzuschalten, obwohl er bereits laeuft.";
 	}
 	
 	public static String fraeskopfStopped() {
-		//TODO: Rephrase following
 		return "Der Fraeskopf wurde versucht auszuschalten, obwohl er nicht lief.";
 	}
 	
 	public static String spindelStopped() {
-		//TODO: Rephrase following
 		return "Die Spindel wurde versucht auszuschalten, obwohl sie nicht lief.";
 	}
 	
 	public static String spindelRunning() {
-		//TODO: Rephrase following
-		return "Die Spindel wurde versucht anzuschalten, obwohl sie läuft.";
+		return "Die Spindel wurde versucht anzuschalten, obwohl sie laeuft.";
 	}
+	
+	public static String spindelAus() {
+		return "Die Drehrichtung kann nicht geaendert werden, wenn die Spindel aus ist.";
+	}
+	
+	public static String befehlUnmoeglichFraeseAn() {
+		return "Dieser Befehl kann nicht ausgefuehrt werden, da die Fraese an ist";
+	}
+	
+	public static String befehlUnmoeglichFraeseAus() {
+		return "Dieser Befehl kann nicht ausgefuehrt werden, da die Fraese aus ist";
+	}
+	
+	public static String ungueltigeDrehrichtung(char eingabe) {
+		return eingabe + "ist keine gueltige Drehrichtung. Erlaubt sind l oder r";
+	}
+	
 	
 	public void run() {
 		

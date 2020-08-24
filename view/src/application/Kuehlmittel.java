@@ -2,11 +2,10 @@ package application;
 
 public class Kuehlmittel implements Runnable {
 	
-public boolean kuehlmittelStatus = false;
+public static boolean kuehlmittelStatus = false;
 	// false -> Kuehlmittel aus; true -> Kuehlmittel an
 	
-	public String toString()
-	{
+	public static String _getStatus() {
 		String statusAusgabe;
 		if (kuehlmittelStatus == false)
 		{
@@ -28,7 +27,7 @@ public boolean kuehlmittelStatus = false;
 		}
 	}
 	
-	public void _setKuehlmittelStatus(boolean status) {
+	public static void _setKuehlmittelStatus(boolean status) {
 		if (status == true) {
 			kuehlmittelStatus = true;
 		}
