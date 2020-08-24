@@ -1,9 +1,9 @@
 package application;
 
 public class Fraeskopf implements Runnable {
-	public double fahrGeschwindigkeit;
-	public int schnittGeschwindigkeit;
-	public boolean fraesenStatus = false;
+	public static double fahrGeschwindigkeit;
+	public static int schnittGeschwindigkeit;
+	public static boolean fraesenStatus = false;
 	//
 	public static double positionX;
 	public static double positionY;
@@ -13,15 +13,15 @@ public class Fraeskopf implements Runnable {
 		positionY = 0;
 	}
 	
-	public double _getFahrGeschwindigkeit() {
+	public static double _getFahrGeschwindigkeit() {
 		return fahrGeschwindigkeit;
 	}
 	
-	public void _setFahrGeschwindigkeit(double v) {
+	public static void _setFahrGeschwindigkeit(double v) {
 		fahrGeschwindigkeit = v;
 	}
 	
-	public int _getSchnittGeschwindigkeit() {
+	public static int _getSchnittGeschwindigkeit() {
 		return schnittGeschwindigkeit;
 	}
 	
@@ -34,7 +34,16 @@ public class Fraeskopf implements Runnable {
 		}
 	}
 	
-	public String _getFraesenStatus() {
+	public static double _getGeschwindigkeit(boolean fraesenStatus) {
+		if (fraesenStatus == true) {
+			return _getSchnittGeschwindigkeit();
+		}
+		else {
+			return _getFahrGeschwindigkeit();
+		}
+	}
+	
+	public static String _getFraesenStatus() {
 		if (fraesenStatus == false) {
 			return "Die Fräse ist aus";
 		}
@@ -52,7 +61,7 @@ public class Fraeskopf implements Runnable {
 		}
 	}
 	
-	public void stoppFraese() {
+	public static void stoppFraese() {
 		if (fraesenStatus == true) {
 			fraesenStatus = false;
 		}
@@ -61,7 +70,7 @@ public class Fraeskopf implements Runnable {
 		}
 	}
 	
-	public static void _setPositionX(double x) {
+	public static void _setPositionX(int x) {
 		if(x > 0 && x < 1400) {
 			positionX = x;
 		}
@@ -70,7 +79,7 @@ public class Fraeskopf implements Runnable {
 		}
 	}
 	
-	public static void _setPositionY(double y) {
+	public static void _setPositionY(int y) {
 		if(y > 0 && y < 1050) {
 			positionY = y;
 		}
@@ -79,24 +88,24 @@ public class Fraeskopf implements Runnable {
 		}
 	}
 	
-	public void fraeskopfPositionieren(double x, double y) {
-		this._setPositionX(x);
-		this._setPositionY(y);
+	public void fraeskopfPositionieren(int x, int y) {
+		_setPositionX(x);
+		_setPositionY(y);
 	}
 	
-	public double _getPositionX() {
+	public static double _getPositionX() {
 		return positionX;
 	}
 	
-	public double _getPositionY() {
+	public static double _getPositionY() {
 		return positionY;
 	}
 	
-	public String _getPosition() {
-		return "(" + this._getPositionX() + ";" + this._getPositionY() + ")";
+	public static String _getPosition() {
+		return "(" + _getPositionX() + ";" + _getPositionY() + ")";
 	}
 	
-	public String _getGeschwindigkeit() {
+	public static String _getGeschwindigkeit() {
 		if (fraesenStatus == true) {
 			return (_getSchnittGeschwindigkeit() + " ");
 		}

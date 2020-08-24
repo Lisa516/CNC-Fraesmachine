@@ -1,10 +1,15 @@
 package application;
 
 import javafx.application.Application;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -13,13 +18,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class MainFX extends Application {
 	
-	public static Fraeskopf fraeskopf = new Fraeskopf();
+/**	public static Fraeskopf fraeskopf = new Fraeskopf();
 	public static Kuehlmittel kuehlmittel = new Kuehlmittel();
 	public static Spindel spindel = new Spindel();
-	//ErrorHandling??
+	public static ErrorHandling errorHandler = new ErrorHandling();
+	public static BefehlHandler befehlHandler = new BefehlHandler();
+	**/
+	
+	
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -38,7 +48,6 @@ public class MainFX extends Application {
 //				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 	public void start(Stage primaryStage) {
-		try {
 			primaryStage.setTitle("Fraesmaschine");
 			primaryStage.setResizable(false);
 			//kein Resizen möglich um Fehler zu vermeiden
@@ -46,6 +55,9 @@ public class MainFX extends Application {
 			
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 1100, 725);
+			
+			Rectangle arbeitsflaeche = new Rectangle(1100, 725, Color.GREY);
+			root.getChildren().add(arbeitsflaeche);
 			
 			Rectangle info = new Rectangle(200, 725, Color.WHITE);
 			info.setX(800);
@@ -65,7 +77,7 @@ public class MainFX extends Application {
 			Rectangle borderL = new Rectangle(100, 725, Color.WHITE);
 			root.getChildren().add(borderL);
 			
-			Circle bohrer = new Circle(100, 100, 5, Color.RED);
+			Circle bohrer = new Circle(100, 100, 7.5, Color.RED);
 			root.getChildren().add(bohrer);
 			
 			Circle gefraesteFlaeche = new Circle(0,0,0,Color.BLACK);
@@ -74,18 +86,48 @@ public class MainFX extends Application {
 			Circle home = new Circle(100,100,5,Color.GREEN);
 			root.getChildren().add(home);
 			
+			bohrer.relocate(10, 10);
+			
+			Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),
+	                new EventHandler<ActionEvent>() {
+
+	        	double dx = 7; //Step on x or velocity
+	        	double dy = 3; //Step on y
+
+	            public void handle(ActionEvent t) {
+	            	//move the ball
+	            	bohrer.setLayoutX(bohrer.getLayoutX() + dx);
+	            	bohrer.setLayoutY(bohrer.getLayoutY() + dy);
+
+	                Bounds bounds = root.getBoundsInLocal();
+	            }
+			}));
+			
+			timeline.setCycleCount(Timeline.INDEFINITE);
+	        timeline.play();
+			
 			VBox infos = new VBox();
 			
-			Label position = new Label("Position: " + fraeskopf._getPosition());
+			Label position = new Label("Position: " + Fraeskopf._getPosition());
 			
-			Label spindelStatus = new Label(spindel.toString());
+			Label spindelStatus = new Label(Spindel.SpindelAusgabe());
 			
-			Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + kuehlmittel.toString());
+			Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
 			
-			Label geschwindigkeit = new Label("Geschwindigkeit: " + fraeskopf._getGeschwindigkeit() + "m/s");
+			Label geschwindigkeit = new Label("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
 			
-			infos.getChildren().addAll(position, spindelStatus, kuehlmittelStatus, geschwindigkeit);
+			HBox suchen = new HBox();
+			
+			Label befehl = new Label ("Befehl: ");
+			TextField textField = new TextField ();
+			Button go = new Button("Go");
+			
+			suchen.getChildren().addAll(befehl, textField, go);
+			suchen.setSpacing(5);
+			
+			infos.getChildren().addAll(position, spindelStatus, kuehlmittelStatus, geschwindigkeit, suchen);
 			root.setRight(infos);
+			infos.setSpacing(10);
 			
 			/**Text position = new Text(820, 125, "Position: " + fraeskopf._getPosition());
 			root.getChildren().add(position);
@@ -111,19 +153,41 @@ public class MainFX extends Application {
 			
 			Button stop = new Button("Stop");
 			stop.setDisable(true);
+			
+			Button abbrechen = new Button("Abbrechen");
+			abbrechen.setDisable(true);
+			
 			stop.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent e) {
 					stop.setDisable(true);
 					weiter.setDisable(false);
+					Fraeskopf.stoppFraese();
 				}
 			});
 			
-			Button abbrechen = new Button("Abbrechen");
-			abbrechen.setDisable(true);
+			abbrechen.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent e) {
+					stop.setDisable(true);
+					abbrechen.setDisable(true);
+					Fraeskopf.stoppFraese();
+					Fraeskopf._setPositionX(0);
+					Fraeskopf._setPositionY(0);
+				}
+			});
+			
+			weiter.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent e) {
+					stop.setDisable(false);
+					abbrechen.setDisable(false);
+				}
+			});
 			
 			buttons.getChildren().addAll(stop, weiter, abbrechen);
-			root.setBottom(buttons);			
+			root.setBottom(buttons);		
+			buttons.setSpacing(5);
 			
 		/**	Text arbeitsflaeche = new Text(25, 25, "Arbeitsflaeche");
 			arbeitsflaeche.setFill(Color.CHOCOLATE);
@@ -133,11 +197,8 @@ public class MainFX extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
-		}	
-			catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 	}
-}
 
+}
 //Lisa
