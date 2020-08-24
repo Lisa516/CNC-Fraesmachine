@@ -12,10 +12,9 @@ public class m00Handler {
 	}
 	
 	public static void ausfuehren() {
-		Spindel.spindelStatus = false;
-		Kuehlmittel.kuehlmittelStatus = false;
-		Fraeskopf.fraesenStatus = false;
+		Spindel.spindelStopp();
+		Kuehlmittel._setKuehlmittelStatus(false);
+		Fraeskopf.stoppFraese();
 	}
-	
 
 }

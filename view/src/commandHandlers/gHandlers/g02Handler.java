@@ -2,8 +2,9 @@ package commandHandlers.gHandlers;
 
 import application.ErrorHandling;
 import application.Fraeskopf;
+import application.PathClass;
 
-public class g02Handler {
+public class g02Handler extends PathClass {
 	//Vorschub mit Kreisbogen, im Uhrzeigersinn (Kreis Interpolation)
 	
 	public static boolean test() {

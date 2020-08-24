@@ -2,8 +2,9 @@ package commandHandlers.gHandlers;
 
 import application.ErrorHandling;
 import application.Fraeskopf;
+import application.PathClass;
 
-public class g01Handler {
+public class g01Handler extends PathClass {
 	//Geraden (Linear) Interpolation
 	
 	public static boolean test() {
