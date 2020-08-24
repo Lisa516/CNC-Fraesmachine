@@ -1,11 +1,13 @@
 package application;
 
 import javafx.application.Application;
+
+import java.io.FileNotFoundException;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Bounds;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -29,15 +31,53 @@ public class MainFX extends Application {
 	public static BefehlHandler befehlHandler = new BefehlHandler();
 	**/
 	
+	public static Circle bohrer = new Circle(100, 100, 7.5, Color.RED);
 	
+	Label position = new Label("Position: " + Fraeskopf._getPosition());
 	
-	public static void main(String[] args) {
+	Label spindelStatus = new Label(Spindel.SpindelAusgabe());
+	
+	Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
+	
+	Label geschwindigkeit = new Label("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
+	
+	public static void move(int x, int y) {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),
+	            new EventHandler<ActionEvent>() {
+
+	    	double dx = 1; //Step on x or velocity
+	    	double dy = 1; //Step on y
+
+	        public void handle(ActionEvent t) {
+	        	//move the ball
+	        	if (bohrer.getLayoutX() == x) {
+	        		dx = 0;
+	        	}
+	        	else if (bohrer.getLayoutY() == y) {
+	        		dy = 0;
+	        	}
+	        	else {
+	        		bohrer.setLayoutX(bohrer.getLayoutX() + dx);
+		        	bohrer.setLayoutY(bohrer.getLayoutY() + dy);
+	        	}
+	        	
+	        }
+		}));
+		
+		timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+	}
+
+	public static void main(String[] args) throws FileNotFoundException {
+		BefehlHandler.befehlAufrufen(0);
 		launch(args);
+
 		Thread t1 = new Thread (new Fraeskopf());
 		Thread t2 = new Thread (new Kuehlmittel());
 		t1.start();
 		t2.start();
 		run();
+		
 	}
 	
 	public static void run() {
@@ -77,7 +117,6 @@ public class MainFX extends Application {
 			Rectangle borderL = new Rectangle(100, 725, Color.WHITE);
 			root.getChildren().add(borderL);
 			
-			Circle bohrer = new Circle(100, 100, 7.5, Color.RED);
 			root.getChildren().add(bohrer);
 			
 			Circle gefraesteFlaeche = new Circle(0,0,0,Color.BLACK);
@@ -85,36 +124,9 @@ public class MainFX extends Application {
 			
 			Circle home = new Circle(100,100,5,Color.GREEN);
 			root.getChildren().add(home);
-			
-			bohrer.relocate(10, 10);
-			
-			Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),
-	                new EventHandler<ActionEvent>() {
-
-	        	double dx = 7; //Step on x or velocity
-	        	double dy = 3; //Step on y
-
-	            public void handle(ActionEvent t) {
-	            	//move the ball
-	            	bohrer.setLayoutX(bohrer.getLayoutX() + dx);
-	            	bohrer.setLayoutY(bohrer.getLayoutY() + dy);
-
-	                Bounds bounds = root.getBoundsInLocal();
-	            }
-			}));
-			
-			timeline.setCycleCount(Timeline.INDEFINITE);
-	        timeline.play();
+			 
 			
 			VBox infos = new VBox();
-			
-			Label position = new Label("Position: " + Fraeskopf._getPosition());
-			
-			Label spindelStatus = new Label(Spindel.SpindelAusgabe());
-			
-			Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
-			
-			Label geschwindigkeit = new Label("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
 			
 			HBox suchen = new HBox();
 			
@@ -197,7 +209,8 @@ public class MainFX extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
-		
+			
+			
 	}
 
 }

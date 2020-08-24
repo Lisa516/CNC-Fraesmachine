@@ -2,8 +2,9 @@ package commandHandlers.gHandlers;
 
 import application.ErrorHandling;
 import application.Fraeskopf;
+import application.PathClass;
 
-public class g03Handler {
+public class g03Handler extends PathClass {
 	//Vorschub mit Kreisbogen, gegen den Uhrzeigersinn
 	
 	public static boolean test() {
