@@ -43,6 +43,8 @@ public class MainFX extends Application {
 	
 	Label geschwindigkeit = new Label("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
 	
+	public String eingabeUser;
+	
 	public static void moveLine(int x, int y) {
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),
 	            new EventHandler<ActionEvent>() {
@@ -156,7 +158,79 @@ public class MainFX extends Application {
 			
 			Label befehl = new Label ("Befehl: ");
 			TextField textField = new TextField ();
+			
 			Button go = new Button("Go");
+			
+			
+			//Hier mit Textfield arbeiten
+			
+			
+			go.setOnAction(new EventHandler<ActionEvent>()
+					{
+						public void handle(ActionEvent AE) 
+						{
+							eingabeUser = textField.getText().toString();
+						}
+					});
+			
+			try {
+				Log new_log = new Log("logDatei.txt");
+			
+			switch (eingabeUser)
+			{
+			case "G00":
+				new_log.logger.info("Ausgeführter Befehl: G00");
+				break;
+			case "G01":
+				new_log.logger.info("Ausgeführter Befehl: G01");
+				break;
+			case "G02":
+				new_log.logger.info("Ausgeführter Befehl: G02");
+				break;
+			case "G03":
+				new_log.logger.info("Ausgeführter Befehl: G03");
+				break;
+			case "G28":
+				new_log.logger.info("Ausgeführter Befehl: G28");
+				break;
+			case "M00":
+				new_log.logger.info("Ausgeführter Befehl: M00");
+				break;
+			case "M02":
+				new_log.logger.info("Ausgeführter Befehl: M02");
+				break;
+			case "M03":
+				new_log.logger.info("Ausgeführter Befehl: M03");
+				break;
+			case "M04":
+				new_log.logger.info("Ausgeführter Befehl: M04");
+				break;
+			case "M05":
+				new_log.logger.info("Ausgeführter Befehl: M05");
+				break;
+			case "M08":
+				new_log.logger.info("Ausgeführter Befehl: M08");
+				break;
+			case "M09":
+				new_log.logger.info("Ausgeführter Befehl: M09");
+				break;
+			case "M13":
+				new_log.logger.info("Ausgeführter Befehl: M13");
+				break;
+			case "M14":
+				new_log.logger.info("Ausgeführter Befehl: M14");
+				break;
+			
+				
+				default:
+					break;
+			}
+			}
+			catch(Exception e) {
+				
+			}
+		
+
 			
 			suchen.getChildren().addAll(befehl, textField, go);
 			suchen.setSpacing(5);
