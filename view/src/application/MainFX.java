@@ -169,69 +169,21 @@ public class MainFX extends Application {
 					{
 						public void handle(ActionEvent AE) 
 						{
-							eingabeUser = textField.getText().toString();
+							eingabeUser = textField.getText();
 						}
 					});
 			
-			try {
-				Log new_log = new Log("logDatei.txt");
-			
-			switch (eingabeUser)
+			try 
 			{
-			case "G00":
-				new_log.logger.info("Ausgeführter Befehl: G00");
-				break;
-			case "G01":
-				new_log.logger.info("Ausgeführter Befehl: G01");
-				break;
-			case "G02":
-				new_log.logger.info("Ausgeführter Befehl: G02");
-				break;
-			case "G03":
-				new_log.logger.info("Ausgeführter Befehl: G03");
-				break;
-			case "G28":
-				new_log.logger.info("Ausgeführter Befehl: G28");
-				break;
-			case "M00":
-				new_log.logger.info("Ausgeführter Befehl: M00");
-				break;
-			case "M02":
-				new_log.logger.info("Ausgeführter Befehl: M02");
-				break;
-			case "M03":
-				new_log.logger.info("Ausgeführter Befehl: M03");
-				break;
-			case "M04":
-				new_log.logger.info("Ausgeführter Befehl: M04");
-				break;
-			case "M05":
-				new_log.logger.info("Ausgeführter Befehl: M05");
-				break;
-			case "M08":
-				new_log.logger.info("Ausgeführter Befehl: M08");
-				break;
-			case "M09":
-				new_log.logger.info("Ausgeführter Befehl: M09");
-				break;
-			case "M13":
-				new_log.logger.info("Ausgeführter Befehl: M13");
-				break;
-			case "M14":
-				new_log.logger.info("Ausgeführter Befehl: M14");
-				break;
-			
-				
-				default:
-					break;
-			}
-			}
-			catch(Exception e) {
-				
-			}
-		
+				Log new_log = new Log("logDatei.txt");
+				new_log.logger.info("Ausgeführter Befehl: " + eingabeUser);				
 
-			
+			}
+			catch(Exception e) 
+			{
+				
+			}
+					
 			suchen.getChildren().addAll(befehl, textField, go);
 			suchen.setSpacing(5);
 			
