@@ -32,13 +32,13 @@ public class BefehlHandler {
 		String withX = FileReader._getBefehl(stelle)[2];
 		String withoutX = withX.substring(1);
 		int x = Integer.parseInt(withoutX);
-		return x;
+		return (x + 100);
 	}
 	
 	public static int _getY(int stelle) throws FileNotFoundException {
 		String withY = FileReader._getBefehl(stelle)[3];
 		String withoutY = withY.substring(1); 
-		return Integer.parseInt(withoutY);
+		return (Integer.parseInt(withoutY) + 100);
 	}
 	
 	public static void befehlAufrufen(int stelle) throws FileNotFoundException {
@@ -51,7 +51,7 @@ public class BefehlHandler {
 				return;
 			}
 			if (befehl.contentEquals("G00")) {
-				g00Handler.ausfuehren(x, y, MainFX.bohrer);
+				g00Handler.ausfuehren(x, y);
 				return;
 			}
 			else if (befehl.contentEquals("G01")) {

@@ -31,6 +31,8 @@ public class MainFX extends Application {
 	public static BefehlHandler befehlHandler = new BefehlHandler();
 	**/
 	
+	static BorderPane root = new BorderPane();
+	
 	public static Circle bohrer = new Circle(100, 100, 7.5, Color.RED);
 	
 	Label position = new Label("Position: " + Fraeskopf._getPosition());
@@ -41,7 +43,7 @@ public class MainFX extends Application {
 	
 	Label geschwindigkeit = new Label("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
 	
-	public static void move(int x, int y) {
+	public static void moveLine(int x, int y) {
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),
 	            new EventHandler<ActionEvent>() {
 
@@ -67,9 +69,36 @@ public class MainFX extends Application {
 		timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 	}
+	
+	public static void fraesenLine(int x, int y, double dx, int dy) {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),
+	            new EventHandler<ActionEvent>() {
+			
+	        public void handle(ActionEvent t) {
+	        	//move the ball
+		        Circle circle2 = new Circle(bohrer.getLayoutX() + 100, bohrer.getLayoutY() + 100, 3.75, Color.BLACK);
+		        root.getChildren().add(circle2);
+	        	if (bohrer.getLayoutX() < x || bohrer.getLayoutY() < y) {
+	        		if (bohrer.getLayoutX() >= x) {
+		        		final int dx = 0;
+		        	}
+	        		else if (bohrer.getLayoutY() >= y) {
+		        		final int dy = 0;
+		        	}
+			        Circle circle = new Circle(bohrer.getLayoutX() + 100, bohrer.getLayoutY() + 100, 3.75, Color.BLACK);
+			        root.getChildren().add(circle);
+		        	bohrer.setLayoutX(bohrer.getLayoutX() + dx);
+		        	bohrer.setLayoutY(bohrer.getLayoutY() + dy);
+	        	}
+	        }
+		}));
+		
+		timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+	}
 
 	public static void main(String[] args) throws FileNotFoundException {
-		BefehlHandler.befehlAufrufen(0);
+		BefehlHandler.befehlAufrufen(3);
 		launch(args);
 
 		Thread t1 = new Thread (new Fraeskopf());
@@ -77,7 +106,6 @@ public class MainFX extends Application {
 		t1.start();
 		t2.start();
 		run();
-		
 	}
 	
 	public static void run() {
@@ -93,7 +121,6 @@ public class MainFX extends Application {
 			//kein Resizen möglich um Fehler zu vermeiden
 			primaryStage.centerOnScreen();
 			
-			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 1100, 725);
 			
 			Rectangle arbeitsflaeche = new Rectangle(1100, 725, Color.GREY);
@@ -119,9 +146,6 @@ public class MainFX extends Application {
 			
 			root.getChildren().add(bohrer);
 			
-			Circle gefraesteFlaeche = new Circle(0,0,0,Color.BLACK);
-			gefraesteFlaeche.setRadius(5.0);
-			
 			Circle home = new Circle(100,100,5,Color.GREEN);
 			root.getChildren().add(home);
 			 
@@ -140,23 +164,6 @@ public class MainFX extends Application {
 			infos.getChildren().addAll(position, spindelStatus, kuehlmittelStatus, geschwindigkeit, suchen);
 			root.setRight(infos);
 			infos.setSpacing(10);
-			
-			/**Text position = new Text(820, 125, "Position: " + fraeskopf._getPosition());
-			root.getChildren().add(position);
-			
-			Text spindelStatus = new Text(820, 175, spindel.toString());
-			root.getChildren().add(spindelStatus);
-			
-			Text kuehlmittelStatus = new Text(820, 225, "Kuehlmittelstatus: " + kuehlmittel.toString());
-			root.getChildren().add(kuehlmittelStatus);
-			
-			Text geschwindigkeit = new Text(820, 275, "Geschwindigkeit: " + fraeskopf._getGeschwindigkeit() + "m/s");
-			root.getChildren().add(geschwindigkeit);**/
-			
-			/**Text feldLabel = new Text(620, 225, "Befehl: ");
-			TextField befehlFeld = new TextField();
-			root.getChildren().add(befehlFeld);
-			root.getChildren().add(feldLabel);**/
 			
 			HBox buttons = new HBox();
 			
@@ -208,8 +215,6 @@ public class MainFX extends Application {
         
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
-			
 			
 	}
 

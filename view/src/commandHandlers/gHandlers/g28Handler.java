@@ -2,9 +2,8 @@ package commandHandlers.gHandlers;
 
 import application.ErrorHandling;
 import application.Fraeskopf;
-import application.PathClass;
 
-public class g28Handler extends PathClass{
+public class g28Handler{
 	//HOME Position anfahren
 	
 	public static boolean test() {

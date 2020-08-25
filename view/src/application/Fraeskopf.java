@@ -4,7 +4,6 @@ public class Fraeskopf implements Runnable {
 	public static double fahrGeschwindigkeit;
 	public static int schnittGeschwindigkeit;
 	public static boolean fraesenStatus = false;
-	//
 	public static double positionX;
 	public static double positionY;
 	

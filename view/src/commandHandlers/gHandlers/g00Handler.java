@@ -3,10 +3,8 @@ package commandHandlers.gHandlers;
 import application.ErrorHandling;
 import application.Fraeskopf;
 import application.MainFX;
-import javafx.scene.shape.Circle;
-import application.PathClass;
 
-public class g00Handler extends PathClass {
+public class g00Handler{
 	//Verfahrbewegung im Eilgang (nur ohne Bohren/Fraesen moeglich)
 	
 	public static boolean test() {
@@ -17,11 +15,11 @@ public class g00Handler extends PathClass {
 		return false;
 	}
 	
-	public static void ausfuehren(int x, int y, Circle bohrer) {
+	public static void ausfuehren(int x, int y) {
 		if (test() == false) {
 			return;
 		}	
-		MainFX.move(200, 700);
+		MainFX.moveLine(x, y);
 	}
 
 }
