@@ -43,6 +43,8 @@ public class MainFX extends Application {
 	
 	Label geschwindigkeit = new Label("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
 	
+	public String eingabeUser;
+	
 	public static void moveLine(int x, int y) {
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),
 	            new EventHandler<ActionEvent>() {
@@ -156,8 +158,32 @@ public class MainFX extends Application {
 			
 			Label befehl = new Label ("Befehl: ");
 			TextField textField = new TextField ();
+			
 			Button go = new Button("Go");
 			
+			
+			//Hier mit Textfield arbeiten
+			
+			
+			go.setOnAction(new EventHandler<ActionEvent>()
+					{
+						public void handle(ActionEvent AE) 
+						{
+							eingabeUser = textField.getText();
+						}
+					});
+			
+			try 
+			{
+				Log new_log = new Log("logDatei.txt");
+				new_log.logger.info("Ausgeführter Befehl: " + eingabeUser);				
+
+			}
+			catch(Exception e) 
+			{
+				
+			}
+					
 			suchen.getChildren().addAll(befehl, textField, go);
 			suchen.setSpacing(5);
 			

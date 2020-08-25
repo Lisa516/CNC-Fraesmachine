@@ -1,0 +1,8 @@
+Aug. 25, 2020 4:52:37 PM application.MainFX start
+INFO: Ausgeführter Befehl: null
+Aug. 25, 2020 4:53:39 PM application.MainFX start
+INFO: Ausgeführter Befehl: null
+Aug. 25, 2020 4:56:22 PM application.MainFX start
+INFO: Ausgeführter Befehl: null
+Aug. 25, 2020 5:03:13 PM application.MainFX start
+INFO: Ausgeführter Befehl: null
