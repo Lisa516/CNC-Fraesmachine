@@ -19,10 +19,8 @@ public class g00Handler{
 		if (test() == false) {
 			return;
 		}	
-		MainFX.moveLine(x, y);
+		System.out.println(x + " " + y + " " + x/y);
+		MainFX.moveLine(x, y, x / y, 1);
 	}
 
 }
-
-
-

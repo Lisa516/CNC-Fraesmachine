@@ -10,5 +10,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
 	<classpathentry kind="lib" path="lib/gson-2.8.5.jar"/>
 	<classpathentry kind="lib" path="lib/javaFX.jar"/>
+	<classpathentry kind="lib" path="lib/common-javaFX-plugin.jar"/>
+	<classpathentry kind="lib" path="lib/javaFX-jps-plugin.jar"/>
+	<classpathentry kind="lib" path="lib/resources_en.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
