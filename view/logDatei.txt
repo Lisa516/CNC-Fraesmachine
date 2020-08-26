@@ -6,3 +6,19 @@ Aug. 25, 2020 4:56:22 PM application.MainFX start
 INFO: Ausgeführter Befehl: null
 Aug. 25, 2020 5:03:13 PM application.MainFX start
 INFO: Ausgeführter Befehl: null
+Aug. 26, 2020 10:21:17 AM application.MainFX start
+INFO: Ausgeführter Befehl: null
+Aug. 26, 2020 1:49:30 PM application.MainFX start
+INFO: Ausgeführter Befehl: null
+Aug. 26, 2020 4:15:04 PM application.MainFX start
+INFO: Ausgeführter Befehl: null
+Aug. 26, 2020 4:16:05 PM application.MainFX$3 handle
+INFO: Ausgeführter Befehl: Test
+Aug. 26, 2020 4:23:08 PM application.MainFX$3 handle
+INFO: Ausgeführter Befehl: Test1
+Aug. 26, 2020 4:23:12 PM application.MainFX$3 handle
+INFO: Ausgeführter Befehl: Test2
+Aug. 26, 2020 4:32:18 PM application.MainFX$3 handle
+INFO: Ausgeführter Befehl: Versuch1
+Aug. 26, 2020 4:32:21 PM application.MainFX$3 handle
+INFO: Ausgeführter Befehl: Versuch2
