@@ -14,7 +14,7 @@ public class g03Handler {
 		return false;
 	}
 	
-	public static void ausfuehren(int x, int y) {
+	public static void ausfuehren(int x, int y, int i, int j) {
 		if (test() == false) {
 			return;
 		}	

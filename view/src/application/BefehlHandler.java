@@ -32,46 +32,48 @@ public class BefehlHandler {
 		String withX = FileReader._getBefehl(stelle)[2];
 		String withoutX = withX.substring(1);
 		int x = Integer.parseInt(withoutX);
-		return (x + 100);
+		return (x + 50);
 	}
 	
 	public static int _getY(int stelle) throws FileNotFoundException {
 		String withY = FileReader._getBefehl(stelle)[3];
 		String withoutY = withY.substring(1); 
-		return (Integer.parseInt(withoutY) + 100);
+		return (Integer.parseInt(withoutY) + 50);
+	}
+	
+	public static int _getI(int stelle) throws FileNotFoundException {
+		String withI = FileReader._getBefehl(stelle)[3];
+		String withoutI = withI.substring(1);
+		return (Integer.parseInt(withoutI) + 50);
+	}
+	
+	public static int _getJ(int stelle) throws FileNotFoundException {
+		String withJ = FileReader._getBefehl(stelle)[4];
+		String withoutJ = withJ.substring(1);
+		return (Integer.parseInt(withoutJ) + 50);
 	}
 	
 	public static void befehlAufrufen(int stelle) throws FileNotFoundException {
 		String befehl = FileReader._getBefehl(stelle)[1];
-		int x = _getX(stelle);
-		int y = _getY(stelle);
-		if (befehl.startsWith("G")) {
-			if (testX(x) == false || testY(y) == false) {
-				ErrorHandling.OutOfRange();
+		if (befehl.startsWith("G")) {			
+			if (befehl.contentEquals("G00") || befehl.contentEquals("G01")) {
+				linienBefehlAufrufen(stelle, befehl);
+				return;
+			}			
+			if (befehl.contentEquals("G02") || befehl.contentEquals("G03")) {
+				kreisBefehlAufrufen(stelle, befehl);
 				return;
 			}
-			if (befehl.contentEquals("G00")) {
-				g00Handler.ausfuehren(x, y);
-				return;
-			}
-			else if (befehl.contentEquals("G01")) {
-				g01Handler.ausfuehren(x, y);
-				return;
-			}
-			else if (befehl.contentEquals("G02")) {
-				g02Handler.ausfuehren(x, y);
-				return;
-			}
-			else if (befehl.contentEquals("G03")) {
-				g03Handler.ausfuehren(x, y);
-				return;
-			}
+
 			else if (befehl.contentEquals("G28")) {
-				g28Handler.ausfuehren(x, y);
+				g28Handler.ausfuehren();
 				return;
+			}
+			else {
+				ErrorHandling.ungueltigerBefehl(befehl);
 			}
 		}
-		else {
+		else if (befehl.startsWith("M")) {
 			if (befehl.contentEquals("M00")) {
 				m00Handler.ausfuehren();
 				return;
@@ -108,6 +110,36 @@ public class BefehlHandler {
 				m14Handler.ausfuehren();
 				return;
 			}
+			else {
+				ErrorHandling.ungueltigerBefehl(befehl);
+			}
+		}
+		else {
+			ErrorHandling.ungueltigerBefehl(befehl);
+		}
+	}
+	
+	public static void linienBefehlAufrufen(int stelle, String befehl) throws FileNotFoundException {
+		int x = _getX(stelle);
+		int y = _getY(stelle);
+		if (befehl.contentEquals("G00")) {
+			g00Handler.ausfuehren(x, y);
+		}
+		else {
+			g01Handler.ausfuehren(x, y);
+		}
+	}
+	
+	public static void kreisBefehlAufrufen(int stelle, String befehl) throws FileNotFoundException {
+		int x = _getX(stelle);
+		int y = _getY(stelle);
+		int i = _getI(stelle);
+		int j = _getJ(stelle);
+		if (befehl.contentEquals("G02")) {
+			g02Handler.ausfuehren(x, y, i, j);
+		}
+		else {
+			g03Handler.ausfuehren(x, y, i, j);
 		}
 	}
 	
