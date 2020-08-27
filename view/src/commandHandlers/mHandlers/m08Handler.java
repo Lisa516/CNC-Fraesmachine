@@ -5,7 +5,7 @@ import application.Kuehlmittel;
 public class m08Handler {
 	//Kuehlmittel Ein
 	
-	public static void ausfuehren() {
+	public static void execute() {
 		Kuehlmittel._setKuehlmittelStatus(true);
 	}
 

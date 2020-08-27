@@ -1,14 +1,14 @@
 package application;
 
-public class Fraeskopf implements Runnable {
+public class MillingCutter implements Runnable {
 	private static double fahrGeschwindigkeit;
 	private static int schnittGeschwindigkeit;
 	private static boolean fraesenStatus = false;
 	private static double positionX;
 	private static double positionY;
 	
-	//Konstruktor
-	public Fraeskopf() {
+	//Constructor
+	public MillingCutter() {
 		positionX = 0;
 		positionY = 0;
 	}
@@ -22,7 +22,7 @@ public class Fraeskopf implements Runnable {
 		return schnittGeschwindigkeit;
 	}
 	
-	public static boolean _getFraesenStatus() {
+	public static boolean _getMillingStatus() {
 		return fraesenStatus;
 	}
 	
@@ -62,7 +62,7 @@ public class Fraeskopf implements Runnable {
 			fraesenStatus = true;
 		}
 		else {
-			ErrorHandling.fraeskopfRunning();
+			ErrorHandling.millRunning();
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class Fraeskopf implements Runnable {
 			fraesenStatus = false;
 		}
 		else {
-			ErrorHandling.fraeskopfStopped();
+			ErrorHandling.millStopped();
 		}
 	}
 	
