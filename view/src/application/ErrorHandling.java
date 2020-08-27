@@ -55,7 +55,9 @@ public class ErrorHandling extends Thread{
 	public static String ungueltigeDrehrichtung(char eingabe) {
 		return eingabe + "ist keine gueltige Drehrichtung. Erlaubt sind l oder r";
 	}
-	
+	public static String ungueltigerBefehl(String befehl) {
+		return befehl + "ist ein ungueltiger Befehl";
+	}
 	
 	public void run() {
 		

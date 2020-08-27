@@ -1,4 +1,0 @@
-Aug. 27, 2020 11:17:07 AM application.MainFX$3 handle
-INFO: Ausgeführter Befehl: Test1
-Aug. 27, 2020 11:17:11 AM application.MainFX$3 handle
-INFO: Ausgeführter Befehl: Test2

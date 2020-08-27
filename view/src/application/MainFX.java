@@ -33,7 +33,7 @@ public class MainFX extends Application {
 	
 	static BorderPane root = new BorderPane();
 	
-	public static Circle bohrer = new Circle(100, 100, 7.5, Color.RED);
+	public static Circle bohrer = new Circle(50, 50, 7.5, Color.RED);
 	
 	Label position = new Label("Position: " + Fraeskopf._getPosition());
 	
@@ -45,49 +45,48 @@ public class MainFX extends Application {
 	
 	public String eingabeUser;
 	
-	public static void moveLine(int x, int y) {
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),
-	            new EventHandler<ActionEvent>() {
-
-	    	double dx = 1; //Step on x or velocity
-	    	double dy = 1; //Step on y
-
-	        public void handle(ActionEvent t) {
-	        	//move the ball
-	        	if (bohrer.getLayoutX() == x) {
-	        		dx = 0;
-	        	}
-	        	else if (bohrer.getLayoutY() == y) {
-	        		dy = 0;
-	        	}
-	        	else {
-	        		bohrer.setLayoutX(bohrer.getLayoutX() + dx);
-		        	bohrer.setLayoutY(bohrer.getLayoutY() + dy);
-	        	}
-	        	
-	        }
-		}));
+	public static void drawCircle(double x, double y, double centerX, double centerY, double radius, double startAngle, double length) {
 		
-		timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
 	}
 	
-	public static void fraesenLine(int x, int y, double dx, int dy) {
+	public static void moveLine(int x, int y, double dx, int dy) {
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),
 	            new EventHandler<ActionEvent>() {
-			
+
 	        public void handle(ActionEvent t) {
 	        	//move the ball
-		        Circle circle2 = new Circle(bohrer.getLayoutX() + 100, bohrer.getLayoutY() + 100, 3.75, Color.BLACK);
-		        root.getChildren().add(circle2);
-	        	if (bohrer.getLayoutX() < x || bohrer.getLayoutY() < y) {
+	        	if (bohrer.getLayoutX() < x - 50 || bohrer.getLayoutY() < y - 50) {
 	        		if (bohrer.getLayoutX() >= x) {
 		        		final int dx = 0;
 		        	}
 	        		else if (bohrer.getLayoutY() >= y) {
 		        		final int dy = 0;
 		        	}
-			        Circle circle = new Circle(bohrer.getLayoutX() + 100, bohrer.getLayoutY() + 100, 3.75, Color.BLACK);
+		        	bohrer.setLayoutX(bohrer.getLayoutX() + dx);
+		        	bohrer.setLayoutY(bohrer.getLayoutY() + dy);
+	        	}
+	        }
+		}));
+		timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+	}
+	
+	public static void fraesenLine(int x, int y, double dx, double dy) {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),
+	            new EventHandler<ActionEvent>() {
+			
+	        public void handle(ActionEvent t) {
+	        	//move the ball
+	        	if (bohrer.getLayoutX() < x - 50 || bohrer.getLayoutY() < y - 50) {
+	        		if (bohrer.getLayoutX() >= x) {
+		        		final int dx = 0;
+		        	}
+	        		
+	        		else if (bohrer.getLayoutY() >= y) {
+		        		final int dy = 0;
+		        	}
+	        		
+			        Circle circle = new Circle(bohrer.getLayoutX() + 50, bohrer.getLayoutY() + 50, 3.75, Color.BLACK);
 			        root.getChildren().add(circle);
 		        	bohrer.setLayoutX(bohrer.getLayoutX() + dx);
 		        	bohrer.setLayoutY(bohrer.getLayoutY() + dy);
@@ -100,7 +99,6 @@ public class MainFX extends Application {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
-		BefehlHandler.befehlAufrufen(3);
 		launch(args);
 
 		Thread t1 = new Thread (new Fraeskopf());
@@ -128,27 +126,23 @@ public class MainFX extends Application {
 			Rectangle arbeitsflaeche = new Rectangle(1100, 725, Color.GREY);
 			root.getChildren().add(arbeitsflaeche);
 			
-			Rectangle info = new Rectangle(200, 725, Color.WHITE);
+			Rectangle info = new Rectangle(350, 725, Color.WHITE);
 			info.setX(800);
 			root.getChildren().add(info);
 			
-			Rectangle borderO = new Rectangle(1100, 100, Color.WHITE);
+			Rectangle borderO = new Rectangle(1100, 50, Color.WHITE);
 			root.getChildren().add(borderO);
 			
-			Rectangle borderR = new Rectangle(100, 725, Color.WHITE);
-			borderR.setX(1000);
-			root.getChildren().add(borderR);
-			
-			Rectangle borderU = new Rectangle(1100, 100, Color.WHITE);
+			Rectangle borderU = new Rectangle(1100, 150, Color.WHITE);
 			borderU.setY(625);
 			root.getChildren().add(borderU);
 			
-			Rectangle borderL = new Rectangle(100, 725, Color.WHITE);
+			Rectangle borderL = new Rectangle(50, 725, Color.WHITE);
 			root.getChildren().add(borderL);
 			
 			root.getChildren().add(bohrer);
 			
-			Circle home = new Circle(100,100,5,Color.GREEN);
+			Circle home = new Circle(50, 50, 5, Color.GREEN);
 			root.getChildren().add(home);
 			 
 			
@@ -199,6 +193,8 @@ public class MainFX extends Application {
 			Button abbrechen = new Button("Abbrechen");
 			abbrechen.setDisable(true);
 			
+			Button startJSON = new Button("Start JSON Programm");
+			
 			stop.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent e) {
@@ -227,7 +223,22 @@ public class MainFX extends Application {
 				}
 			});
 			
-			buttons.getChildren().addAll(stop, weiter, abbrechen);
+			startJSON.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent e) {
+					startJSON.setDisable(true);
+					stop.setDisable(false);
+					abbrechen.setDisable(false);
+					try {
+						CommandsQueue.QueueFromJSON();
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+			
+			buttons.getChildren().addAll(stop, weiter, abbrechen, startJSON);
 			root.setBottom(buttons);		
 			buttons.setSpacing(5);
 			

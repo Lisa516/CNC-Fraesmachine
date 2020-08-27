@@ -14,7 +14,7 @@ public class g28Handler{
 		return false;
 	}
 	
-	public static void ausfuehren(int x, int y) {
+	public static void ausfuehren() {
 		if (test() == false) {
 			return;
 		}	
