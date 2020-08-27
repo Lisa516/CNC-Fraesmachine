@@ -12,6 +12,8 @@ public class Log {
 	
 	public Log(String file_name)throws SecurityException, IOException {
 	
+		deletePreviousFile(file_name);
+		
 		File f = new File(file_name);
 		
 		if(!f.exists()){
@@ -27,6 +29,12 @@ public class Log {
 		fh.setFormatter(formatter);
 		
 		
+	}
+	
+	public static void deletePreviousFile(String file_name)
+	{
+		File f = new File(file_name);
+		f.delete();
 	}
 
 }

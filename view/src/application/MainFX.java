@@ -121,117 +121,132 @@ public class MainFX extends Application {
 //				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 	public void start(Stage primaryStage) {
-		primaryStage.setTitle("Fraesmaschine");
-		primaryStage.setResizable(false);
-		// kein Resizen möglich um Fehler zu vermeiden
-		primaryStage.centerOnScreen();
+//////////////////
 
-		Scene scene = new Scene(root, 1100, 725);
 
-		Rectangle arbeitsflaeche = new Rectangle(1100, 725, Color.GREY);
-		root.getChildren().add(arbeitsflaeche);
+=======
+			primaryStage.setTitle("Fraesmaschine");
+			primaryStage.setResizable(false);
+			//kein Resizen mÃ¶glich um Fehler zu vermeiden
+			primaryStage.centerOnScreen();
+			
+			Scene scene = new Scene(root, 1100, 725);
+			
+			Rectangle arbeitsflaeche = new Rectangle(1100, 725, Color.GREY);
+			root.getChildren().add(arbeitsflaeche);
+			
+			Rectangle info = new Rectangle(350, 725, Color.WHITE);
+			info.setX(800);
+			root.getChildren().add(info);
+			
+			Rectangle borderO = new Rectangle(1100, 50, Color.WHITE);
+			root.getChildren().add(borderO);
+			
+			Rectangle borderU = new Rectangle(1100, 150, Color.WHITE);
+			borderU.setY(625);
+			root.getChildren().add(borderU);
+			
+			Rectangle borderL = new Rectangle(50, 725, Color.WHITE);
+			root.getChildren().add(borderL);
+			
+			root.getChildren().add(bohrer);
+			
+			Circle home = new Circle(50, 50, 5, Color.GREEN);
+			root.getChildren().add(home);
+			 
+			
+			VBox infos = new VBox();
+			
+			HBox suchen = new HBox();
+			
+			Label befehl = new Label ("Befehl: ");
+			TextField textField = new TextField ();
+			
+			Button go = new Button("Go");
+    
+			go.setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent AE) {
+              
+			go.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>()
+					{
+						public void handle(MouseEvent o)
+						{
+              
+							eingabeUser = textField.getText();
+							
+							try 
+							{
+								Log new_log = new Log("logDatei.txt");
+								new_log.logger.info("AusgefÃ¼hrter Befehl: " + eingabeUser);				
 
-		Rectangle info = new Rectangle(350, 725, Color.WHITE);
-		info.setX(800);
-		root.getChildren().add(info);
-
-		Rectangle borderO = new Rectangle(1100, 50, Color.WHITE);
-		root.getChildren().add(borderO);
-
-		Rectangle borderU = new Rectangle(1100, 150, Color.WHITE);
-		borderU.setY(625);
-		root.getChildren().add(borderU);
-
-		Rectangle borderL = new Rectangle(50, 725, Color.WHITE);
-		root.getChildren().add(borderL);
-
-		root.getChildren().add(bohrer);
-
-		Circle home = new Circle(50, 50, 5, Color.GREEN);
-		root.getChildren().add(home);
-
-		VBox infos = new VBox();
-
-		HBox suchen = new HBox();
-
-		Label befehl = new Label("Befehl: ");
-		TextField textField = new TextField();
-
-		Button go = new Button("Go");
-
-		go.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent AE) {
-				eingabeUser = textField.getText();
-			}
-		});
-
-		try {
-			Log new_log = new Log("logDatei.txt");
-			new_log.logger.info("Ausgeführter Befehl: " + eingabeUser);
-
-		} catch (Exception e) {
-			// TODO
-		}
-
-		suchen.getChildren().addAll(befehl, textField, go);
-		suchen.setSpacing(5);
-
-		root.setRight(infos);
-		infos.setSpacing(10);
-
-		Label position = new Label("Position: " + MillingCutter._getPosition());
-		Label spindelStatus = new Label(Spindle.SpindelAusgabe());
-		Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
-		Label geschwindigkeit = new Label("Geschwindigkeit: " + MillingCutter._getGeschwindigkeit() + "m/min");
-		infos.getChildren().addAll(position, spindelStatus, kuehlmittelStatus, geschwindigkeit, suchen);
-
-		HBox buttons = new HBox();
-
-		Button weiter = new Button("Weiter");
-		weiter.setDisable(true);
-
-		Button stop = new Button("Stop");
-		stop.setDisable(true);
-
-		Button abbrechen = new Button("Abbrechen");
-		abbrechen.setDisable(true);
-
-		Button startJSON = new Button("Start JSON Programm");
-
-		stop.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				stop.setDisable(true);
-				weiter.setDisable(false);
-				MillingCutter.stoppFraese();
-			}
-		});
-
-		abbrechen.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				stop.setDisable(true);
-				abbrechen.setDisable(true);
-				MillingCutter.stoppFraese();
-				MillingCutter._setPositionX(0);
-				MillingCutter._setPositionY(0);
-			}
-		});
-
-		weiter.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				stop.setDisable(false);
-				abbrechen.setDisable(false);
-			}
-		});
-
-		startJSON.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+							}
+							catch(Exception e) {
+                //TODO
+								
+							}
+						}
+					});
+					
+			suchen.getChildren().addAll(befehl, textField, go);
+			suchen.setSpacing(5);
+			
+			root.setRight(infos);
+			infos.setSpacing(10);
+			
+			Label position = new Label("Position: " + Fraeskopf._getPosition());
+			Label spindelStatus = new Label(Spindel.SpindelAusgabe());
+			Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
+			Label geschwindigkeit = new Label("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
+			infos.getChildren().addAll(position, spindelStatus, kuehlmittelStatus, geschwindigkeit, suchen);
+			
+			HBox buttons = new HBox();
+			
+			Button weiter = new Button("Weiter");
+			weiter.setDisable(true);
+			
+			Button stop = new Button("Stop");
+			stop.setDisable(true);
+			
+			Button abbrechen = new Button("Abbrechen");
+			abbrechen.setDisable(true);
+			
+			Button startJSON = new Button("Start JSON Programm");
+			
+			stop.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent e) {
+					stop.setDisable(true);
+					weiter.setDisable(false);
+					Fraeskopf.stoppFraese();
+				}
+			});
+			
+			abbrechen.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent e) {
+					stop.setDisable(true);
+					abbrechen.setDisable(true);
+					Fraeskopf.stoppFraese();
+					Fraeskopf._setPositionX(0);
+					Fraeskopf._setPositionY(0);
+				}
+			});
+			
+			weiter.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent e) {
+					stop.setDisable(false);
+					abbrechen.setDisable(false);
+				}
+			});
+              
+     startJSON.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
 				Task triggerJsonCommands = new Task<Void>() {
 					@Override
 					public Void call() throws FileNotFoundException {
+					try {
 						CommandsQueue.QueueFromJSON();
 						return null;
 					}
