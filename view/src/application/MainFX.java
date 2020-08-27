@@ -155,28 +155,25 @@ public class MainFX extends Application {
 			
 			Button go = new Button("Go");
 			
-			
-			//Hier mit Textfield arbeiten
-			
-			
-			go.setOnAction(new EventHandler<ActionEvent>()
+			go.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>()
 					{
-						public void handle(ActionEvent AE) 
+						public void handle(MouseEvent o)
 						{
 							eingabeUser = textField.getText();
+							
+							try 
+							{
+								Log new_log = new Log("logDatei.txt");
+								new_log.logger.info("Ausgeführter Befehl: " + eingabeUser);				
+
+							}
+							catch(Exception e) 
+							{
+								
+							}
 						}
 					});
 			
-			try 
-			{
-				Log new_log = new Log("logDatei.txt");
-				new_log.logger.info("Ausgeführter Befehl: " + eingabeUser);				
-
-			}
-			catch(Exception e) 
-			{
-				
-			}
 					
 			suchen.getChildren().addAll(befehl, textField, go);
 			suchen.setSpacing(5);
