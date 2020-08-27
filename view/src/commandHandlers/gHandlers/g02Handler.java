@@ -1,21 +1,21 @@
 package commandHandlers.gHandlers;
 
 import application.ErrorHandling;
-import application.Fraeskopf;
+import application.MillingCutter;
 import application.MainFX;
 
 public class g02Handler {
 	//Vorschub mit Kreisbogen, im Uhrzeigersinn (Kreis Interpolation)
 	
 	public static boolean test() {
-		if (Fraeskopf._getFraesenStatus() == false) {
+		if (MillingCutter._getMillingStatus() == false) {
 			ErrorHandling.befehlUnmoeglichFraeseAus();
 			return false;
 		}
 		return true;
 	}
 
-	public static void ausfuehren(int x, int y, int i, int j) {
+	public static void execute(int x, int y, int i, int j) {
 		if (test() == false) {
 			return;
 		}

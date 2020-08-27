@@ -1,26 +1,40 @@
 package application;
 
 public class Test implements Runnable{
-	
-	//Fraese sollte an sein. Test, ob dem so ist
-	public static boolean testFraeseAn() {
-		if (Fraeskopf._getFraesenStatus() == true) {
+//Tests concerning milling
+	//Milling is supposed to be running. Test whether it is
+	public static boolean testMillRunning() {
+		if (MillingCutter._getMillingStatus() == true) {
 			return true;
 		}
-		ErrorHandling.befehlUnmoeglichFraeseAus();
+		ErrorHandling.commandInvalidMillNotRunning();
 		return false;
 	}
 	
-	//Fraese sollte aus sein. Test, ob dem so ist
+	//Milling is supposed to not be running. Test whether it is
 	public static boolean testFraeseAus() {
-		if (Fraeskopf._getFraesenStatus() == false) {
+		if (MillingCutter._getMillingStatus() == false) {
 			return true;
 		}
-		ErrorHandling.befehlUnmoeglichFraeseAn();
+		ErrorHandling.commandInvalidMillNotRunning();
 		return false;
 	}
 	
-	//X-Wert muss auf der Arbeitsflaeche liegen
+//Tests concerning Spindle
+	//Spindle is supposed to be running. Test whether it is
+	public static boolean testSpindleRunning() {
+		return Spindle._getSpindelStatus();
+	}
+	
+	public static boolean testSpindleNotRunning() {
+		if (Spindle._getSpindelStatus() == true) {
+			return false;
+		}
+		return true;
+	}
+	
+//Input Tests	
+	//Test whether x-value is in range
 	public static boolean testXInRange(double x) {
 		if (x >= 0 && x <= 1400) {
 			return true;
@@ -30,7 +44,7 @@ public class Test implements Runnable{
 		}
 	}
 	
-	//Y-Wert muss auf der Arbeitsflaeche liegen
+	//Test whether y-value is in range
 	public static boolean testYInRange(double y) {
 		if (y >= 0 && y <= 1050) {
 			return true;
@@ -40,7 +54,7 @@ public class Test implements Runnable{
 		}
 	}
 	
-	//X- & Y-Wert testen, ob beide auf Arbeitsflaeche liegen
+	//Text x- and y-value
 	public static boolean testXYInRange(double x, double y) {
 		if (testXInRange(x) == true && testYInRange(y) == true) {
 			return true;

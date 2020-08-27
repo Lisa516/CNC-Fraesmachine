@@ -1,15 +1,15 @@
 package commandHandlers.mHandlers;
 
 import application.Kuehlmittel;
-import application.Spindel;
+import application.Spindle;
 
 public class m13Handler {
 	//Spindel Ein, Rechtslauf und Kuehlmittel Ein
 
 	
-	public static void ausfuehren() {
+	public static void execute() {
 		Kuehlmittel._setKuehlmittelStatus(true);
-		Spindel.spindelStart('r');
+		Spindle.spindelStart('r');
 	}
 
 }

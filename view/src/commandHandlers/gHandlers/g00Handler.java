@@ -1,7 +1,7 @@
 package commandHandlers.gHandlers;
 
 import application.ErrorHandling;
-import application.Fraeskopf;
+import application.MillingCutter;
 import application.MainFX;
 import application.Test;
 
@@ -10,9 +10,9 @@ public class g00Handler{
 	
 	
 	
-	public static void ausfuehren(int x, int y) {
+	public static void execute(int x, int y) {
 		if (Test.testFraeseAus() == false) {
-			ErrorHandling.befehlUnmoeglichFraeseAn();
+			ErrorHandling.commandInvalidMillNotRunning();
 			return;
 		}	
 		System.out.println(x + " " + y + " " + x/y);
