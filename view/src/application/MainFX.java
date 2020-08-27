@@ -3,6 +3,7 @@ package application;
 import javafx.application.Application;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -43,6 +44,8 @@ public class MainFX extends Application {
 	
 	Label geschwindigkeit = new Label("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
 	
+	Label logdatei = new Label("Ausgeführte Befehle:");
+		
 	public String eingabeUser;
 	
 	public static void drawCircle(double x, double y, double centerX, double centerY, double radius, double startAngle, double length) {
@@ -115,7 +118,7 @@ public class MainFX extends Application {
 	@Override
 //				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws SecurityException, IOException {
 			primaryStage.setTitle("Fraesmaschine");
 			primaryStage.setResizable(false);
 			//kein Resizen möglich um Fehler zu vermeiden
@@ -140,6 +143,7 @@ public class MainFX extends Application {
 			Rectangle borderL = new Rectangle(50, 725, Color.WHITE);
 			root.getChildren().add(borderL);
 			
+			
 			root.getChildren().add(bohrer);
 			
 			Circle home = new Circle(50, 50, 5, Color.GREEN);
@@ -155,16 +159,23 @@ public class MainFX extends Application {
 			
 			Button go = new Button("Go");
 			
+			Log new_log = new Log("logDatei.txt");
+
+			
 			go.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>()
 					{
 						public void handle(MouseEvent o)
 						{
-							eingabeUser = textField.getText();
-							
+						
 							try 
 							{
-								Log new_log = new Log("logDatei.txt");
-								new_log.logger.info("Ausgeführter Befehl: " + eingabeUser);				
+								eingabeUser = textField.getText();
+								
+								new_log.logger.info("Ausgeführter Befehl: " + eingabeUser);
+								
+								Label loginfos = new Label(eingabeUser);
+								infos.getChildren().add(loginfos);
+								root.setRight(infos);
 
 							}
 							catch(Exception e) 
@@ -173,14 +184,15 @@ public class MainFX extends Application {
 							}
 						}
 					});
-			
-					
+								
 			suchen.getChildren().addAll(befehl, textField, go);
 			suchen.setSpacing(5);
 			
 			infos.getChildren().addAll(position, spindelStatus, kuehlmittelStatus, geschwindigkeit, suchen);
 			root.setRight(infos);
 			infos.setSpacing(10);
+			
+			infos.getChildren().add(logdatei);
 			
 			HBox buttons = new HBox();
 			
