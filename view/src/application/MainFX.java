@@ -130,7 +130,7 @@ public class MainFX extends Application {
 	public void start(Stage primaryStage) {
 			primaryStage.setTitle("Fraesmaschine");
 			primaryStage.setResizable(false);
-			//kein Resizen möglich um Fehler zu vermeiden
+			//kein Resizen mÃ¶glich um Fehler zu vermeiden
 			primaryStage.centerOnScreen();
 			
 			Scene scene = new Scene(root, 1100, 725);
@@ -166,21 +166,29 @@ public class MainFX extends Application {
 			TextField textField = new TextField ();
 			
 			Button go = new Button("Go");
-			
+    
 			go.setOnAction(new EventHandler<ActionEvent>() {
 						public void handle(ActionEvent AE) {
+              
+			go.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>()
+					{
+						public void handle(MouseEvent o)
+						{
+              
 							eingabeUser = textField.getText();
+							
+							try 
+							{
+								Log new_log = new Log("logDatei.txt");
+								new_log.logger.info("AusgefÃ¼hrter Befehl: " + eingabeUser);				
+
+							}
+							catch(Exception e) {
+                //TODO
+								
+							}
 						}
 					});
-			
-			try {
-				Log new_log = new Log("logDatei.txt");
-				new_log.logger.info("Ausgeführter Befehl: " + eingabeUser);				
-
-			}
-			catch(Exception e) {
-				//TODO
-			}
 					
 			suchen.getChildren().addAll(befehl, textField, go);
 			suchen.setSpacing(5);
