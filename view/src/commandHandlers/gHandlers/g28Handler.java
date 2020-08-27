@@ -7,7 +7,7 @@ public class g28Handler{
 	//HOME Position anfahren
 	
 	public static boolean test() {
-		if (Fraeskopf.fraesenStatus == false) {
+		if (Fraeskopf._getFraesenStatus() == false) {
 			return true;
 		}
 		ErrorHandling.befehlUnmoeglichFraeseAn();

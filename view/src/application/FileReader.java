@@ -150,6 +150,20 @@ public static String[] befehleAlsStringArray() throws FileNotFoundException {
 		return befehl.split("\\,");
 	}
 	
+	public static int _getX(int stelle) throws FileNotFoundException {
+		String withX = FileReader._getBefehl(stelle)[2];
+		String withoutX = withX.substring(1);
+		int x = Integer.parseInt(withoutX);
+		return (x + 50);
+	}
+	
+	
+	public static int _getY(int stelle) throws FileNotFoundException {
+		String withY = FileReader._getBefehl(stelle)[3];
+		String withoutY = withY.substring(1); 
+		return (Integer.parseInt(withoutY) + 50);
+	}
+	
 	
 	
 	public static void main(String[] args) throws FileNotFoundException {

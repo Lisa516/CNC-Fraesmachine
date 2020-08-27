@@ -1,11 +1,14 @@
 package application;
 
-import javafx.application.Application;
-
 import java.io.FileNotFoundException;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -23,7 +26,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MainFX extends Application {
-	
+	    
 /**	public static Fraeskopf fraeskopf = new Fraeskopf();
 	public static Kuehlmittel kuehlmittel = new Kuehlmittel();
 	public static Spindel spindel = new Spindel();
@@ -35,18 +38,22 @@ public class MainFX extends Application {
 	
 	public static Circle bohrer = new Circle(50, 50, 7.5, Color.RED);
 	
-	Label position = new Label("Position: " + Fraeskopf._getPosition());
+	static Label position = new Label("Position: " + Fraeskopf._getPosition());
+	static Label spindelStatus = new Label(Spindel.SpindelAusgabe());
+	static Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
+	static Label geschwindigkeit = new Label("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
 	
-	Label spindelStatus = new Label(Spindel.SpindelAusgabe());
-	
-	Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
-	
-	Label geschwindigkeit = new Label("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
-	
+	public static void refreshLabel() {
+		position.setText("Position: " + Fraeskopf._getPosition());
+		spindelStatus.setText(Spindel.SpindelAusgabe());
+		kuehlmittelStatus.setText("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
+		geschwindigkeit.setText("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
+	}
+
 	public String eingabeUser;
 	
 	public static void drawCircle(double x, double y, double centerX, double centerY, double radius, double startAngle, double length) {
-		
+		//TODO
 	}
 	
 	public static void moveLine(int x, int y, double dx, int dy) {
@@ -63,7 +70,10 @@ public class MainFX extends Application {
 		        		final int dy = 0;
 		        	}
 		        	bohrer.setLayoutX(bohrer.getLayoutX() + dx);
+		        	Fraeskopf._setPositionX(bohrer.getLayoutX());
 		        	bohrer.setLayoutY(bohrer.getLayoutY() + dy);
+		        	Fraeskopf._setPositionY(bohrer.getLayoutY());
+		        	refreshLabel();
 	        	}
 	        }
 		}));
@@ -89,7 +99,9 @@ public class MainFX extends Application {
 			        Circle circle = new Circle(bohrer.getLayoutX() + 50, bohrer.getLayoutY() + 50, 3.75, Color.BLACK);
 			        root.getChildren().add(circle);
 		        	bohrer.setLayoutX(bohrer.getLayoutX() + dx);
+		        	Fraeskopf._setPositionX(bohrer.getLayoutX());
 		        	bohrer.setLayoutY(bohrer.getLayoutY() + dy);
+		        	Fraeskopf._setPositionY(bohrer.getLayoutY());
 	        	}
 	        }
 		}));
@@ -118,7 +130,7 @@ public class MainFX extends Application {
 	public void start(Stage primaryStage) {
 			primaryStage.setTitle("Fraesmaschine");
 			primaryStage.setResizable(false);
-			//kein Resizen möglich um Fehler zu vermeiden
+			//kein Resizen mÃ¶glich um Fehler zu vermeiden
 			primaryStage.centerOnScreen();
 			
 			Scene scene = new Scene(root, 1100, 725);
@@ -154,33 +166,41 @@ public class MainFX extends Application {
 			TextField textField = new TextField ();
 			
 			Button go = new Button("Go");
-			
+    
+			go.setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent AE) {
+              
 			go.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>()
 					{
 						public void handle(MouseEvent o)
 						{
+              
 							eingabeUser = textField.getText();
 							
 							try 
 							{
 								Log new_log = new Log("logDatei.txt");
-								new_log.logger.info("Ausgeführter Befehl: " + eingabeUser);				
+								new_log.logger.info("AusgefÃ¼hrter Befehl: " + eingabeUser);				
 
 							}
-							catch(Exception e) 
-							{
+							catch(Exception e) {
+                //TODO
 								
 							}
 						}
 					});
-			
 					
 			suchen.getChildren().addAll(befehl, textField, go);
 			suchen.setSpacing(5);
 			
-			infos.getChildren().addAll(position, spindelStatus, kuehlmittelStatus, geschwindigkeit, suchen);
 			root.setRight(infos);
 			infos.setSpacing(10);
+			
+			Label position = new Label("Position: " + Fraeskopf._getPosition());
+			Label spindelStatus = new Label(Spindel.SpindelAusgabe());
+			Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
+			Label geschwindigkeit = new Label("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
+			infos.getChildren().addAll(position, spindelStatus, kuehlmittelStatus, geschwindigkeit, suchen);
 			
 			HBox buttons = new HBox();
 			
