@@ -8,10 +8,12 @@ public class m02Handler {
 	//Programm Ende
 	
 	public static void ausfuehren() {
-		Spindel.spindelStatus = false;
-		Kuehlmittel.kuehlmittelStatus = false;
-		Fraeskopf.fraesenStatus = false;
 		//TODO
+		Spindel.spindelStopp();
+		Kuehlmittel._setKuehlmittelStatus(false);
+		if (Fraeskopf._getFraesenStatus() == true) {
+			Fraeskopf.stoppFraese();
+		}
 	}
 
 }

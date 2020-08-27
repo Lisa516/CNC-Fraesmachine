@@ -7,7 +7,7 @@ public class g03Handler {
 	//Vorschub mit Kreisbogen, gegen den Uhrzeigersinn
 	
 	public static boolean test() {
-		if (Fraeskopf.fraesenStatus == true) {
+		if (Fraeskopf._getFraesenStatus() == true) {
 			return true;
 		}
 		ErrorHandling.befehlUnmoeglichFraeseAus();

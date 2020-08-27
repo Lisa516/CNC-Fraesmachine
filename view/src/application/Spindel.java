@@ -7,6 +7,10 @@ public class Spindel implements Runnable {
 	public static char spindelDrehrichtung = '0';
 	//0 = aus, r = im Uhrzeigersinn (Rechtslauf), l = gegen den Uhrzeigersinn (Linkslauf)	
 	
+	public static boolean _getSpindelStatus() {
+		return spindelStatus;
+	}
+	
 	public static void spindelStopp() {
 		if (spindelStatus == true) {
 			spindelStatus = false;

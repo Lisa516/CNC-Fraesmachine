@@ -28,19 +28,6 @@ public class BefehlHandler {
 		return (y < 1051);
 	}
 	
-	public static int _getX(int stelle) throws FileNotFoundException {
-		String withX = FileReader._getBefehl(stelle)[2];
-		String withoutX = withX.substring(1);
-		int x = Integer.parseInt(withoutX);
-		return (x + 50);
-	}
-	
-	public static int _getY(int stelle) throws FileNotFoundException {
-		String withY = FileReader._getBefehl(stelle)[3];
-		String withoutY = withY.substring(1); 
-		return (Integer.parseInt(withoutY) + 50);
-	}
-	
 	public static int _getI(int stelle) throws FileNotFoundException {
 		String withI = FileReader._getBefehl(stelle)[3];
 		String withoutI = withI.substring(1);
@@ -120,8 +107,8 @@ public class BefehlHandler {
 	}
 	
 	public static void linienBefehlAufrufen(int stelle, String befehl) throws FileNotFoundException {
-		int x = _getX(stelle);
-		int y = _getY(stelle);
+		int x = FileReader._getX(stelle);
+		int y = FileReader._getY(stelle);
 		if (befehl.contentEquals("G00")) {
 			g00Handler.ausfuehren(x, y);
 		}
@@ -131,8 +118,8 @@ public class BefehlHandler {
 	}
 	
 	public static void kreisBefehlAufrufen(int stelle, String befehl) throws FileNotFoundException {
-		int x = _getX(stelle);
-		int y = _getY(stelle);
+		int x = FileReader._getX(stelle);
+		int y = FileReader._getY(stelle);
 		int i = _getI(stelle);
 		int j = _getJ(stelle);
 		if (befehl.contentEquals("G02")) {

@@ -3,20 +3,16 @@ package commandHandlers.gHandlers;
 import application.ErrorHandling;
 import application.Fraeskopf;
 import application.MainFX;
+import application.Test;
 
 public class g00Handler{
 	//Verfahrbewegung im Eilgang (nur ohne Bohren/Fraesen moeglich)
 	
-	public static boolean test() {
-		if (Fraeskopf.fraesenStatus == false) {
-			return true;
-		}
-		ErrorHandling.befehlUnmoeglichFraeseAn();
-		return false;
-	}
+	
 	
 	public static void ausfuehren(int x, int y) {
-		if (test() == false) {
+		if (Test.testFraeseAus() == false) {
+			ErrorHandling.befehlUnmoeglichFraeseAn();
 			return;
 		}	
 		System.out.println(x + " " + y + " " + x/y);

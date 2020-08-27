@@ -1,29 +1,44 @@
 package application;
 
 public class Fraeskopf implements Runnable {
-	public static double fahrGeschwindigkeit;
-	public static int schnittGeschwindigkeit;
-	public static boolean fraesenStatus = false;
-	public static double positionX;
-	public static double positionY;
+	private static double fahrGeschwindigkeit;
+	private static int schnittGeschwindigkeit;
+	private static boolean fraesenStatus = false;
+	private static double positionX;
+	private static double positionY;
 	
+	//Konstruktor
 	public Fraeskopf() {
 		positionX = 0;
 		positionY = 0;
 	}
 	
+	//Getter
 	public static double _getFahrGeschwindigkeit() {
 		return fahrGeschwindigkeit;
-	}
-	
-	public static void _setFahrGeschwindigkeit(double v) {
-		fahrGeschwindigkeit = v;
 	}
 	
 	public static int _getSchnittGeschwindigkeit() {
 		return schnittGeschwindigkeit;
 	}
 	
+	public static boolean _getFraesenStatus() {
+		return fraesenStatus;
+	}
+	
+	public static String statusToString() {
+		if (fraesenStatus == false) {
+			return "Die Fräse ist aus";
+		}
+		else {
+			return "Die Fräse ist an";
+		}
+	}
+	
+	public static void _setFahrGeschwindigkeit(double v) {
+		fahrGeschwindigkeit = v;
+	}
+
 	public void _setSchnittGeschwindigkeit(boolean kuehlmittelStatus) {
 		if (kuehlmittelStatus == true) {
 			schnittGeschwindigkeit = 3;
@@ -39,15 +54,6 @@ public class Fraeskopf implements Runnable {
 		}
 		else {
 			return _getFahrGeschwindigkeit();
-		}
-	}
-	
-	public static String _getFraesenStatus() {
-		if (fraesenStatus == false) {
-			return "Die Fräse ist aus";
-		}
-		else {
-			return "Die Fräse ist an";
 		}
 	}
 	
@@ -69,7 +75,7 @@ public class Fraeskopf implements Runnable {
 		}
 	}
 	
-	public static void _setPositionX(int x) {
+	public static void _setPositionX(double x) {
 		if(x > 0 && x < 1400) {
 			positionX = x;
 		}
@@ -78,7 +84,7 @@ public class Fraeskopf implements Runnable {
 		}
 	}
 	
-	public static void _setPositionY(int y) {
+	public static void _setPositionY(double y) {
 		if(y > 0 && y < 1050) {
 			positionY = y;
 		}
@@ -87,7 +93,7 @@ public class Fraeskopf implements Runnable {
 		}
 	}
 	
-	public void fraeskopfPositionieren(int x, int y) {
+	public void fraeskopfPositionieren(double x, double y) {
 		_setPositionX(x);
 		_setPositionY(y);
 	}
