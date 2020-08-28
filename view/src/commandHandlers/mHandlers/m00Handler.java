@@ -15,7 +15,7 @@ public class m00Handler {
 
 		Spindle.stopSpindle();
 		Coolant._setCoolantStatus(false);
-		MillingCutter.stopMillingCutter();
+		MillingCutter.stopMilling();
 	}
 
 }

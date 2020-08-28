@@ -1,0 +1,23 @@
+{
+
+  	
+ 					"colorHomePosition": "green",
+	
+ 					 "homePositionX": 0,
+  
+  					 "homePositionY": 0,
+  
+  					 "velocityWithCoolant": 2,
+  
+  					 "velocityWithOutCoolant": 3,
+  
+  					 "velocityMillNotRunning": 6,
+  
+  					 "diameterDrill": 15,
+  
+  					 "colorSurface": "grey",
+  					   
+  					 "colorMilledSurface": "black",
+  
+  					 "colorMillhead": "red"   					
+}

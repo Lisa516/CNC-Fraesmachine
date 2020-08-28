@@ -14,5 +14,7 @@ public class Buttons {
 	static Button abbrechen = new Button("Abbrechen");
 
 	static Button startJSON = new Button("Start JSON Programm");
+	
+	static Button loadSettings = new Button("Load Settings from json");
 
 }

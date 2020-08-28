@@ -14,7 +14,7 @@ public class m02Handler {
 
 		Coolant._setCoolantStatus(false);
 		if (MillingCutter._getMillingStatus() == true) {
-			MillingCutter.stopMillingCutter();
+			MillingCutter.stopMilling();
 		}
 	}
 
