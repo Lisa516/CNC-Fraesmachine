@@ -1,6 +1,6 @@
 package application;
 
-public class Kuehlmittel implements Runnable {
+public class Coolant implements Runnable {
 	
 private static boolean kuehlmittelStatus = false;
 	// false -> Kuehlmittel aus; true -> Kuehlmittel an

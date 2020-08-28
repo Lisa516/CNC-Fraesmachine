@@ -12,13 +12,13 @@ public class UI {
 
 	static Label position = new Label("Position: " + MillingCutter._getPosition());
 	static Label spindelStatus = new Label(Spindle.SpindelAusgabe());
-	static Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
+	static Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + Coolant._getStatus());
 	static Label geschwindigkeit = new Label("Geschwindigkeit: " + MillingCutter._getGeschwindigkeit() + "m/min");
 
 	public static void refreshLabel() {
 		position.setText("Position: " + MillingCutter._getPosition());
 		spindelStatus.setText(Spindle.SpindelAusgabe());
-		kuehlmittelStatus.setText("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
+		kuehlmittelStatus.setText("Kuehlmittelstatus: " + Coolant._getStatus());
 		geschwindigkeit.setText("Geschwindigkeit: " + MillingCutter._getGeschwindigkeit() + "m/min");
 	}
 
