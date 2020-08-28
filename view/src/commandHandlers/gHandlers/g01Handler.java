@@ -2,6 +2,7 @@ package commandHandlers.gHandlers;
 
 import application.ErrorHandling;
 import application.MillingCutter;
+import application.UI;
 import application.MainFX;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -13,8 +14,8 @@ public class g01Handler {
 		/**if (test() == false) {
 			return;
 		}**/
-		double neuX = x - MainFX.bohrer.getLayoutX();
-		double neuY = y - MainFX.bohrer.getLayoutY();
+		double neuX = x - UI.bohrer.getLayoutX();
+		double neuY = y - UI.bohrer.getLayoutY();
 
 		MainFX.fraesenLine(x, y, neuX / neuY / 2, 0.5);
 	}
