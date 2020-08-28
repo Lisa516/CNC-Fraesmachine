@@ -37,7 +37,7 @@ public class Spindle implements Runnable {
 		}
 	}
 	
-	public static void spindelStart(char richtung) {
+	public static void startSpindle(char richtung) {
 		if (spindelStatus == false) {
 			spindelStatus = true;
 			if (richtung == 'r') {
@@ -55,7 +55,7 @@ public class Spindle implements Runnable {
 		}
 	}
 	
-	public static void spindelStart() {
+	public static void startSpindle() {
 		if (spindelStatus == false) {
 			spindelStatus = true;
 			spindelDrehrichtung = 'r';

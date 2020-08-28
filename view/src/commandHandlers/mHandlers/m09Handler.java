@@ -6,7 +6,7 @@ public class m09Handler {
 	//Kuehlmittel aus
 	
 	public static void execute() {
-		Coolant._setKuehlmittelStatus(false);
+		Coolant._setCoolantStatus(false);
 	}
 
 }

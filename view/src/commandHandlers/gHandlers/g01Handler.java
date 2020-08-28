@@ -1,11 +1,7 @@
 package commandHandlers.gHandlers;
 
-import application.ErrorHandling;
-import application.MillingCutter;
+import application.MillingShapes;
 import application.UI;
-import application.MainFX;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 public class g01Handler {
 	//Geraden (Linear) Interpolation
@@ -17,6 +13,6 @@ public class g01Handler {
 		double neuX = x - UI.bohrer.getLayoutX();
 		double neuY = y - UI.bohrer.getLayoutY();
 
-		MainFX.fraesenLine(x, y, neuX / neuY / 2, 0.5);
+		MillingShapes.fraesenLine(x, y, neuX / neuY / 2, 0.5);
 	}
 }

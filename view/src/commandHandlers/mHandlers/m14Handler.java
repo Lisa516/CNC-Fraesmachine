@@ -7,8 +7,8 @@ public class m14Handler {
 	//Spindel ein, Linkslauf und Kuehlmittel ein 
 	
 	public static void execute() {
-		Coolant._setKuehlmittelStatus(true);
-		Spindle.spindelStart('l');
+		Coolant._setCoolantStatus(true);
+		Spindle.startSpindle('l');
 	}
 
 }
