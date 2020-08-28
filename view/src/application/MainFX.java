@@ -1,12 +1,15 @@
 package application;
 
-import javafx.application.Application;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -24,6 +27,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MainFX extends Application {
+
 	
 /**	public static Fraeskopf fraeskopf = new Fraeskopf();
 	public static Kuehlmittel kuehlmittel = new Kuehlmittel();
@@ -44,110 +48,108 @@ public class MainFX extends Application {
 	
 	Label geschwindigkeit = new Label("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
 	
-	Label logdatei = new Label("Ausgeführte Befehle:");
+	Label logdatei = new Label("Ausgefï¿½hrte Befehle:");
 		
-	public String eingabeUser;
-	
-	public static void drawCircle(double x, double y, double centerX, double centerY, double radius, double startAngle, double length) {
-		
-	}
-	
-	public static void moveLine(int x, int y, double dx, int dy) {
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),
-	            new EventHandler<ActionEvent>() {
 
-	        public void handle(ActionEvent t) {
-	        	//move the ball
-	        	if (bohrer.getLayoutX() < x - 50 || bohrer.getLayoutY() < y - 50) {
-	        		if (bohrer.getLayoutX() >= x) {
-		        		final int dx = 0;
-		        	}
-	        		else if (bohrer.getLayoutY() >= y) {
-		        		final int dy = 0;
-		        	}
-		        	bohrer.setLayoutX(bohrer.getLayoutX() + dx);
-		        	bohrer.setLayoutY(bohrer.getLayoutY() + dy);
-	        	}
-	        }
-		}));
-		timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+	public String eingabeUser;
+
+	public static void drawCircle(double x, double y, double centerX, double centerY, double radius, double startAngle, double length) {
+		// TODO
 	}
-	
-	public static void fraesenLine(int x, int y, double dx, double dy) {
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),
-	            new EventHandler<ActionEvent>() {
-			
-	        public void handle(ActionEvent t) {
-	        	//move the ball
-	        	if (bohrer.getLayoutX() < x - 50 || bohrer.getLayoutY() < y - 50) {
-	        		if (bohrer.getLayoutX() >= x) {
-		        		final int dx = 0;
-		        	}
-	        		
-	        		else if (bohrer.getLayoutY() >= y) {
-		        		final int dy = 0;
-		        	}
-	        		
-			        Circle circle = new Circle(bohrer.getLayoutX() + 50, bohrer.getLayoutY() + 50, 3.75, Color.BLACK);
-			        root.getChildren().add(circle);
-		        	bohrer.setLayoutX(bohrer.getLayoutX() + dx);
-		        	bohrer.setLayoutY(bohrer.getLayoutY() + dy);
-	        	}
-	        }
+
+	public static void moveLine(int x, int y, double dx, int dy) {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
+
+			public void handle(ActionEvent t) {
+				// move the ball
+				if (UI.bohrer.getLayoutX() < x - 50 || UI.bohrer.getLayoutY() < y - 50) {
+					if (UI.bohrer.getLayoutX() >= x) {
+						final int dx = 0;
+					} else if (UI.bohrer.getLayoutY() >= y) {
+						final int dy = 0;
+					}
+					UI.bohrer.setLayoutX(UI.bohrer.getLayoutX() + dx);
+					MillingCutter._setPositionX(UI.bohrer.getLayoutX());
+					UI.bohrer.setLayoutY(UI.bohrer.getLayoutY() + dy);
+					MillingCutter._setPositionY(UI.bohrer.getLayoutY());
+					UI.refreshLabel();
+				}
+			}
 		}));
-		
 		timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+		timeline.play();
+	}
+
+	public static void fraesenLine(int x, int y, double dx, double dy) {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
+
+			public void handle(ActionEvent t) {
+				// move the ball
+				if (UI.bohrer.getLayoutX() < x - 50 || UI.bohrer.getLayoutY() < y - 50) {
+					if (UI.bohrer.getLayoutX() >= x) {
+						final int dx = 0;
+					}
+
+					else if (UI.bohrer.getLayoutY() >= y) {
+						final int dy = 0;
+					}
+					Circle circle = new Circle(UI.bohrer.getLayoutX() + 50, UI.bohrer.getLayoutY() + 50, 3.75, Color.BLACK);
+					UI.root.getChildren().add(circle);
+					UI.bohrer.setLayoutX(UI.bohrer.getLayoutX() + dx);
+					MillingCutter._setPositionX(UI.bohrer.getLayoutX());
+					UI.bohrer.setLayoutY(UI.bohrer.getLayoutY() + dy);
+					MillingCutter._setPositionY(UI.bohrer.getLayoutY());
+				}
+				UI.refreshLabel();
+			}
+		}));
+
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.play();
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
 		launch(args);
+	}
 
-		Thread t1 = new Thread (new Fraeskopf());
-		Thread t2 = new Thread (new Kuehlmittel());
-		t1.start();
-		t2.start();
-		run();
-	}
-	
-	public static void run() {
-		
-	}
-	
-	@Override
 //				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
+  
 	public void start(Stage primaryStage) throws SecurityException, IOException {
+
+
 			primaryStage.setTitle("Fraesmaschine");
 			primaryStage.setResizable(false);
-			//kein Resizen möglich um Fehler zu vermeiden
+			//kein Resizen mÃ¶glich um Fehler zu vermeiden
 			primaryStage.centerOnScreen();
 			
-			Scene scene = new Scene(root, 1100, 725);
+			Scene scene = new Scene(UI.root, 1100, 725);
 			
 			Rectangle arbeitsflaeche = new Rectangle(1100, 725, Color.GREY);
-			root.getChildren().add(arbeitsflaeche);
+			UI.root.getChildren().add(arbeitsflaeche);
 			
 			Rectangle info = new Rectangle(350, 725, Color.WHITE);
 			info.setX(800);
-			root.getChildren().add(info);
+			UI.root.getChildren().add(info);
 			
 			Rectangle borderO = new Rectangle(1100, 50, Color.WHITE);
-			root.getChildren().add(borderO);
+			UI.root.getChildren().add(borderO);
 			
 			Rectangle borderU = new Rectangle(1100, 150, Color.WHITE);
 			borderU.setY(625);
-			root.getChildren().add(borderU);
+			UI.root.getChildren().add(borderU);
 			
 			Rectangle borderL = new Rectangle(50, 725, Color.WHITE);
-			root.getChildren().add(borderL);
+			UI.root.getChildren().add(borderL);
 			
+
 			
 			root.getChildren().add(bohrer);
+			UI.root.getChildren().add(UI.bohrer);
+
 			
 			Circle home = new Circle(50, 50, 5, Color.GREEN);
-			root.getChildren().add(home);
+			UI.root.getChildren().add(home);
 			 
 			
 			VBox infos = new VBox();
@@ -159,6 +161,7 @@ public class MainFX extends Application {
 			
 			Button go = new Button("Go");
 			
+
 			Log new_log = new Log("logDatei.txt");
 
 			
@@ -171,28 +174,50 @@ public class MainFX extends Application {
 							{
 								eingabeUser = textField.getText();
 								
-								new_log.logger.info("Ausgeführter Befehl: " + eingabeUser);
+								new_log.logger.info("Ausgefï¿½hrter Befehl: " + eingabeUser);
 								
 								Label loginfos = new Label(eingabeUser);
 								infos.getChildren().add(loginfos);
 								root.setRight(infos);
 
+			go.setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent AE) {
+					go.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent o) {
+							eingabeUser = textField.getText();
+							
+							try {
+								Log new_log = new Log("logDatei.txt");
+								new_log.logger.info("Ausgefuehrter Befehl: " + eingabeUser);
+
 							}
-							catch(Exception e) 
-							{
-								
+							catch(Exception e) {
+								//TODO
 							}
 						}
 					});
+
 								
+
+				}
+			});
+					
+
 			suchen.getChildren().addAll(befehl, textField, go);
 			suchen.setSpacing(5);
 			
-			infos.getChildren().addAll(position, spindelStatus, kuehlmittelStatus, geschwindigkeit, suchen);
-			root.setRight(infos);
+			UI.root.setRight(infos);
 			infos.setSpacing(10);
 			
+
 			infos.getChildren().add(logdatei);
+
+			Label position = new Label("Position: " + MillingCutter._getPosition());
+			Label spindelStatus = new Label(Spindle.SpindelAusgabe());
+			Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
+			Label geschwindigkeit = new Label("Geschwindigkeit: " + MillingCutter._getGeschwindigkeit() + "m/min");
+			infos.getChildren().addAll(position, spindelStatus, kuehlmittelStatus, geschwindigkeit, suchen);
+
 			
 			HBox buttons = new HBox();
 			
@@ -212,7 +237,7 @@ public class MainFX extends Application {
 				public void handle(MouseEvent e) {
 					stop.setDisable(true);
 					weiter.setDisable(false);
-					Fraeskopf.stoppFraese();
+					MillingCutter.stoppFraese();
 				}
 			});
 			
@@ -221,9 +246,9 @@ public class MainFX extends Application {
 				public void handle(MouseEvent e) {
 					stop.setDisable(true);
 					abbrechen.setDisable(true);
-					Fraeskopf.stoppFraese();
-					Fraeskopf._setPositionX(0);
-					Fraeskopf._setPositionY(0);
+					MillingCutter.stoppFraese();
+					MillingCutter._setPositionX(0);
+					MillingCutter._setPositionY(0);
 				}
 			});
 			
@@ -234,35 +259,25 @@ public class MainFX extends Application {
 					abbrechen.setDisable(false);
 				}
 			});
-			
-			startJSON.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent e) {
-					startJSON.setDisable(true);
-					stop.setDisable(false);
-					abbrechen.setDisable(false);
-					try {
-						CommandsQueue.QueueFromJSON();
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
-			});
-			
+              
 			buttons.getChildren().addAll(stop, weiter, abbrechen, startJSON);
-			root.setBottom(buttons);		
+			UI.root.setBottom(buttons);
 			buttons.setSpacing(5);
-			
-		/**	Text arbeitsflaeche = new Text(25, 25, "Arbeitsflaeche");
-			arbeitsflaeche.setFill(Color.CHOCOLATE);
-			arbeitsflaeche.setFont(Font.font(java.awt.Font.SERIF, 25));
-			root.getChildren().add(arbeitsflaeche); **/
-        
 			primaryStage.setScene(scene);
-			primaryStage.show();
-			
-	}
-
-}
+			primaryStage.show();		
+			startJSON.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+				Task triggerJsonCommands = new Task<Void>() {
+					@Override
+					public Void call() throws FileNotFoundException {
+						CommandsQueue.QueueFromJSON();
+						return null;
+						}
+					};
+					new Thread(triggerJsonCommands).start();
+				});
+				/**startJSON.setDisable(true);
+				stop.setDisable(false);
+				abbrechen.setDisable(false);**/
+			}
+		};
 //Lisa

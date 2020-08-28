@@ -1,17 +1,19 @@
 package commandHandlers.mHandlers;
 
-import application.Fraeskopf;
+import application.MillingCutter;
 import application.Kuehlmittel;
-import application.Spindel;
+import application.Spindle;
 
 public class m02Handler {
 	//Programm Ende
 	
-	public static void ausfuehren() {
-		Spindel.spindelStatus = false;
-		Kuehlmittel.kuehlmittelStatus = false;
-		Fraeskopf.fraesenStatus = false;
+	public static void execute() {
 		//TODO
+		Spindle.spindelStopp();
+		Kuehlmittel._setKuehlmittelStatus(false);
+		if (MillingCutter._getMillingStatus() == true) {
+			MillingCutter.stoppFraese();
+		}
 	}
 
 }

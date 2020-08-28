@@ -55,7 +55,7 @@ public class FileReader {
         return befehleUrsprung;
 	}
 	
-public static String[] befehleAlsStringArray() throws FileNotFoundException {
+public static String[] commandsAsStringArray() throws FileNotFoundException {
 	
 		JsonArray commands = einlesen();
 		String[] befehleUrsprung = new String[commands.size()];
@@ -110,7 +110,7 @@ public static String[] befehleAlsStringArray() throws FileNotFoundException {
 	}
 	
 	public static String[] befehleOrdnen() throws FileNotFoundException {
-		String[] befehleUrsprung = befehleAlsStringArray();
+		String[] befehleUrsprung = commandsAsStringArray();
 		String[] befehle = new String[befehleUrsprung.length];
 		
 		String temp;
@@ -133,7 +133,7 @@ public static String[] befehleAlsStringArray() throws FileNotFoundException {
 		return befehle;
 	}
 		
-	public static String[] _getBefehl(int stelle, String[] befehle) {
+	public static String[] _getCommand(int stelle, String[] befehle) {
 		String befehl = befehle[stelle];
 	/**	for (int i = 0; i < befehl.split("\\,").length; i++) {
 			System.out.println(split[i]);
@@ -141,13 +141,27 @@ public static String[] befehleAlsStringArray() throws FileNotFoundException {
 		return befehl.split("\\,");
 	}
 	
-	public static String[] _getBefehl(int stelle) throws FileNotFoundException {
+	public static String[] _getCommand(int stelle) throws FileNotFoundException {
 		String[] befehle = befehleOrdnen();
 		String befehl = befehle[stelle];
 	/**	for (int i = 0; i < befehl.split("\\,").length; i++) {
 			System.out.println(split[i]);
 		}**/
 		return befehl.split("\\,");
+	}
+	
+	public static int _getX(int index) throws FileNotFoundException {
+		String withX = FileReader._getCommand(index)[2];
+		String withoutX = withX.substring(1);
+		int x = Integer.parseInt(withoutX);
+		return (x + 50);
+	}
+	
+	
+	public static int _getY(int index) throws FileNotFoundException {
+		String withY = FileReader._getCommand(index)[3];
+		String withoutY = withY.substring(1); 
+		return (Integer.parseInt(withoutY) + 50);
 	}
 	
 	

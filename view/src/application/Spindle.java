@@ -1,12 +1,32 @@
 package application;
 
-public class Spindel implements Runnable {
-	public static boolean spindelStatus = false;
+public class Spindle implements Runnable {
+	private static boolean spindelStatus = false;
 	// false = aus, true = ein
 	
-	public static char spindelDrehrichtung = '0';
+	private static char spindelDrehrichtung = '0';
 	//0 = aus, r = im Uhrzeigersinn (Rechtslauf), l = gegen den Uhrzeigersinn (Linkslauf)	
 	
+	
+	//Getter Methoden
+	public static boolean _getSpindelStatus() {
+		return spindelStatus;
+	}
+	
+	public static char _getSpindelDrehrichtung() {
+		return spindelDrehrichtung;
+	}
+	
+	//Setter
+	public static void _setSpindelStatus(boolean status) {
+		spindelStatus = status;
+	}
+	
+	public static void _setSpindelDrehrichtung(char richtung) {
+		spindelDrehrichtung = richtung;
+	}
+	
+	//Spindel stoppen
 	public static void spindelStopp() {
 		if (spindelStatus == true) {
 			spindelStatus = false;

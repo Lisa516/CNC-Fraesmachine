@@ -1,8 +1,8 @@
 package commandHandlers.mHandlers;
 
-import application.Fraeskopf;
+import application.MillingCutter;
 import application.Kuehlmittel;
-import application.Spindel;
+import application.Spindle;
 
 public class m00Handler {
 	//Programmhalt (Spindel, Kuehlmittel, Vorschub aus)
@@ -11,10 +11,10 @@ public class m00Handler {
 		
 	}
 	
-	public static void ausfuehren() {
-		Spindel.spindelStopp();
+	public static void execute() {
+		Spindle.spindelStopp();
 		Kuehlmittel._setKuehlmittelStatus(false);
-		Fraeskopf.stoppFraese();
+		MillingCutter.stoppFraese();
 	}
 
 }

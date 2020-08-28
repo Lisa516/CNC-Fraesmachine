@@ -2,7 +2,7 @@ package application;
 
 public class Kuehlmittel implements Runnable {
 	
-public static boolean kuehlmittelStatus = false;
+private static boolean kuehlmittelStatus = false;
 	// false -> Kuehlmittel aus; true -> Kuehlmittel an
 	
 	public static String _getStatus() {

@@ -1,22 +1,18 @@
 package commandHandlers.gHandlers;
 
 import application.ErrorHandling;
-import application.Fraeskopf;
+import application.MillingCutter;
 import application.MainFX;
+import application.Test;
 
 public class g00Handler{
 	//Verfahrbewegung im Eilgang (nur ohne Bohren/Fraesen moeglich)
 	
-	public static boolean test() {
-		if (Fraeskopf.fraesenStatus == false) {
-			return true;
-		}
-		ErrorHandling.befehlUnmoeglichFraeseAn();
-		return false;
-	}
 	
-	public static void ausfuehren(int x, int y) {
-		if (test() == false) {
+	
+	public static void execute(int x, int y) {
+		if (Test.testFraeseAus() == false) {
+			ErrorHandling.commandInvalidMillNotRunning();
 			return;
 		}	
 		System.out.println(x + " " + y + " " + x/y);
