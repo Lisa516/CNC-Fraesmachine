@@ -1,12 +1,12 @@
 package commandHandlers.mHandlers;
 
-import application.Kuehlmittel;
+import application.Coolant;
 
 public class m08Handler {
 	//Kuehlmittel Ein
 	
 	public static void execute() {
-		Kuehlmittel._setKuehlmittelStatus(true);
+		Coolant._setKuehlmittelStatus(true);
 	}
 
 }

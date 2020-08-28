@@ -157,9 +157,9 @@ public class MainFX extends Application {
 			
 			Label position = new Label("Position: " + MillingCutter._getPosition());
 			Label spindelStatus = new Label(Spindle.SpindelAusgabe());
-			Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
+			Label coolantStatus = new Label("Status of coolant: " + Coolant._getStatus());
 			Label geschwindigkeit = new Label("Geschwindigkeit: " + MillingCutter._getGeschwindigkeit() + "m/min");
-			infos.getChildren().addAll(position, spindelStatus, kuehlmittelStatus, geschwindigkeit, suchen);
+			infos.getChildren().addAll(position, spindelStatus, coolantStatus, geschwindigkeit, suchen);
 			
 			HBox buttons = new HBox();
 			
