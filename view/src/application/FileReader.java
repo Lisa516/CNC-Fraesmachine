@@ -10,7 +10,7 @@ import com.google.gson.JsonObject;
 
 public class FileReader {
 	
-	public static JsonArray einlesen() throws FileNotFoundException {
+	public static JsonArray readIn() throws FileNotFoundException {
 		Gson gson = new Gson();
         // Datei "Befehlscode.json" über einen Stream einlesen
         FileInputStream input = new FileInputStream("src/application/Befehlscode.json");
@@ -25,75 +25,75 @@ public class FileReader {
         return commands;
 	}
 	
-	public static String[] befehleAlsStringArray(JsonArray commands) {
+	public static String[] commandAsAlsStringArray(JsonArray commands) {
 		
-		String[] befehleUrsprung = new String[commands.size()];
+		String[] commandOrigin = new String[commands.size()];
 
         for(int i = 0; i < commands.size(); i++){
             JsonObject command = commands.get(i).getAsJsonObject();
             
-            befehleUrsprung[i] = command.get("number").getAsString() + "," + command.get("code").getAsString();
+            commandOrigin[i] = command.get("number").getAsString() + "," + command.get("code").getAsString();
                
             // Parameter je als JsonObject einlesen
             if (command.get("parameters").getAsJsonObject().has("x")) {
             	JsonObject parameters = command.get("parameters").getAsJsonObject(); 
                 // Name des parameter ausgeben
             	
-            	befehleUrsprung[i] = befehleUrsprung[i] + ",X" + parameters.get("x").getAsString();
-            	befehleUrsprung[i] = befehleUrsprung[i] + ",Y" + parameters.get("y").getAsString();
+            	commandOrigin[i] = commandOrigin[i] + ",X" + parameters.get("x").getAsString();
+            	commandOrigin[i] = commandOrigin[i] + ",Y" + parameters.get("y").getAsString();
             	
                 if ( command.get("parameters").getAsJsonObject().has("i")) {
                 	
-                	befehleUrsprung[i] = befehleUrsprung[i] + ",I" + parameters.get("i").getAsString();
-                	befehleUrsprung[i] = befehleUrsprung[i] + ",J" + parameters.get("j").getAsString();
+                	commandOrigin[i] = commandOrigin[i] + ",I" + parameters.get("i").getAsString();
+                	commandOrigin[i] = commandOrigin[i] + ",J" + parameters.get("j").getAsString();
                 }
             }
         }
  /**        for(int i = 0; i < befehleUrsprung.length; i++) {
         	 System.out.println(befehleUrsprung[i]);
          }**/
-        return befehleUrsprung;
+        return commandOrigin;
 	}
 	
 public static String[] commandsAsStringArray() throws FileNotFoundException {
 	
-		JsonArray commands = einlesen();
-		String[] befehleUrsprung = new String[commands.size()];
+		JsonArray commands = readIn();
+		String[] commandOrigin = new String[commands.size()];
 
         for(int i = 0; i < commands.size(); i++){
             JsonObject command = commands.get(i).getAsJsonObject();
             
-            befehleUrsprung[i] = command.get("number").getAsString() + "," + command.get("code").getAsString();
+            commandOrigin[i] = command.get("number").getAsString() + "," + command.get("code").getAsString();
                
             // Parameter je als JsonObject einlesen
             if (command.get("parameters").getAsJsonObject().has("x")) {
             	JsonObject parameters = command.get("parameters").getAsJsonObject(); 
                 // Name des parameter ausgeben
             	
-            	befehleUrsprung[i] = befehleUrsprung[i] + ",X" + parameters.get("x").getAsString();
-            	befehleUrsprung[i] = befehleUrsprung[i] + ",Y" + parameters.get("y").getAsString();
+            	commandOrigin[i] = commandOrigin[i] + ",X" + parameters.get("x").getAsString();
+            	commandOrigin[i] = commandOrigin[i] + ",Y" + parameters.get("y").getAsString();
             	
                 if ( command.get("parameters").getAsJsonObject().has("i")) {
                 	
-                	befehleUrsprung[i] = befehleUrsprung[i] + ",I" + parameters.get("i").getAsString();
-                	befehleUrsprung[i] = befehleUrsprung[i] + ",J" + parameters.get("j").getAsString();
+                	commandOrigin[i] = commandOrigin[i] + ",I" + parameters.get("i").getAsString();
+                	commandOrigin[i] = commandOrigin[i] + ",J" + parameters.get("j").getAsString();
                 }
             }
         }
  /**        for(int i = 0; i < befehleUrsprung.length; i++) {
         	 System.out.println(befehleUrsprung[i]);
          }**/
-        return befehleUrsprung;
+        return commandOrigin;
 	}
 	
-	public static String[] befehleOrdnen(String[] befehleUrsprung) {
-		String[] befehle = new String[befehleUrsprung.length];
+	public static String[] putCommandsInOrder(String[] befehleUrsprung) {
+		String[] commands = new String[befehleUrsprung.length];
 		
 		String temp;
 		
-		for (int i = 0; i < befehle.length; i++) {
+		for (int i = 0; i < commands.length; i++) {
 			if (Integer.parseInt(String.valueOf(befehleUrsprung[i].charAt(3))) == i + 1) {
-				befehle[i] = befehleUrsprung[i];
+				commands[i] = befehleUrsprung[i];
 			}
 			else {
 				//Tauschen von aufgerufenem String und dem wo er hingehört
@@ -106,48 +106,48 @@ public static String[] commandsAsStringArray() throws FileNotFoundException {
 		/**for (int i = 0; i < befehle.length; i++) {
 			System.out.println(befehle[i]);
 		}**/
-		return befehle;
+		return commands;
 	}
 	
-	public static String[] befehleOrdnen() throws FileNotFoundException {
-		String[] befehleUrsprung = commandsAsStringArray();
-		String[] befehle = new String[befehleUrsprung.length];
+	public static String[] putCommandsInOrder() throws FileNotFoundException {
+		String[] commandsOrigin = commandsAsStringArray();
+		String[] commands = new String[commandsOrigin.length];
 		
 		String temp;
 		
-		for (int i = 0; i < befehle.length; i++) {
-			if (Integer.parseInt(String.valueOf(befehleUrsprung[i].charAt(3))) == i + 1) {
-				befehle[i] = befehleUrsprung[i];
+		for (int i = 0; i < commands.length; i++) {
+			if (Integer.parseInt(String.valueOf(commandsOrigin[i].charAt(3))) == i + 1) {
+				commands[i] = commandsOrigin[i];
 			}
 			else {
 				//Tauschen von aufgerufenem String und dem wo er hingehört
-				temp = befehleUrsprung[befehleUrsprung[i].charAt(3) - 1];
-				befehleUrsprung[befehleUrsprung[i].charAt(3) - 1] = befehleUrsprung[i];
-				befehleUrsprung[i] = temp;
+				temp = commandsOrigin[commandsOrigin[i].charAt(3) - 1];
+				commandsOrigin[commandsOrigin[i].charAt(3) - 1] = commandsOrigin[i];
+				commandsOrigin[i] = temp;
 				i = i - 1;
 			}
 		}
 		/**for (int i = 0; i < befehle.length; i++) {
 			System.out.println(befehle[i]);
 		}**/
-		return befehle;
+		return commands;
 	}
 		
-	public static String[] _getCommand(int stelle, String[] befehle) {
-		String befehl = befehle[stelle];
+	public static String[] _getCommand(int position, String[] commands) {
+		String command = commands[position];
 	/**	for (int i = 0; i < befehl.split("\\,").length; i++) {
 			System.out.println(split[i]);
 		}**/
-		return befehl.split("\\,");
+		return command.split("\\,");
 	}
 	
-	public static String[] _getCommand(int stelle) throws FileNotFoundException {
-		String[] befehle = befehleOrdnen();
-		String befehl = befehle[stelle];
+	public static String[] _getCommand(int position) throws FileNotFoundException {
+		String[] commands = putCommandsInOrder();
+		String command = commands[position];
 	/**	for (int i = 0; i < befehl.split("\\,").length; i++) {
 			System.out.println(split[i]);
 		}**/
-		return befehl.split("\\,");
+		return command.split("\\,");
 	}
 	
 	public static int _getX(int index) throws FileNotFoundException {

@@ -12,9 +12,10 @@ public class m00Handler {
 	}
 	
 	public static void execute() {
-		Spindle.spindelStopp();
+
+		Spindle.stopSpindle();
 		Coolant._setCoolantStatus(false);
-		MillingCutter.stoppFraese();
+		MillingCutter.stopMillingCutter();
 	}
 
 }

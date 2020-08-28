@@ -10,7 +10,7 @@ public class g03Handler {
 		if (MillingCutter._getMillingStatus() == true) {
 			return true;
 		}
-		ErrorHandling.befehlUnmoeglichFraeseAus();
+		ErrorHandling.commandImpossibleMillingMachineOff();
 		return false;
 	}
 	

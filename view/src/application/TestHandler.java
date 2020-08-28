@@ -5,22 +5,22 @@ import java.io.FileNotFoundException;
 public class TestHandler {
 	public boolean ProgrammEnde = false;
 	
-	public static boolean aufrufenTest(int stelle) throws FileNotFoundException {
-		String befehl = FileReader._getCommand(stelle)[1];
-		if (befehl.contentEquals("G00") || befehl.contentEquals("G01") || befehl.contentEquals("G02") || befehl.contentEquals("G03")) {
-			if (Test.testXYInRange(FileReader._getX(stelle), FileReader._getY(stelle)) == false) {
+	public static boolean callTest(int location) throws FileNotFoundException {
+		String command = FileReader._getCommand(location)[1];
+		if (command.contentEquals("G00") || command.contentEquals("G01") || command.contentEquals("G02") || command.contentEquals("G03")) {
+			if (Test.testXYInRange(FileReader._getX(location), FileReader._getY(location)) == false) {
 				return false;
 			}
-			if (befehl.contentEquals("G00") == false) {
+			if (command.contentEquals("G00") == false) {
 				if (Test.testMillRunning() == false) {
 					return false;
 				}
-				if (befehl.contentEquals("G01") == false) {
+				if (command.contentEquals("G01") == false) {
 					//TODO I & J testen
 				}
 			}
 		}
-		if (befehl.contentEquals("G00") || befehl.contentEquals("G28")) {
+		if (command.contentEquals("G00") || command.contentEquals("G28")) {
 			if (Test.testFraeseAus() == false) {
 				return false;
 			}

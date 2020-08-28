@@ -23,11 +23,11 @@ public class Test implements Runnable{
 //Tests concerning Spindle
 	//Spindle is supposed to be running. Test whether it is
 	public static boolean testSpindleRunning() {
-		return Spindle._getSpindelStatus();
+		return Spindle._getSpindleStatus();
 	}
 	
 	public static boolean testSpindleNotRunning() {
-		if (Spindle._getSpindelStatus() == true) {
+		if (Spindle._getSpindleStatus() == true) {
 			return false;
 		}
 		return true;

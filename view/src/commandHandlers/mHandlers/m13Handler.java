@@ -9,7 +9,9 @@ public class m13Handler {
 	
 	public static void execute() {
 		Coolant._setCoolantStatus(true);
+
 		Spindle.startSpindle('r');
+
 	}
 
 }

@@ -6,7 +6,7 @@ public class m05Handler {
 	//Spindel Stopp
 
 	public static void execute() {
-		Spindle.spindelStopp();
+		Spindle.spindleStop();
 	}
 
 }

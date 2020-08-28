@@ -33,32 +33,32 @@ public class ErrorHandling extends Thread {
 
 	//Error if the milling head was not running while someone tried to turn it off.
 	public static String millStopped() {
-		return "Der Fraeskopf wurde versucht auszuschalten, obwohl er nicht lief.";
+		return "The Milling Cutter was tried to be shut off despite he was not running.";
 	}
 
 	
-	public static String spindelStopped() {
-		return "Die Spindel wurde versucht auszuschalten, obwohl sie nicht lief.";
+	public static String spindleStopped() {
+		return "The spindle was tried to be shut off despite she was not running.";
 	}
 
-	public static String spindelRunning() {
-		return "Die Spindel wurde versucht anzuschalten, obwohl sie laeuft.";
+	public static String spindleRunning() {
+		return "The spindle was tried to be shut off despite she was not running";
 	}
 
-	public static String spindelAus() {
-		return "Die Drehrichtung kann nicht geaendert werden, wenn die Spindel aus ist.";
+	public static String spindleOff() {
+		return "The direction of rotation can not be changed if the spindle is not running.";
 	}
 
 	public static String commandInvalidMillNotRunning() {
-		return "Dieser Befehl kann nicht ausgefuehrt werden, da die Fraese an ist";
+		return "This command can not be executed because the milling cutter is running.";
 	}
 
-	public static String befehlUnmoeglichFraeseAus() {
-		return "Dieser Befehl kann nicht ausgefuehrt werden, da die Fraese aus ist";
+	public static String commandImpossibleMillingMachineOff() {
+		return "This command can not be executed because the milling cutter is not running.";
 	}
 
-	public static String ungueltigeDrehrichtung(char eingabe) {
-		return eingabe + "ist keine gueltige Drehrichtung. Erlaubt sind l oder r";
+	public static String invalidDirectionOfRotation(char eingabe) {
+		return eingabe + "is not a valid direction of rotation. A valid direction of rotation is r or l.";
 	}
 
 	public static String invalidCommand(String command) {
