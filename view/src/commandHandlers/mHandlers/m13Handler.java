@@ -8,8 +8,8 @@ public class m13Handler {
 
 	
 	public static void execute() {
-		Coolant._setKuehlmittelStatus(true);
-		Spindle.spindelStart('r');
+		Coolant._setCoolantStatus(true);
+		Spindle.startSpindle('r');
 	}
 
 }

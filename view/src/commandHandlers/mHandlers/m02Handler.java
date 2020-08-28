@@ -10,7 +10,7 @@ public class m02Handler {
 	public static void execute() {
 		//TODO
 		Spindle.spindelStopp();
-		Coolant._setKuehlmittelStatus(false);
+		Coolant._setCoolantStatus(false);
 		if (MillingCutter._getMillingStatus() == true) {
 			MillingCutter.stoppFraese();
 		}

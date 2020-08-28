@@ -6,7 +6,7 @@ public class m08Handler {
 	//Kuehlmittel Ein
 	
 	public static void execute() {
-		Coolant._setKuehlmittelStatus(true);
+		Coolant._setCoolantStatus(true);
 	}
 
 }
