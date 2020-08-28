@@ -37,11 +37,12 @@ public class Spindle implements Runnable {
 		}
 	}
 	
-	public static void spindleStart(char direction) {
+	public static void startSpindle(char richtung) {
 		if (spindleStatus == false) {
 			spindleStatus = true;
 			if (direction == 'r') {
-				spindleDirectionOfRotation = 'r';
+				spindleRotDirection = 'r';
+
 			}
 			else if (direction == 'l') {
 				spindleDirectionOfRotation = 'l';
@@ -55,11 +56,12 @@ public class Spindle implements Runnable {
 		}
 	}
 	
-	public static void spindelStart() {
+	public static void startSpindle() {
 		if (spindleStatus == false) {
 			spindleStatus = true;
-			spindleDirectionOfRotation = 'r';
-			//Drehen im Uhrzeigersinn falls nichts übergeben
+			spindleRotDirection = 'r';
+
+			//Drehen im Uhrzeigersinn falls nichts Ã¼bergeben
 		}
 		else {
 			ErrorHandling.spindleRunning();

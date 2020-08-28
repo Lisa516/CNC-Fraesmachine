@@ -6,20 +6,13 @@ import java.io.IOException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -28,27 +21,12 @@ import javafx.util.Duration;
 
 public class MainFX extends Application {
 
-	/**
-	 * public static Fraeskopf fraeskopf = new Fraeskopf(); public static
-	 * Kuehlmittel kuehlmittel = new Kuehlmittel(); public static Spindel spindel =
-	 * new Spindel(); public static ErrorHandling errorHandler = new
-	 * ErrorHandling(); public static BefehlHandler befehlHandler = new
-	 * BefehlHandler();
-	 **/
+
 
 	static BorderPane root = new BorderPane();
 
 	public static Circle drill = new Circle(50, 50, 7.5, Color.RED);
-	
-	// war glaube ich zu viel durchs mergen bin mir aber unsicher ~ Joshua
 
-//	Label position = new Label("Position: " + MillingCutter._getPosition());
-
-//	Label spindleStatus = new Label(Spindle.SpindelAusgabe());
-
-//	Label coolantStatus = new Label("Coolant status: " + Coolant._getStatus());
-
-//	Label speed = new Label("Speed: " + MillingCutter._getGeschwindigkeit() + "m/min");
 
 	Label logfile = new Label("Executed Commands");
 
@@ -82,35 +60,6 @@ public class MainFX extends Application {
 		timeline.play();
 	}
 
-	public static void fraesenLine(int x, int y, double dx, double dy) {
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
-
-			public void handle(ActionEvent t) {
-				// move the ball
-				if (UI.bohrer.getLayoutX() < x - 50 || UI.bohrer.getLayoutY() < y - 50) {
-					if (UI.bohrer.getLayoutX() >= x) {
-						final int dx = 0;
-					}
-
-					else if (UI.bohrer.getLayoutY() >= y) {
-						final int dy = 0;
-					}
-					Circle circle = new Circle(UI.bohrer.getLayoutX() + 50, UI.bohrer.getLayoutY() + 50, 3.75,
-							Color.BLACK);
-					UI.root.getChildren().add(circle);
-					UI.bohrer.setLayoutX(UI.bohrer.getLayoutX() + dx);
-					MillingCutter._setPositionX(UI.bohrer.getLayoutX());
-					UI.bohrer.setLayoutY(UI.bohrer.getLayoutY() + dy);
-					MillingCutter._setPositionY(UI.bohrer.getLayoutY());
-				}
-				UI.refreshLabel();
-			}
-		}));
-
-		timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.play();
-	}
-
 	public static void main(String[] args) throws FileNotFoundException {
 		launch(args);
 	}
@@ -118,8 +67,61 @@ public class MainFX extends Application {
 //				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 	public void start(Stage primaryStage) throws SecurityException, IOException {
+		
+		Buttons.weiter.setDisable(true);
+		
+		Buttons.stop.setDisable(true);
+		
+		Buttons.abbrechen.setDisable(true);
+		
+		Buttons.stop.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				Buttons.stop.setDisable(true);
+				Buttons.weiter.setDisable(false);
+				MillingCutter.stoppFraese();
+			}
+		});
+		
+		Buttons.abbrechen.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				Buttons.stop.setDisable(true);
+				Buttons.abbrechen.setDisable(true);
+				MillingCutter.stoppFraese();
+				MillingCutter._setPositionX(0);
+				MillingCutter._setPositionY(0);
+			}
+		});
+		
+		Buttons.weiter.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				Buttons.stop.setDisable(false);
+				Buttons.abbrechen.setDisable(false);
+			}
+		});
+		
+		Buttons.startJSON.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			Task triggerJsonCommands = new Task<Void>() {
+				@Override
+				public Void call() throws FileNotFoundException {
+					CommandsQueue.QueueFromJSON();
+					Buttons.startJSON.setDisable(true);
+					Buttons.stop.setDisable(false);
+					Buttons.abbrechen.setDisable(false);
+					return null;
+				}
+			};
+			new Thread(triggerJsonCommands).start();
+		});
+		
+		Buttons.buttons.getChildren().addAll(Buttons.stop, Buttons.weiter, Buttons.abbrechen, Buttons.startJSON);
+		
+		UI.root.setBottom(Buttons.buttons);
+		Buttons.buttons.setSpacing(5);
 
 		primaryStage.setTitle("Milling machine");
+
 		primaryStage.setResizable(false);
 		// kein Resizen moeglich um Fehler zu vermeiden
 		primaryStage.centerOnScreen();
@@ -131,7 +133,7 @@ public class MainFX extends Application {
 
 		Rectangle info = new Rectangle(350, 725, Color.WHITE);
 		info.setX(800);
-		UI.root.getChildren().add(info);
+		UI.root.getChildren().add(InfoBox.info);
 
 		Rectangle borderO = new Rectangle(1100, 50, Color.WHITE);
 		UI.root.getChildren().add(borderO);
@@ -144,10 +146,12 @@ public class MainFX extends Application {
 		UI.root.getChildren().add(borderL);
 
 		root.getChildren().add(drill);
+
 		UI.root.getChildren().add(UI.bohrer);
 
 		Circle home = new Circle(50, 50, 5, Color.GREEN);
 		UI.root.getChildren().add(home);
+//////////////////////////
 
 		VBox infos = new VBox();
 
@@ -259,4 +263,38 @@ public class MainFX extends Application {
  * abbrechen.setDisable(false);
  **/
 
+///////////////////////////////////
+
+		Log new_log = new Log("logDatei.txt");
+
+		InfoBox.go.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent o) {
+
+				try {
+					eingabeUser = InfoBox.textField.getText();
+
+					new_log.logger.info("Ausgefuehrter Befehl: " + eingabeUser);
+
+					Label loginfos = new Label(eingabeUser);
+					InfoBox.infos.getChildren().add(loginfos);
+					root.setRight(InfoBox.infos);
+				} catch (Exception e) {
+					// TODO
+				}
+			}
+		});
+
+		InfoBox.suchen.getChildren().addAll(InfoBox.befehl, InfoBox.textField, InfoBox.go);
+		InfoBox.suchen.setSpacing(5);
+
+		UI.root.setRight(InfoBox.infos);
+		InfoBox.infos.setSpacing(10);
+
+		InfoBox.infos.getChildren().addAll(InfoBox.position, InfoBox.spindelStatus, InfoBox.coolantStatus, InfoBox.velocity, InfoBox.suchen, InfoBox.logdatei);
+
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+};
+//////////////////////
 //Lisa
