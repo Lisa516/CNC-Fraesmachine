@@ -1,105 +1,105 @@
 package application;
 
 public class Spindle implements Runnable {
-	private static boolean spindelStatus = false;
+	private static boolean spindleStatus = false;
 	// false = aus, true = ein
 	
-	private static char spindelDrehrichtung = '0';
+	private static char spindleDirectionOfRotation = '0';
 	//0 = aus, r = im Uhrzeigersinn (Rechtslauf), l = gegen den Uhrzeigersinn (Linkslauf)	
 	
 	
 	//Getter Methoden
-	public static boolean _getSpindelStatus() {
-		return spindelStatus;
+	public static boolean _getSpindleStatus() {
+		return spindleStatus;
 	}
 	
-	public static char _getSpindelDrehrichtung() {
-		return spindelDrehrichtung;
+	public static char _getSpindleDirectionOfRotation() {
+		return spindleDirectionOfRotation;
 	}
 	
 	//Setter
-	public static void _setSpindelStatus(boolean status) {
-		spindelStatus = status;
+	public static void _setSpindleStatus(boolean status) {
+		spindleStatus = status;
 	}
 	
-	public static void _setSpindelDrehrichtung(char richtung) {
-		spindelDrehrichtung = richtung;
+	public static void _setSpindleDirectionOfRotation(char direction) {
+		spindleDirectionOfRotation = direction;
 	}
 	
 	//Spindel stoppen
-	public static void spindelStopp() {
-		if (spindelStatus == true) {
-			spindelStatus = false;
-			spindelDrehrichtung = '0';
+	public static void spindleStop() {
+		if (spindleStatus == true) {
+			spindleStatus = false;
+			spindleDirectionOfRotation = '0';
 		}
 		else {
-			ErrorHandling.spindelStopped();
+			ErrorHandling.spindleStopped();
 		}
 	}
 	
-	public static void spindelStart(char richtung) {
-		if (spindelStatus == false) {
-			spindelStatus = true;
-			if (richtung == 'r') {
-				spindelDrehrichtung = 'r';
+	public static void spindleStart(char direction) {
+		if (spindleStatus == false) {
+			spindleStatus = true;
+			if (direction == 'r') {
+				spindleDirectionOfRotation = 'r';
 			}
-			else if (richtung == 'l') {
-				spindelDrehrichtung = 'l';
+			else if (direction == 'l') {
+				spindleDirectionOfRotation = 'l';
 			}
 			else {
-				ErrorHandling.ungueltigeDrehrichtung(richtung);
+				ErrorHandling.invalidDirectionOfRotation(direction);
 			}
 		}
 		else {
-			ErrorHandling.spindelRunning();
+			ErrorHandling.spindleRunning();
 		}
 	}
 	
 	public static void spindelStart() {
-		if (spindelStatus == false) {
-			spindelStatus = true;
-			spindelDrehrichtung = 'r';
+		if (spindleStatus == false) {
+			spindleStatus = true;
+			spindleDirectionOfRotation = 'r';
 			//Drehen im Uhrzeigersinn falls nichts übergeben
 		}
 		else {
-			ErrorHandling.spindelRunning();
+			ErrorHandling.spindleRunning();
 		}
 	}
 	
 	public static void changeDrehrichtung(char richtung) {
-		if (spindelStatus == true) {
+		if (spindleStatus == true) {
 			if (richtung == 'r') {
-				spindelDrehrichtung = 'r';
+				spindleDirectionOfRotation = 'r';
 			}
 			else if (richtung == 'l') {
-				spindelDrehrichtung = 'l';
+				spindleDirectionOfRotation = 'l';
 			}
 			else {
-				ErrorHandling.ungueltigeDrehrichtung(richtung);
+				ErrorHandling.invalidDirectionOfRotation(richtung);
 			}
 		}
 		else {
-			ErrorHandling.spindelAus();
+			ErrorHandling.spindleOff();
 		}
 	}
 	
 	public static String SpindelAusgabe() {
-		String statusAusgabe;
-		String drehrichtungAusgabe;
-		if (spindelStatus == false) {
-			statusAusgabe = "aus";
-			drehrichtungAusgabe = "aus";
+		String statusOutput;
+		String directionOfRotationOutput;
+		if (spindleStatus == false) {
+			statusOutput = "aus";
+			directionOfRotationOutput = "aus";
 		}
 		else {
-			statusAusgabe = "ein";
-			if (spindelDrehrichtung == 'r') {
-				drehrichtungAusgabe = "Rechtslauf";
+			statusOutput = "ein";
+			if (spindleDirectionOfRotation == 'r') {
+				directionOfRotationOutput = "Rechtslauf";
 			}
 			else {
-				drehrichtungAusgabe = "Linkslauf";
+				directionOfRotationOutput = "Linkslauf";
 			}
 		}
-		return ("Spindelstatus: " + statusAusgabe + "\n" + "Drehrichtung: " + drehrichtungAusgabe);
+		return ("Spindelstatus: " + statusOutput + "\n" + "Drehrichtung: " + directionOfRotationOutput);
 	}
 	
 	public void run() {

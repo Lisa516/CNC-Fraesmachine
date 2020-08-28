@@ -12,8 +12,8 @@ public class m00Handler {
 	}
 	
 	public static void execute() {
-		Spindle.spindelStopp();
-		Kuehlmittel._setKuehlmittelStatus(false);
+		Spindle.spindleStopp();
+		Coolant._setKuehlmittelStatus(false);
 		MillingCutter.stoppFraese();
 	}
 

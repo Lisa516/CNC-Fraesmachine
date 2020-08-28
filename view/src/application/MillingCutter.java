@@ -1,9 +1,9 @@
 package application;
 
 public class MillingCutter implements Runnable {
-	private static double fahrGeschwindigkeit;
-	private static int schnittGeschwindigkeit;
-	private static boolean fraesenStatus = false;
+	private static double drivingSpeed;
+	private static int cuttingSpeed;
+	private static boolean millingCutterStatus = false;
 	private static double positionX;
 	private static double positionY;
 	
@@ -14,61 +14,61 @@ public class MillingCutter implements Runnable {
 	}
 	
 	//Getter
-	public static double _getFahrGeschwindigkeit() {
-		return fahrGeschwindigkeit;
+	public static double _getDrivingSpeed() {
+		return drivingSpeed;
 	}
 	
-	public static int _getSchnittGeschwindigkeit() {
-		return schnittGeschwindigkeit;
+	public static int _getCuttingSpeed() {
+		return cuttingSpeed;
 	}
 	
 	public static boolean _getMillingStatus() {
-		return fraesenStatus;
+		return millingCutterStatus;
 	}
 	
 	public static String statusToString() {
-		if (fraesenStatus == false) {
-			return "Die Fräse ist aus";
+		if (millingCutterStatus == false) {
+			return "The milling cutter is on";
 		}
 		else {
-			return "Die Fräse ist an";
+			return "The milling cutter is off";
 		}
 	}
 	
-	public static void _setFahrGeschwindigkeit(double v) {
-		fahrGeschwindigkeit = v;
+	public static void _setDrivingSpeed(double v) {
+		drivingSpeed = v;
 	}
 
-	public void _setSchnittGeschwindigkeit(boolean kuehlmittelStatus) {
-		if (kuehlmittelStatus == true) {
-			schnittGeschwindigkeit = 3;
+	public void _setCuttingSpeed(boolean coolantStatus) {
+		if (coolantStatus == true) {
+			cuttingSpeed = 3;
 		}
 		else {
-			schnittGeschwindigkeit = 2;
+			cuttingSpeed = 2;
 		}
 	}
 	
-	public static double _getGeschwindigkeit(boolean fraesenStatus) {
-		if (fraesenStatus == true) {
-			return _getSchnittGeschwindigkeit();
+	public static double _getDrivingSpeed(boolean millingCutterStatus) {
+		if (millingCutterStatus == true) {
+			return _getCuttingSpeed();
 		}
 		else {
-			return _getFahrGeschwindigkeit();
+			return _getDrivingSpeed();
 		}
 	}
 	
-	public void startFraese() {
-		if (fraesenStatus == false) {
-			fraesenStatus = true;
+	public void startMillingCutter() {
+		if (millingCutterStatus == false) {
+			millingCutterStatus = true;
 		}
 		else {
 			ErrorHandling.millRunning();
 		}
 	}
 	
-	public static void stoppFraese() {
-		if (fraesenStatus == true) {
-			fraesenStatus = false;
+	public static void stopMillingCutter() {
+		if (millingCutterStatus == true) {
+			millingCutterStatus = false;
 		}
 		else {
 			ErrorHandling.millStopped();
@@ -93,7 +93,7 @@ public class MillingCutter implements Runnable {
 		}
 	}
 	
-	public void fraeskopfPositionieren(double x, double y) {
+	public void positionMillingCutter(double x, double y) {
 		_setPositionX(x);
 		_setPositionY(y);
 	}
@@ -110,12 +110,12 @@ public class MillingCutter implements Runnable {
 		return "(" + _getPositionX() + ";" + _getPositionY() + ")";
 	}
 	
-	public static String _getGeschwindigkeit() {
-		if (fraesenStatus == true) {
-			return (_getSchnittGeschwindigkeit() + " ");
+	public static String _getSpeed() {
+		if (millingCutterStatus == true) {
+			return (_getCuttingSpeed() + " ");
 		}
 		else {
-			return (_getFahrGeschwindigkeit() + " ");
+			return (_getDrivingSpeed() + " ");
 		}
 	}
 	

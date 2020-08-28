@@ -1,6 +1,0 @@
-Aug. 27, 2020 5:09:05 PM application.MainFX$3 handle
-INFO: Ausgeführter Befehl: M10
-Aug. 27, 2020 5:09:09 PM application.MainFX$3 handle
-INFO: Ausgeführter Befehl: D14
-Aug. 27, 2020 5:09:13 PM application.MainFX$3 handle
-INFO: Ausgeführter Befehl: G19
