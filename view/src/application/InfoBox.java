@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class InfoBox {
+	
 	static Rectangle info = new Rectangle(350, 725, Color.WHITE);
 	
 	static Label position = new Label("Position: " + MillingCutter._getPosition());

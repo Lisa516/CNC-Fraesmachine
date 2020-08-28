@@ -1,15 +1,10 @@
 package application;
 
 public class MillingCutter implements Runnable {
-///////////
-	private static double drivingSpeed;
-	private static int cuttingSpeed;
-	private static boolean millingCutterStatus = false;
-////////////////////7
+
 	private static double movingVelocity;
 	private static int millingVelocity;
 	private static boolean millingStatus = false;
-/////////////////////
 	private static double positionX;
 	private static double positionY;
 	
@@ -20,54 +15,7 @@ public class MillingCutter implements Runnable {
 	}
 	
 	//Getter
-/////////////////////
-	public static double _getDrivingSpeed() {
-		return drivingSpeed;
-	}
-	
-	public static int _getCuttingSpeed() {
-		return cuttingSpeed;
-	}
-	
-	public static boolean _getMillingStatus() {
-		return millingCutterStatus;
-	}
-	
-	public static String statusToString() {
-		if (millingCutterStatus == false) {
-			return "The milling cutter is on";
-		}
-		else {
-			return "The milling cutter is off";
-		}
-	}
-	
-	public static void _setDrivingSpeed(double v) {
-		drivingSpeed = v;
-	}
 
-	public void _setCuttingSpeed(boolean coolantStatus) {
-		if (coolantStatus == true) {
-			cuttingSpeed = 3;
-		}
-		else {
-			cuttingSpeed = 2;
-		}
-	}
-	
-	public static double _getDrivingSpeed(boolean millingCutterStatus) {
-		if (millingCutterStatus == true) {
-			return _getCuttingSpeed();
-		}
-		else {
-			return _getDrivingSpeed();
-		}
-	}
-	
-	public void startMillingCutter() {
-		if (millingCutterStatus == false) {
-			millingCutterStatus = true;
-//////////////////////////
 	public static double _getMovingVelocity() {
 		return movingVelocity;
 	}
@@ -114,16 +62,15 @@ public class MillingCutter implements Runnable {
 	public void startFraese() {
 		if (millingStatus == false) {
 			millingStatus = true;
-////////////////////
 		}
 		else {
 			ErrorHandling.millRunning();
 		}
 	}
 	
-	public static void stopMillingCutter() {
-		if (millingCutterStatus == true) {
-			millingCutterStatus = false;
+	public static void stopMilling() {
+		if (millingStatus == true) {
+			millingStatus = false;
 		}
 		else {
 			ErrorHandling.millStopped();

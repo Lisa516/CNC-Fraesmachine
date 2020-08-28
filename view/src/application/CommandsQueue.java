@@ -6,7 +6,7 @@ public class CommandsQueue {
 
 	// Call Tests for all of the commands (Lisa)
 	public static boolean testQueueFromJson() throws FileNotFoundException {
-		for (int i = 0; i < FileReader.commandsAsStringArray().length; i++) {
+		for (int i = 0; i < FileReader.contentAsStringArray().length; i++) {
 			if (TestHandler.callTest(i) == false) {
 				return false;
 			}
@@ -16,7 +16,7 @@ public class CommandsQueue {
 
 	// Call all of the commands (Lisa)
 	public static void QueueFromJSON() throws FileNotFoundException {
-		for (int i = 0; i < FileReader.commandsAsStringArray().length; i++) {
+		for (int i = 0; i < FileReader.contentAsStringArray().length; i++) {
 			CommandHandler.callCommand(i);
 		}
 	}

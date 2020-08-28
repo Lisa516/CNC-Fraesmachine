@@ -4,7 +4,7 @@ public class Spindle implements Runnable {
 	private static boolean spindleStatus = false;
 	// false = aus, true = ein
 	
-	private static char spindleDirectionOfRotation = '0';
+	private static char spindleRotDirection = '0';
 	//0 = aus, r = im Uhrzeigersinn (Rechtslauf), l = gegen den Uhrzeigersinn (Linkslauf)	
 	
 	
@@ -14,7 +14,7 @@ public class Spindle implements Runnable {
 	}
 	
 	public static char _getSpindleDirectionOfRotation() {
-		return spindleDirectionOfRotation;
+		return spindleRotDirection;
 	}
 	
 	//Setter
@@ -23,21 +23,21 @@ public class Spindle implements Runnable {
 	}
 	
 	public static void _setSpindleDirectionOfRotation(char direction) {
-		spindleDirectionOfRotation = direction;
+		spindleRotDirection = direction;
 	}
 	
 	//Spindel stoppen
-	public static void spindleStop() {
+	public static void stopSpindle() {
 		if (spindleStatus == true) {
 			spindleStatus = false;
-			spindleDirectionOfRotation = '0';
+			spindleRotDirection = '0';
 		}
 		else {
 			ErrorHandling.spindleStopped();
 		}
 	}
 	
-	public static void startSpindle(char richtung) {
+	public static void startSpindle(char direction) {
 		if (spindleStatus == false) {
 			spindleStatus = true;
 			if (direction == 'r') {
@@ -45,7 +45,7 @@ public class Spindle implements Runnable {
 
 			}
 			else if (direction == 'l') {
-				spindleDirectionOfRotation = 'l';
+				spindleRotDirection = 'l';
 			}
 			else {
 				ErrorHandling.invalidDirectionOfRotation(direction);
@@ -71,10 +71,10 @@ public class Spindle implements Runnable {
 	public static void changeDrehrichtung(char richtung) {
 		if (spindleStatus == true) {
 			if (richtung == 'r') {
-				spindleDirectionOfRotation = 'r';
+				spindleRotDirection = 'r';
 			}
 			else if (richtung == 'l') {
-				spindleDirectionOfRotation = 'l';
+				spindleRotDirection = 'l';
 			}
 			else {
 				ErrorHandling.invalidDirectionOfRotation(richtung);
@@ -94,7 +94,7 @@ public class Spindle implements Runnable {
 		}
 		else {
 			statusOutput = "ein";
-			if (spindleDirectionOfRotation == 'r') {
+			if (spindleRotDirection == 'r') {
 				directionOfRotationOutput = "Rechtslauf";
 			}
 			else {
