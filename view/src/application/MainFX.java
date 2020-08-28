@@ -1,6 +1,7 @@
 package application;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -26,6 +27,29 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MainFX extends Application {
+
+	
+/**	public static Fraeskopf fraeskopf = new Fraeskopf();
+	public static Kuehlmittel kuehlmittel = new Kuehlmittel();
+	public static Spindel spindel = new Spindel();
+	public static ErrorHandling errorHandler = new ErrorHandling();
+	public static BefehlHandler befehlHandler = new BefehlHandler();
+	**/
+	
+	static BorderPane root = new BorderPane();
+	
+	public static Circle bohrer = new Circle(50, 50, 7.5, Color.RED);
+	
+	Label position = new Label("Position: " + Fraeskopf._getPosition());
+	
+	Label spindelStatus = new Label(Spindel.SpindelAusgabe());
+	
+	Label kuehlmittelStatus = new Label("Kuehlmittelstatus: " + Kuehlmittel._getStatus());
+	
+	Label geschwindigkeit = new Label("Geschwindigkeit: " + Fraeskopf._getGeschwindigkeit() + "m/min");
+	
+	Label logdatei = new Label("Ausgef�hrte Befehle:");
+		
 
 	public String eingabeUser;
 
@@ -90,7 +114,9 @@ public class MainFX extends Application {
 
 //				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
-	public void start(Stage primaryStage) {
+  
+	public void start(Stage primaryStage) throws SecurityException, IOException {
+
 
 			primaryStage.setTitle("Fraesmaschine");
 			primaryStage.setResizable(false);
@@ -116,7 +142,11 @@ public class MainFX extends Application {
 			Rectangle borderL = new Rectangle(50, 725, Color.WHITE);
 			UI.root.getChildren().add(borderL);
 			
+
+			
+			root.getChildren().add(bohrer);
 			UI.root.getChildren().add(UI.bohrer);
+
 			
 			Circle home = new Circle(50, 50, 5, Color.GREEN);
 			UI.root.getChildren().add(home);
@@ -131,6 +161,25 @@ public class MainFX extends Application {
 			
 			Button go = new Button("Go");
 			
+
+			Log new_log = new Log("logDatei.txt");
+
+			
+			go.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>()
+					{
+						public void handle(MouseEvent o)
+						{
+						
+							try 
+							{
+								eingabeUser = textField.getText();
+								
+								new_log.logger.info("Ausgef�hrter Befehl: " + eingabeUser);
+								
+								Label loginfos = new Label(eingabeUser);
+								infos.getChildren().add(loginfos);
+								root.setRight(infos);
+
 			go.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent AE) {
 					go.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -140,27 +189,36 @@ public class MainFX extends Application {
 							try {
 								Log new_log = new Log("logDatei.txt");
 								new_log.logger.info("Ausgefuehrter Befehl: " + eingabeUser);
+
 							}
 							catch(Exception e) {
 								//TODO
 							}
 						}
 					});
+
+								
+
 				}
 			});
 					
+
 			suchen.getChildren().addAll(befehl, textField, go);
 			suchen.setSpacing(5);
 			
 			UI.root.setRight(infos);
 			infos.setSpacing(10);
 			
+
+			infos.getChildren().add(logdatei);
+
 			Label position = new Label("Position: " + MillingCutter._getPosition());
 			Label spindelStatus = new Label(Spindle.SpindelAusgabe());
 			Label coolantStatus = new Label("Status of coolant: " + Coolant._getStatus());
 			Label geschwindigkeit = new Label("Geschwindigkeit: " + MillingCutter._getGeschwindigkeit() + "m/min");
+
 			infos.getChildren().addAll(position, spindelStatus, coolantStatus, geschwindigkeit, suchen);
-			
+
 			HBox buttons = new HBox();
 			
 			Button weiter = new Button("Weiter");

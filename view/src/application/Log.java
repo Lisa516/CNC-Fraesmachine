@@ -10,8 +10,10 @@ public class Log {
 	
 	public Logger logger;
 	
-	public Log(String file_name)throws SecurityException, IOException {
 	
+	public Log(String file_name)throws SecurityException, IOException {
+		
+
 		deletePreviousFile(file_name);
 		
 		File f = new File(file_name);
