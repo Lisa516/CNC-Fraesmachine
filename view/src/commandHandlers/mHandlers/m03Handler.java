@@ -7,7 +7,7 @@ public class m03Handler {
 	
 	
 	public static void execute() {
-		Spindle.spindelStart('r');
+		Spindle.spindleStart('r');
 	}
 
 }

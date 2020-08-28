@@ -6,7 +6,7 @@ public class m04Handler {
 	//Spindel Ein: Gegen den Uhrzeigersinn (Linkslauf)
 	
 	public static void execute() {
-		Spindle.spindelStart('l');
+		Spindle.spindleStart('l');
 	}
 
 }

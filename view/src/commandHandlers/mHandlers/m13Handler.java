@@ -1,6 +1,6 @@
 package commandHandlers.mHandlers;
 
-import application.Kuehlmittel;
+import application.Coolant;
 import application.Spindle;
 
 public class m13Handler {
@@ -8,8 +8,8 @@ public class m13Handler {
 
 	
 	public static void execute() {
-		Kuehlmittel._setKuehlmittelStatus(true);
-		Spindle.spindelStart('r');
+		Coolant._setCoolantStatus(true);
+		Spindle.spindleStart('r');
 	}
 
 }

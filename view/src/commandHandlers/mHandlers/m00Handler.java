@@ -1,7 +1,7 @@
 package commandHandlers.mHandlers;
 
 import application.MillingCutter;
-import application.Kuehlmittel;
+import application.Coolant;
 import application.Spindle;
 
 public class m00Handler {
@@ -12,9 +12,9 @@ public class m00Handler {
 	}
 	
 	public static void execute() {
-		Spindle.spindleStopp();
-		Coolant._setKuehlmittelStatus(false);
-		MillingCutter.stoppFraese();
+		Spindle.spindleStop();
+		Coolant._setCoolantStatus(false);
+		MillingCutter.stopMillingCutter();
 	}
 
 }

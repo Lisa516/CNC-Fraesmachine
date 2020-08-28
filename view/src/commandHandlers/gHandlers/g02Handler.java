@@ -9,7 +9,7 @@ public class g02Handler {
 
 	public static boolean test() {
 		if (MillingCutter._getMillingStatus() == false) {
-			ErrorHandling.befehlUnmoeglichFraeseAus();
+			ErrorHandling.commandImpossibleMillingMachineOff();
 			return false;
 		}
 		return true;
