@@ -1,5 +1,6 @@
-package application;
+package ui;
 
+import application.MillingCutter;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -8,27 +9,29 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-public class MillingShapes {
+@SuppressWarnings("unused")
+public class MillingShapes extends MillingCutter {
+	
+	public static Color colorMilledSurface;
+	
 	public static void fraesenLine(int x, int y, double dx, double dy) {
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent t) {
-				// move the ball
-				if (UI.bohrer.getLayoutX() < x - 50 || UI.bohrer.getLayoutY() < y - 50) {
-					if (UI.bohrer.getLayoutX() >= x) {
+				if (UI.drill.getLayoutX() < (x - 50) || UI.drill.getLayoutY() < (y - 50)) {
+					if (UI.drill.getLayoutX() >= x) {
 						final int dx = 0;
 					}
 
-					else if (UI.bohrer.getLayoutY() >= y) {
+					else if (UI.drill.getLayoutY() >= y) {
 						final int dy = 0;
 					}
-					Circle circle = new Circle(UI.bohrer.getLayoutX() + 50, UI.bohrer.getLayoutY() + 50, 3.75,
-							Color.BLACK);
+					Circle circle = new Circle(UI.drill.getLayoutX() + 50, UI.drill.getLayoutY() + 50, 3.75, colorMilledSurface);
 					UI.root.getChildren().add(circle);
-					UI.bohrer.setLayoutX(UI.bohrer.getLayoutX() + dx);
-					MillingCutter._setPositionX(UI.bohrer.getLayoutX());
-					UI.bohrer.setLayoutY(UI.bohrer.getLayoutY() + dy);
-					MillingCutter._setPositionY(UI.bohrer.getLayoutY());
+					UI.drill.setLayoutX(UI.drill.getLayoutX() + dx);
+					_setPositionX(UI.drill.getLayoutX());
+					UI.drill.setLayoutY(UI.drill.getLayoutY() + dy);
+					_setPositionY(UI.drill.getLayoutY());
 				}
 				UI.refreshLabel();
 			}

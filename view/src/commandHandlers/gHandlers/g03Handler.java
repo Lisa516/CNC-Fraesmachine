@@ -1,7 +1,7 @@
 package commandHandlers.gHandlers;
 
-import application.ErrorHandling;
 import application.MillingCutter;
+import errorHandler.ErrorHandling;
 
 public class g03Handler {
 	//Vorschub mit Kreisbogen, gegen den Uhrzeigersinn

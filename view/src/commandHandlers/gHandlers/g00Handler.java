@@ -1,8 +1,8 @@
 package commandHandlers.gHandlers;
 
-import application.ErrorHandling;
-import application.MainFX;
 import application.Test;
+import errorHandler.ErrorHandling;
+import ui.MainFX;
 
 public class g00Handler {
 	// Verfahrbewegung im Eilgang (nur ohne Bohren/Fraesen moeglich)

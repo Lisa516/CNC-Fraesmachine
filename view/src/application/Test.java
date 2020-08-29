@@ -1,5 +1,7 @@
 package application;
 
+import errorHandler.ErrorHandling;
+
 public class Test implements Runnable{
 //Tests concerning milling
 	//Milling is supposed to be running. Test whether it is

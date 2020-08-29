@@ -1,4 +1,6 @@
-package application;
+package errorHandler;
+
+import application.MillingCutter;
 
 public class ErrorHandling extends Thread {
 

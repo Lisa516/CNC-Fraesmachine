@@ -1,23 +1,12 @@
 {
-
-  	
- 					"colorHomePosition": "green",
-	
- 					 "homePositionX": 0,
-  
-  					 "homePositionY": 0,
-  
-  					 "velocityWithCoolant": 2,
-  
-  					 "velocityWithOutCoolant": 3,
-  
-  					 "velocityMillNotRunning": 6,
-  
-  					 "diameterDrill": 15,
-  
-  					 "colorSurface": "grey",
-  					   
-  					 "colorMilledSurface": "black",
-  
-  					 "colorMillhead": "red"   					
+	"colorHomePosition": "#008000",
+	"homePositionX": 0,
+	"homePositionY": 0,
+	"velocityWithCoolant": 2,
+	"velocityWithoutCoolant": 3,
+	"velocityMillNotRunning": 6,
+	"diameterDrill": 15,
+	"colorSurface": "#808080",
+	"colorMilledSurface": "#000000",
+	"colorMillhead": "#FF0000"
 }

@@ -1,5 +1,7 @@
 package application;
 
+import errorHandler.ErrorHandling;
+
 public class MillingCutter implements Runnable {
 
 	private static double movingVelocity;
