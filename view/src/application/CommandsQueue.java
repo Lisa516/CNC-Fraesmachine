@@ -5,9 +5,9 @@ import java.io.FileNotFoundException;
 public class CommandsQueue {
 
 	// Call Tests for all of the commands (Lisa)
-	public static boolean testQueueFromJson() throws FileNotFoundException {
-		for (int i = 0; i < FileReader.contentAsStringArray().length; i++) {
-			if (TestHandler.callTest(i) == false) {
+	public static boolean testQueueFromJson(String file) throws FileNotFoundException {
+		for (int i = 0; i < CommandReader.contentAsStringArray(file).length; i++) {
+			if (TestHandler.callTest(i, file) == false) {
 				return false;
 			}
 		}
@@ -15,15 +15,15 @@ public class CommandsQueue {
 	}
 
 	// Call all of the commands (Lisa)
-	public static void QueueFromJSON() throws FileNotFoundException {
-		for (int i = 0; i < FileReader.contentAsStringArray().length; i++) {
-			CommandHandler.callCommand(i);
+	public static void QueueFromJSON(String file) throws FileNotFoundException {
+		for (int i = 0; i < CommandReader.contentAsStringArray(file).length; i++) {
+			CommandHandler.callCommand(i, file);
 		}
 	}
 
 	public void run() throws FileNotFoundException {
-		if (testQueueFromJson() == true) {
-			QueueFromJSON();
+		if (testQueueFromJson("Befehlscode.json") == true) {
+			QueueFromJSON("Befehlscode.json");
 		}
 	}
 

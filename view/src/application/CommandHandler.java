@@ -17,33 +17,20 @@ import commandHandlers.mHandlers.m08Handler;
 import commandHandlers.mHandlers.m09Handler;
 import commandHandlers.mHandlers.m13Handler;
 import commandHandlers.mHandlers.m14Handler;
+import errorHandler.ErrorHandling;
 
 public class CommandHandler {
 	
-	//return I-value of command (Lisa)
-	public static int _getI(int index) throws FileNotFoundException {
-		String withI = FileReader._getCommand(index)[3];
-		String withoutI = withI.substring(1);
-		return (Integer.parseInt(withoutI) + 50);
-	}
-	
-	//return J-value of command (Lisa)
-	public static int _getJ(int index) throws FileNotFoundException {
-		String withJ = FileReader._getCommand(index)[4];
-		String withoutJ = withJ.substring(1);
-		return (Integer.parseInt(withoutJ) + 50);
-	}
-	
-	//Call a specific command (Lisa)
-	public static void callCommand(int index) throws FileNotFoundException {
-		String command = FileReader._getCommand(index)[1];
+	//call a specific command (Lisa)
+	public static void callCommand(int index, String file) throws FileNotFoundException {
+		String command = CommandReader._getCommand(index, file)[1];
 		if (command.startsWith("G")) {			
 			if (command.contentEquals("G00") || command.contentEquals("G01")) {
-				callLineCommand(index, command);
+				callLineCommand(index, command, file);
 				return;
 			}			
 			if (command.contentEquals("G02") || command.contentEquals("G03")) {
-				callCircleCommand(index, command);
+				callCircleCommand(index, command, file);
 				return;
 			}
 
@@ -102,9 +89,9 @@ public class CommandHandler {
 	}
 	
 	//Move the Milling Head in a line (Lisa)
-	public static void callLineCommand(int index, String command) throws FileNotFoundException {
-		int x = FileReader._getX(index);
-		int y = FileReader._getY(index);
+	public static void callLineCommand(int index, String command, String file) throws FileNotFoundException {
+		int x = ParametersCommands._getX(index, file);
+		int y = ParametersCommands._getY(index, file);
 		if (command.contentEquals("G00")) {
 			g00Handler.execute(x, y);
 		}
@@ -114,11 +101,11 @@ public class CommandHandler {
 	}
 	
 	//Mill a Circle (Lisa)
-	public static void callCircleCommand(int index, String command) throws FileNotFoundException {
-		int x = FileReader._getX(index);
-		int y = FileReader._getY(index);
-		int i = _getI(index);
-		int j = _getJ(index);
+	public static void callCircleCommand(int index, String command, String file) throws FileNotFoundException {
+		int x = ParametersCommands._getX(index, file);
+		int y = ParametersCommands._getY(index, file);
+		int i = ParametersCommands._getI(index, file);
+		int j = ParametersCommands._getJ(index, file);
 		if (command.contentEquals("G02")) {
 			g02Handler.execute(x, y, i, j);
 		}

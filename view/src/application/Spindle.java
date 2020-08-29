@@ -1,5 +1,7 @@
 package application;
 
+import errorHandler.ErrorHandling;
+
 public class Spindle implements Runnable {
 	private static boolean spindleStatus = false;
 	// false = aus, true = ein

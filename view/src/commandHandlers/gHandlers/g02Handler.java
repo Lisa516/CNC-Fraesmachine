@@ -1,8 +1,8 @@
 package commandHandlers.gHandlers;
 
-import application.ErrorHandling;
 import application.MillingCutter;
-import application.UI;
+import errorHandler.ErrorHandling;
+import ui.UI;
 
 public class g02Handler {
 	// Vorschub mit Kreisbogen, im Uhrzeigersinn (Kreis Interpolation)
@@ -19,8 +19,9 @@ public class g02Handler {
 		if (test() == false) {
 			return;
 		}
-		double mittelpunktX = UI.bohrer.getLayoutX() + i;
-		double mittelpunktY = UI.bohrer.getLayoutY() + j;
+		//TODO
+		double mittelpunktX = UI.drill.getLayoutX() + i;
+		double mittelpunktY = UI.drill.getLayoutY() + j;
 		double radius = Math.sqrt((i * i) + (j * j));
 		double startAngle;
 		if (x >= y) {

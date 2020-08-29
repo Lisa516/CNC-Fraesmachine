@@ -1,7 +1,7 @@
 package commandHandlers.gHandlers;
 
-import application.MillingShapes;
-import application.UI;
+import ui.MillingShapes;
+import ui.UI;
 
 public class g01Handler {
 	//Geraden (Linear) Interpolation
@@ -10,9 +10,9 @@ public class g01Handler {
 		/**if (test() == false) {
 			return;
 		}**/
-		double neuX = x - UI.bohrer.getLayoutX();
-		double neuY = y - UI.bohrer.getLayoutY();
+		double neuX = x - UI.drill.getLayoutX();
+		double neuY = y - UI.drill.getLayoutY();
 
-		MillingShapes.fraesenLine(x, y, neuX / neuY / 2, 0.5);
+		MillingShapes.fraesenLine(x, y, (neuX - 50) / (neuY - 50) / 2, 0.5);
 	}
 }
