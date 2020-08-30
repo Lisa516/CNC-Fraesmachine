@@ -31,6 +31,5 @@ public class g00Handler {
 		}
 		MainFX.moveLine(x, y, dx, dy);
 		LogCommands.logCommands("G00", x, y);
-		
 	}
 }

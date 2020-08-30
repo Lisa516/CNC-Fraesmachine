@@ -59,6 +59,10 @@ public class MainFX extends Application {
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.play();
 	}
+	
+/**	public static void addLogInfo(Label loginfos) {
+		InfoBox.infos.getChildren().add(loginfos);
+	}**/
 
 	public void start(Stage primaryStage) throws SecurityException, IOException {
 
@@ -152,17 +156,6 @@ public class MainFX extends Application {
 		UI.root.getChildren().add(UI.home);
 
 		Log new_log = new Log("logDatei.txt");
-
-		InfoBox.go.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent o) {
-
-				try {
-
-				} catch (Exception e) {
-					// TODO
-				}
-			}
-		});
 
 		InfoBox.befehlZeile.getChildren().addAll(InfoBox.befehl, InfoBox.befehlFeld);
 		InfoBox.befehlFeld.setMaxWidth(50);
