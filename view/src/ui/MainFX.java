@@ -37,7 +37,7 @@ public class MainFX extends Application {
 	}
 
 	//Move milling head without milling
-	public static void moveLine(int x, int y, double dx, int dy) {
+	public static void moveLine(double x, double y, double dx, int dy) {
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent t) {

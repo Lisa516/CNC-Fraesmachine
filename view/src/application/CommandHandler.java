@@ -21,16 +21,27 @@ import errorHandler.ErrorHandling;
 
 public class CommandHandler {
 	
-	//call a specific command (Lisa)
-	public static void callCommand(int index, String file) throws FileNotFoundException {
+	//get the code of a specific command
+	public static String getCommand(int index, String file) throws FileNotFoundException {
 		String command = CommandReader._getCommand(index, file)[1];
+		if (command.contentEquals("G00") || command.contentEquals("G01")) {
+			callLineCommand(index, command, file);
+			return command;
+			}			
+		if (command.contentEquals("G02") || command.contentEquals("G03")) {
+			callCircleCommand(index, command, file);
+			return command;
+			}
+		return command;
+	}
+	
+	//Call the right handler for a given command
+	public static void callCommand(String command) {
 		if (command.startsWith("G")) {			
 			if (command.contentEquals("G00") || command.contentEquals("G01")) {
-				callLineCommand(index, command, file);
 				return;
 			}			
 			if (command.contentEquals("G02") || command.contentEquals("G03")) {
-				callCircleCommand(index, command, file);
 				return;
 			}
 
@@ -88,10 +99,22 @@ public class CommandHandler {
 		}
 	}
 	
+
+	
 	//Move the Milling Head in a line (Lisa)
 	public static void callLineCommand(int index, String command, String file) throws FileNotFoundException {
 		int x = ParametersCommands._getX(index, file);
 		int y = ParametersCommands._getY(index, file);
+		if (command.contentEquals("G00")) {
+			g00Handler.execute(x, y);
+		}
+		else {
+			g01Handler.execute(x, y);
+		}
+	}
+	
+	//Move the Milling Head in a line (Lisa)
+	public static void callLineCommand(String command, double x, double y) {
 		if (command.contentEquals("G00")) {
 			g00Handler.execute(x, y);
 		}

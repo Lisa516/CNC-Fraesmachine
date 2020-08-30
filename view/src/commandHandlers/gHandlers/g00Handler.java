@@ -7,7 +7,7 @@ import ui.MainFX;
 public class g00Handler {
 	// Verfahrbewegung im Eilgang (nur ohne Bohren/Fraesen moeglich)
 
-	public static void execute(int x, int y) {
+	public static void execute(double x, double y) {
 		if (Test.testFraeseAus() == false) {
 			ErrorHandling.commandInvalidMillNotRunning();
 			return;
