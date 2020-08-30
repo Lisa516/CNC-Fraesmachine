@@ -1,5 +1,6 @@
 package commandHandlers.gHandlers;
 
+import CommandLogging.LogCommands;
 import application.MillingCutter;
 import errorHandler.ErrorHandling;
 import ui.UI;
@@ -29,6 +30,7 @@ public class g02Handler {
 		} else {
 			startAngle = 90 - 45 * (y / x);
 		}
+		LogCommands.logCommands("G02", x, y, i, j);
 	}
 
 }

@@ -34,6 +34,7 @@ public class CommandHandler {
 				return;
 			}			
 			if (command.contentEquals("G02") || command.contentEquals("G03")) {
+				callCircleCommand(index, command, file);
 				return;
 			}
 

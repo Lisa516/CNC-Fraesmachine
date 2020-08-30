@@ -1,5 +1,6 @@
 package commandHandlers.gHandlers;
 
+import CommandLogging.LogCommands;
 import application.MillingCutter;
 import errorHandler.ErrorHandling;
 
@@ -19,6 +20,7 @@ public class g03Handler {
 			return;
 		}	
 		//TODO
+		LogCommands.logCommands("G03", x, y, i, j);
 	}
 
 }

@@ -1,5 +1,6 @@
 package commandHandlers.mHandlers;
 
+import CommandLogging.LogCommands;
 import application.Coolant;
 
 public class m08Handler {
@@ -7,6 +8,7 @@ public class m08Handler {
 	
 	public static void execute() {
 		Coolant._setCoolantStatus(true);
+		LogCommands.logCommands("M08");
 	}
 
 }

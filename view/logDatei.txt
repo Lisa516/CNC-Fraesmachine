@@ -1,2 +1,0 @@
-Aug 30, 2020 3:33:13 PM ui.MainFX$7 handle
-INFO: Ausgefuehrter Befehl: Hallo

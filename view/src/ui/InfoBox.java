@@ -49,7 +49,7 @@ public class InfoBox {
 	static Button go = new Button("Go");
 	static Button clear = new Button("Clear");
 	
-	static VBox infos = new VBox();
+	public static VBox infos = new VBox();
 
 
 
