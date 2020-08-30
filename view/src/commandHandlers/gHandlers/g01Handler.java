@@ -12,7 +12,18 @@ public class g01Handler {
 		}**/
 		double neuX = x - UI.drill.getLayoutX();
 		double neuY = y - UI.drill.getLayoutY();
-
-		MillingShapes.fraesenLine(x, y, (neuX - 50) / (neuY - 50) / 2, 0.5);
+		
+		double dx, dy;
+		
+		if (neuX > neuY) {
+			dy = (neuY - 50) / (neuX - 50);
+			dx = Math.signum(y);
+		}
+		
+		else {
+			dx = (neuX - 50) / (neuY - 50);
+			dy = Math.signum(y);
+		}
+		MillingShapes.fraesenLine(x, y, dx, dy);
 	}
 }

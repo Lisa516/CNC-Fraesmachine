@@ -22,7 +22,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-@SuppressWarnings({"rawtypes", "unused"})
+@SuppressWarnings({ "rawtypes", "unused" })
 public class MainFX extends Application {
 
 	static BorderPane root = new BorderPane();
@@ -36,7 +36,7 @@ public class MainFX extends Application {
 		// TODO
 	}
 
-	//Move milling head without milling
+	// Move milling head without milling
 	public static void moveLine(double x, double y, double dx, int dy) {
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
 
@@ -61,16 +61,16 @@ public class MainFX extends Application {
 	}
 
 	public void start(Stage primaryStage) throws SecurityException, IOException {
-		
+
 		Buttons.buttonContinue.setDisable(true);
-		
+
 		Buttons.stop.setDisable(true);
-		
+
 		Buttons.abort.setDisable(true);
-		
+
 		Buttons.startJSON.setDisable(true);
-		
-		//Stop the milling process when the stop-button is pressed
+
+		// Stop the milling process when the stop-button is pressed
 		Buttons.stop.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
 				Buttons.stop.setDisable(true);
@@ -78,8 +78,8 @@ public class MainFX extends Application {
 				MillingCutter.stopMilling();
 			}
 		});
-		
-		//Abort the milling process when the abort-button is pressed
+
+		// Abort the milling process when the abort-button is pressed
 		Buttons.abort.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
@@ -90,8 +90,8 @@ public class MainFX extends Application {
 				MillingCutter._setPositionY(0);
 			}
 		});
-		
-		//Continue the program after stopping it when the continue-button is pressed
+
+		// Continue the program after stopping it when the continue-button is pressed
 		Buttons.buttonContinue.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
@@ -99,8 +99,8 @@ public class MainFX extends Application {
 				Buttons.abort.setDisable(false);
 			}
 		});
-		
-		//Start controlling, then executing the commands listed on the Befehlscode.json
+
+		// Start controlling, then executing the commands listed on the Befehlscode.json
 		Buttons.startJSON.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 			Task triggerJsonCommands = new Task<Void>() {
 				@Override
@@ -114,8 +114,8 @@ public class MainFX extends Application {
 			};
 			new Thread(triggerJsonCommands).start();
 		});
-		
-		//Load the Settings specified on Settings.json
+
+		// Load the Settings specified on Settings.json
 		Buttons.loadSettings.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 			try {
 				SettingsReader.setSettings();
@@ -126,7 +126,6 @@ public class MainFX extends Application {
 			Buttons.startJSON.setDisable(false);
 			Buttons.loadSettings.setDisable(true);
 		});
-
 
 		primaryStage.setTitle("Milling machine");
 
@@ -164,7 +163,6 @@ public class MainFX extends Application {
 
 					Label loginfos = new Label(eingabeUser);
 					InfoBox.infos.getChildren().add(loginfos);
-					root.setRight(InfoBox.infos);
 				} catch (Exception e) {
 					// TODO
 				}
@@ -173,72 +171,102 @@ public class MainFX extends Application {
 
 		InfoBox.befehlZeile.getChildren().addAll(InfoBox.befehl, InfoBox.befehlFeld);
 		InfoBox.befehlFeld.setMaxWidth(50);
-		
+
 		InfoBox.xZeile.getChildren().addAll(InfoBox.xParameter, InfoBox.xParameterField);
 		InfoBox.xParameterField.setMaxWidth(50);
 		// force the field to be numeric only
 		InfoBox.xParameterField.textProperty().addListener(new ChangeListener<String>() {
-		    @Override
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-		        String newValue) {
-		        if (!newValue.matches("\\d*")) {
-		            InfoBox.xParameterField.setText(newValue.replaceAll("[^\\d]", ""));
-		        }
-		    }
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					InfoBox.xParameterField.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
 		});
-		
+
+		InfoBox.yParameterField.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					InfoBox.yParameterField.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
+		});
+
+		InfoBox.iParameterField.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					InfoBox.iParameterField.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
+		});
+
+		InfoBox.jParameterField.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					InfoBox.jParameterField.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
+		});
+
 		InfoBox.yZeile.getChildren().addAll(InfoBox.yParameter, InfoBox.yParameterField);
 		InfoBox.yParameterField.setMaxWidth(50);
-		
+
 		InfoBox.iZeile.getChildren().addAll(InfoBox.iParameter, InfoBox.iParameterField);
 		InfoBox.iParameterField.setMaxWidth(50);
-		
+
 		InfoBox.jZeile.getChildren().addAll(InfoBox.jParameter, InfoBox.jParameterField);
 		InfoBox.jParameterField.setMaxWidth(50);
-		
+
 		InfoBox.goClear.getChildren().addAll(InfoBox.clear, InfoBox.go);
 		InfoBox.goClear.setSpacing(34);
-		
+
 		InfoBox.go.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			    public void handle(ActionEvent e) {
-					String command = "";
-					double x = 0;
-					double y = 0;
-					double i = 0;
-					double j = 0;
-					if (InfoBox.befehlFeld.getText() != null && !InfoBox.befehlFeld.getText().isEmpty()) {
-						command = InfoBox.befehlFeld.getText();
-					}
-					if (InfoBox.xParameterField.getText() != null && !InfoBox.xParameterField.getText().isEmpty()) {
-						x = Double.parseDouble(InfoBox.xParameterField.getText());
-					}
-					if (InfoBox.yParameterField.getText() != null && !InfoBox.yParameterField.getText().isEmpty()) {
-						x = Double.parseDouble(InfoBox.yParameterField.getText());
-					}
-					if (InfoBox.iParameterField.getText() != null && !InfoBox.iParameterField.getText().isEmpty()) {
-						x = Double.parseDouble(InfoBox.iParameterField.getText());
-					}
-					if (InfoBox.jParameterField.getText() != null && !InfoBox.jParameterField.getText().isEmpty()) {
-						x = Double.parseDouble(InfoBox.jParameterField.getText());
-					}
-			        InputReader._getInputAsStrings(command, x, y, i, j);
-			     }
-			 });
+			public void handle(ActionEvent e) {
+				String command = "";
+				double x = -1;
+				double y = -1;
+				double i = -1;
+				double j = -1;
+				if (InfoBox.befehlFeld.getText() != null && !InfoBox.befehlFeld.getText().isEmpty()) {
+					command = InfoBox.befehlFeld.getText();
+				}
+				if (InfoBox.xParameterField.getText() != null && !InfoBox.xParameterField.getText().isEmpty()) {
+					x = Double.parseDouble(InfoBox.xParameterField.getText());
+				}
+				if (InfoBox.yParameterField.getText() != null && !InfoBox.yParameterField.getText().isEmpty()) {
+					y = Double.parseDouble(InfoBox.yParameterField.getText());
+				}
+				if (InfoBox.iParameterField.getText() != null && !InfoBox.iParameterField.getText().isEmpty()) {
+					i = Double.parseDouble(InfoBox.iParameterField.getText());
+				}
+				if (InfoBox.jParameterField.getText() != null && !InfoBox.jParameterField.getText().isEmpty()) {
+					j = Double.parseDouble(InfoBox.jParameterField.getText());
+				}
+				InputReader._getInputAsStrings(command, x, y, i, j);
+			}
+		});
 
 		UI.root.setRight(InfoBox.infos);
 		InfoBox.infos.setSpacing(10);
 
-		InfoBox.infos.getChildren().addAll(InfoBox.position, InfoBox.spindelStatus, InfoBox.coolantStatus, InfoBox.velocity, InfoBox.befehlZeile, InfoBox.xZeile, InfoBox.yZeile, InfoBox.iZeile, InfoBox.jZeile, InfoBox.goClear, InfoBox.logdatei);
+		InfoBox.infos.getChildren().addAll(InfoBox.position, InfoBox.spindelStatus, InfoBox.coolantStatus,
+				InfoBox.velocity, InfoBox.befehlZeile, InfoBox.xZeile, InfoBox.yZeile, InfoBox.iZeile, InfoBox.jZeile,
+				InfoBox.goClear, InfoBox.logdatei);
 
-		Buttons.buttonsBox.getChildren().addAll(Buttons.stop, Buttons.buttonContinue, Buttons.abort, Buttons.startJSON, Buttons.loadSettings);
-		
+		Buttons.buttonsBox.getChildren().addAll(Buttons.stop, Buttons.buttonContinue, Buttons.abort, Buttons.startJSON,
+				Buttons.loadSettings);
+
 		UI.root.setBottom(Buttons.buttonsBox);
 		Buttons.buttonsBox.setSpacing(5);
-		
+
 		primaryStage.setScene(UI.scene);
 		primaryStage.show();
 	}
+
 	public static void main(String[] args) throws FileNotFoundException {
 		launch(args);
 	}
