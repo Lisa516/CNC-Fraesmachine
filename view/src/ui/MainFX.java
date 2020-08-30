@@ -3,8 +3,8 @@ package ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import CommandLogging.Log;
 import application.CommandsQueue;
-import application.Log;
 import application.MillingCutter;
 import application.SettingsReader;
 import inputHandlers.InputReader;
@@ -37,7 +37,7 @@ public class MainFX extends Application {
 	}
 
 	// Move milling head without milling
-	public static void moveLine(double x, double y, double dx, int dy) {
+	public static void moveLine(double x, double y, double dx, double dy) {
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent t) {
@@ -59,6 +59,10 @@ public class MainFX extends Application {
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.play();
 	}
+	
+/**	public static void addLogInfo(Label loginfos) {
+		InfoBox.infos.getChildren().add(loginfos);
+	}**/
 
 	public void start(Stage primaryStage) throws SecurityException, IOException {
 
@@ -152,22 +156,6 @@ public class MainFX extends Application {
 		UI.root.getChildren().add(UI.home);
 
 		Log new_log = new Log("logDatei.txt");
-
-		InfoBox.go.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent o) {
-
-				try {
-					String eingabeUser = InfoBox.befehlFeld.getText();
-
-					new_log.logger.info("Ausgefuehrter Befehl: " + eingabeUser);
-
-					Label loginfos = new Label(eingabeUser);
-					InfoBox.infos.getChildren().add(loginfos);
-				} catch (Exception e) {
-					// TODO
-				}
-			}
-		});
 
 		InfoBox.befehlZeile.getChildren().addAll(InfoBox.befehl, InfoBox.befehlFeld);
 		InfoBox.befehlFeld.setMaxWidth(50);

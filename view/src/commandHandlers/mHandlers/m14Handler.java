@@ -1,5 +1,6 @@
 package commandHandlers.mHandlers;
 
+import CommandLogging.LogCommands;
 import application.Coolant;
 import application.Spindle;
 
@@ -10,7 +11,7 @@ public class m14Handler {
 		Coolant._setCoolantStatus(true);
 
 		Spindle.startSpindle('l');
-
+		LogCommands.logCommands("M14");
 	}
 
 }
