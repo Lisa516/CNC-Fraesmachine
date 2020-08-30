@@ -6,7 +6,7 @@ import ui.UI;
 public class g01Handler {
 	//Geraden (Linear) Interpolation
 
-	public static void execute(int x, int y) {
+	public static void execute(double x, double y) {
 		/**if (test() == false) {
 			return;
 		}**/

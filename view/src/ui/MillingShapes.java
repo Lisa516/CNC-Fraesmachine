@@ -14,7 +14,7 @@ public class MillingShapes extends MillingCutter {
 	
 	public static Color colorMilledSurface;
 	
-	public static void fraesenLine(int x, int y, double dx, double dy) {
+	public static void fraesenLine(double x, double y, double dx, double dy) {
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent t) {
