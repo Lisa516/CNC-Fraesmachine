@@ -17,7 +17,7 @@ public class CommandsQueue {
 	// Call all of the commands (Lisa)
 	public static void QueueFromJSON(String file) throws FileNotFoundException {
 		for (int i = 0; i < CommandReader.contentAsStringArray(file).length; i++) {
-			CommandHandler.callCommand(CommandHandler.getCommand(i, file));
+			CommandHandler.callCommand(CommandHandler.getCommand(i, file), i, file);
 		}
 	}
 

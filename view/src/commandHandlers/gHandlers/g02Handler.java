@@ -15,7 +15,7 @@ public class g02Handler {
 		return true;
 	}
 
-	public static void execute(int x, int y, int i, int j) {
+	public static void execute(double x, double y, double i, double j) {
 		if (test() == false) {
 			return;
 		}

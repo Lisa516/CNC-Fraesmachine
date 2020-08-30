@@ -6,6 +6,10 @@ public class ErrorHandling extends Thread {
 
 	public ErrorHandling() {
 	}
+	
+	public static String invalidInput() {
+		return "The command and values you put in are not valid. Please try again or have a look at the User Documentation.";
+	}
 
 	//Error if x-value out of Range (Lisa)
 	public static String OutOfRangeX(double value) {
