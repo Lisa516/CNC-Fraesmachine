@@ -1,7 +1,7 @@
 package commandHandlers.gHandlers;
 
-import CommandLogging.LogCommands;
 import application.Test;
+import commandLogging.LogCommands;
 import errorHandler.ErrorHandling;
 import ui.MainFX;
 import ui.UI;

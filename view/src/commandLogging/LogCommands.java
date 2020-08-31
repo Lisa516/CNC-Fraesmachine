@@ -1,4 +1,4 @@
-package CommandLogging;
+package commandLogging;
 
 import ui.InfoBox;
 

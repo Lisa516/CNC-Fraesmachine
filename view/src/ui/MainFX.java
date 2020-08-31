@@ -3,10 +3,10 @@ package ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import CommandLogging.Log;
 import application.CommandsQueue;
-import application.MillingCutter;
 import application.SettingsReader;
+import commandLogging.Log;
+import components.MillingCutter;
 import inputHandlers.InputReader;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

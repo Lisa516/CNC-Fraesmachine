@@ -1,6 +1,10 @@
-package application;
+package components;
 
 import errorHandler.ErrorHandling;
+
+/*
+ * @author Lisa
+ */
 
 public class MillingCutter implements Runnable {
 

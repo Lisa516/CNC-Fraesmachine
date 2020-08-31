@@ -1,7 +1,7 @@
 package commandHandlers.gHandlers;
 
-import CommandLogging.LogCommands;
-import application.MillingCutter;
+import commandLogging.LogCommands;
+import components.MillingCutter;
 import errorHandler.ErrorHandling;
 
 public class g03Handler {

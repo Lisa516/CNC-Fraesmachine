@@ -1,8 +1,8 @@
 package ui;
 
-import application.Coolant;
-import application.MillingCutter;
-import application.Spindle;
+import components.Coolant;
+import components.MillingCutter;
+import components.Spindle;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;

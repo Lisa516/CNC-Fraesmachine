@@ -7,11 +7,17 @@ import com.google.gson.JsonObject;
 
 public class CommandReader extends FileReader {
 
+	/*
+	 * @author Lisa
+	 */
+
+	// Creates a JsonArray of the content of the json file
 	public static JsonArray createJSArray(String file) throws FileNotFoundException {
 		JsonArray commands = readIn(file).getAsJsonArray("commands");
 		return commands;
 	}
 
+	// turns the JsonArray from createJSArray into a String Array
 	public static String[] contentAsStringArray(String file) throws FileNotFoundException {
 
 		JsonArray commands = createJSArray(file);
@@ -40,6 +46,8 @@ public class CommandReader extends FileReader {
 		return commandOrigin;
 	}
 
+	// Sorts the commands of the json file according to their N-codes to execute
+	// them in the right order
 	public static String[] putCommandsInOrder(String file) throws FileNotFoundException {
 		String[] commandsOrigin = contentAsStringArray(file);
 		String[] commands = new String[commandsOrigin.length];
@@ -60,9 +68,10 @@ public class CommandReader extends FileReader {
 		return commands;
 	}
 
-	public static String[] _getCommand(int position, String file) throws FileNotFoundException {
+	// Returns a command at a specific index with its parameters as a String Array
+	public static String[] _getCommand(int index, String file) throws FileNotFoundException {
 		String[] commands = putCommandsInOrder(file);
-		String command = commands[position];
+		String command = commands[index];
 		return command.split("\\,");
 	}
 

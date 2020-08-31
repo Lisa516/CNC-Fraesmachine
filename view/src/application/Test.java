@@ -1,5 +1,7 @@
 package application;
 
+import components.MillingCutter;
+import components.Spindle;
 import errorHandler.ErrorHandling;
 
 public class Test implements Runnable{
