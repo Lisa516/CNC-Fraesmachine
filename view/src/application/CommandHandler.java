@@ -18,11 +18,11 @@ import commandHandlers.mHandlers.m13Handler;
 import commandHandlers.mHandlers.m14Handler;
 import errorHandler.ErrorHandling;
 
-public class CommandHandler {
+/*
+ * @author Lisa
+ */
 
-	/*
-	 * @author Lisa
-	 */
+public class CommandHandler {
 
 	// get the G/M-code of a specific command from a json-file
 	public static String getCommand(int index, String file) throws FileNotFoundException {
@@ -146,8 +146,7 @@ public class CommandHandler {
 	public static void callLineCommand(String command, double x, double y) {
 		if (command.contentEquals("G00")) {
 			g00Handler.execute(x, y);
-		} 
-		else {
+		} else {
 			g01Handler.execute(x, y);
 		}
 	}

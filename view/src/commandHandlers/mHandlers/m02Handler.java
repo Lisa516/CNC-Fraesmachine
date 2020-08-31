@@ -5,6 +5,10 @@ import components.Coolant;
 import components.MillingCutter;
 import components.Spindle;
 
+/*
+ * @author Lisa
+ */
+
 public class m02Handler {
 	//Programm Ende
 	

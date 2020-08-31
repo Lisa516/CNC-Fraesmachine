@@ -3,6 +3,10 @@ package commandHandlers.mHandlers;
 import commandLogging.LogCommands;
 import components.Spindle;
 
+/*
+ * @author Lisa
+ */
+
 public class m03Handler {
 	//Spindel Ein: Im Uhrzeigersinn (Rechtslauf)
 	

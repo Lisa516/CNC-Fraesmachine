@@ -3,9 +3,13 @@ package commandHandlers.mHandlers;
 import commandLogging.LogCommands;
 import components.Spindle;
 
+/*
+ * @author Lisa
+ */
+
 public class m04Handler {
-	//Spindel Ein: Gegen den Uhrzeigersinn (Linkslauf)
-	
+	// Spindel Ein: Gegen den Uhrzeigersinn (Linkslauf)
+
 	public static void execute() {
 
 		Spindle.startSpindle('l');

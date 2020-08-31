@@ -6,6 +6,10 @@ import errorHandler.ErrorHandling;
 import ui.MainFX;
 import ui.UI;
 
+/*
+ * @author Lisa
+ */
+
 public class g00Handler {
 	// Verfahrbewegung im Eilgang (nur ohne Bohren/Fraesen moeglich)
 
@@ -14,7 +18,7 @@ public class g00Handler {
 			ErrorHandling.commandInvalidMillNotRunning();
 			return;
 		}
-		
+
 		double neuX = x - UI.drill.getLayoutX();
 		System.out.println(neuX);
 		double neuY = y - UI.drill.getLayoutY();
@@ -23,37 +27,42 @@ public class g00Handler {
 
 		double dx, dy;
 
-		if (Math.abs(neuX) > Math.abs(neuY)) {
-			dy = (neuY) / (neuX);
+		if (neuX == 0 && neuY == 0) {
+			dx = 0;
+			dy = 0;
+		}
+
+		else if (Math.abs(neuX) > Math.abs(neuY)) {
+			if (neuY != 0) {
+				dy = (neuY) / (neuX);
+			}
+			else {
+				dy = 0;
+			}
 			dx = Math.signum(neuX);
 		}
 
+		else if (Math.abs(neuX) == Math.abs(neuY)) {
+			dx = 1;
+			dy = 1;
+		}
+
 		else {
-			dx = (neuX) / (neuY);
+			if (neuX != 0) {
+				dx = (neuX) / (neuY);
+			}
+			else {
+				dx = 0;
+			}
 			dy = Math.signum(neuY);
 		}
-		
+
 		if (dx > 0) {
-			if (dy > 0) {
-				MainFX.moveLinePositive(x, y, dx, dy);
-			}
-			else {
-				MainFX.moveLineXPositive(x, y, dx, dy);
-			}
+			MainFX.moveLineX(dx, dy, Math.abs(neuX), UI.velocity(Math.sqrt(dx*dx + dy*dy), false));
+		} else {
+			MainFX.moveLineY(dx, dy, Math.abs(neuY), UI.velocity(Math.sqrt(dx*dx + dy*dy), false));
 		}
-		else {
-			if (dy > 0) {
-				System.out.println(dx);
-				System.out.println(dy);
-				MainFX.thisX = UI.drill.getLayoutX();
-				MainFX.thisY = UI.drill.getLayoutY();
-				MainFX.moveLineYPositive(x, y, dx, dy);
-				System.out.println("fertig");
-			}
-			else {
-				MainFX.moveLineNegative(x, y, dx, dy);
-			}
-		}
+
 		LogCommands.logCommands("G00", x, y);
 	}
 }

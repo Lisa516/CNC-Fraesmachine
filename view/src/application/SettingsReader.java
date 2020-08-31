@@ -6,15 +6,20 @@ import javafx.scene.paint.Color;
 import ui.MillingShapes;
 import ui.UI;
 
+/*
+ * @author Lisa
+ * 
+ * class which takes a given Settings.json and processes its in
+ */
+
 public class SettingsReader extends FileReader {
 
 	public static void setSettings() throws FileNotFoundException {
-		double velocityWithCoolant = readIn("Settings.json").get("velocityWithCoolant").getAsInt();
-		double velocityWithoutCoolant = readIn("Settings.json").get("velocityWithoutCoolant").getAsInt();
-		double velocityMillNotRunning = readIn("Settings.json").get("velocityMillNotRunning").getAsInt();
 
-		// TODO: Geschwindigkeit
-		
+		UI.velocityWithoutCoolantMM = readIn("Settings.json").get("velocityWithoutCoolant").getAsInt() * 1000;
+
+		UI.velocityNotMilling = readIn("Settings.json").get("velocityMillNotRunning").getAsInt() * 1000;
+
 		UI.velocityWithCoolantMM = readIn("Settings.json").get("velocityWithCoolant").getAsInt() * 1000;
 
 		UI.home.setCenterX(readIn("Settings.json").get("homePositionX").getAsInt() + 50);

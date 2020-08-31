@@ -5,8 +5,12 @@ import components.MillingCutter;
 import errorHandler.ErrorHandling;
 import ui.UI;
 
+/*
+ * @author Lisa
+ */
+
 public class g02Handler {
-	// Vorschub mit Kreisbogen, im Uhrzeigersinn (Kreis Interpolation)
+	// This g-code mills a clockwise arc (circular interpolation)
 
 	public static boolean test() {
 		if (MillingCutter._getMillingStatus() == false) {
@@ -20,7 +24,7 @@ public class g02Handler {
 		if (test() == false) {
 			return;
 		}
-		//TODO
+		// TODO
 		double mittelpunktX = UI.drill.getLayoutX() + i;
 		double mittelpunktY = UI.drill.getLayoutY() + j;
 		double radius = Math.sqrt((i * i) + (j * j));

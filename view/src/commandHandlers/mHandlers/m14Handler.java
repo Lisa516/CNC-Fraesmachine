@@ -4,6 +4,10 @@ import commandLogging.LogCommands;
 import components.Coolant;
 import components.Spindle;
 
+/*
+ * @author Lisa
+ */
+
 public class m14Handler {
 	//Spindel ein, Linkslauf und Kuehlmittel ein 
 	
