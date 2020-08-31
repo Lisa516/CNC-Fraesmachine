@@ -4,6 +4,7 @@ import commandLogging.LogCommands;
 import components.Coolant;
 import components.MillingCutter;
 import components.Spindle;
+import ui.UI;
 
 /*
  * @author Lisa
@@ -22,6 +23,7 @@ public class m02Handler {
 			MillingCutter.stopMilling();
 		}
 		LogCommands.logCommands("M02");
+		UI.refreshLabel();
 	}
 
 }

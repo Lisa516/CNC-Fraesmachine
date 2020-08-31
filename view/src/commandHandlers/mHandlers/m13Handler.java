@@ -3,6 +3,7 @@ package commandHandlers.mHandlers;
 import commandLogging.LogCommands;
 import components.Coolant;
 import components.Spindle;
+import ui.UI;
 
 /*
  * @author Lisa
@@ -17,6 +18,7 @@ public class m13Handler {
 
 		Spindle.startSpindle('r');
 		LogCommands.logCommands("M13");
+		UI.refreshLabel();
 	}
 
 }
