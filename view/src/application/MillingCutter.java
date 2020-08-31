@@ -80,7 +80,7 @@ public class MillingCutter implements Runnable {
 	}
 	
 	public static void _setPositionX(double x) {
-		if(x > 0 && x < 1400) {
+		if(x >= 0 && x <= 1400) {
 			positionX = x;
 		}
 		else {
@@ -89,7 +89,7 @@ public class MillingCutter implements Runnable {
 	}
 	
 	public static void _setPositionY(double y) {
-		if(y > 0 && y < 1050) {
+		if(y >= 0 && y <= 1050) {
 			positionY = y;
 		}
 		else {

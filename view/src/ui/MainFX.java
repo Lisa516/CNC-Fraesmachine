@@ -11,6 +11,7 @@ import inputHandlers.InputReader;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
@@ -37,12 +38,10 @@ public class MainFX extends Application {
 	}
 
 	// Move milling head without milling
-	public static void moveLine(double x, double y, double dx, double dy) {
+	public static void moveLinePositive(double x, double y, double dx, double dy) {
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
-
 			public void handle(ActionEvent t) {
-				// move the ball
-				if (UI.drill.getLayoutX() < x - 50 || UI.drill.getLayoutY() < y - 50) {
+				if (UI.drill.getLayoutX() < x || UI.drill.getLayoutY() < y) {
 					if (UI.drill.getLayoutX() >= x) {
 						final int dx = 0;
 					} else if (UI.drill.getLayoutY() >= y) {
@@ -59,10 +58,81 @@ public class MainFX extends Application {
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.play();
 	}
-	
-/**	public static void addLogInfo(Label loginfos) {
-		InfoBox.infos.getChildren().add(loginfos);
-	}**/
+
+	public static void moveLineNegative(double x, double y, double dx, double dy) {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent t) {
+				if (UI.drill.getLayoutX() > x || UI.drill.getLayoutY() > y) {
+					if (UI.drill.getLayoutX() <= x) {
+						final int dx = 0;
+					} else if (UI.drill.getLayoutY() <= y) {
+						final int dy = 0;
+					}
+					UI.drill.setLayoutX(UI.drill.getLayoutX() + dx);
+					MillingCutter._setPositionX(UI.drill.getLayoutX());
+					UI.drill.setLayoutY(UI.drill.getLayoutY() + dy);
+					MillingCutter._setPositionY(UI.drill.getLayoutY());
+					UI.refreshLabel();
+				}
+			}
+		}));
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.play();
+	}
+
+	public static void moveLineXPositive(double x, double y, double dx, double dy) {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent t) {
+				if (UI.drill.getLayoutX() < x || UI.drill.getLayoutY() > y) {
+					if (UI.drill.getLayoutX() >= x) {
+						final int dx = 0;
+					} else if (UI.drill.getLayoutY() <= y) {
+						final int dy = 0;
+					}
+					UI.drill.setLayoutX(UI.drill.getLayoutX() + dx);
+					MillingCutter._setPositionX(UI.drill.getLayoutX());
+					UI.drill.setLayoutY(UI.drill.getLayoutY() + dy);
+					MillingCutter._setPositionY(UI.drill.getLayoutY());
+					UI.refreshLabel();
+				}
+			}
+		}));
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.play();
+	}
+
+	public static double thisX;
+	public static double thisY;
+
+	public static void moveLineYPositive(double x, double y, double dx, double dy) {
+		new Thread(() -> {
+			do {
+				try {
+					Thread.sleep(50);// Thread.sleep((int) ((1000 - sc.gets.getAktuelleSchnittgeschwindigkeit()) /
+										// 100 * 1.5));
+
+				} catch (InterruptedException ex) {
+					ex.printStackTrace();
+				}
+				Platform.runLater(() -> {
+					UI.drill.setLayoutX(thisX);
+					System.out.println(dx + " " + dy);
+					UI.drill.setLayoutX(Math.round(UI.drill.getLayoutX() + dx));
+					System.out.println(UI.drill.getLayoutX());
+					MillingCutter._setPositionX(UI.drill.getLayoutX());
+					UI.drill.setLayoutY(Math.round(UI.drill.getLayoutY() + dy));
+					System.out.println(UI.drill.getLayoutY());
+					MillingCutter._setPositionY(UI.drill.getLayoutY());
+					UI.refreshLabel();
+					thisX = UI.drill.getLayoutX();
+				});
+			} while (UI.drill.getLayoutX() > x || UI.drill.getLayoutY() < y);
+			if (Thread.interrupted()) {
+				return;
+			}
+		}).start();
+
+	}
 
 	public void start(Stage primaryStage) throws SecurityException, IOException {
 
@@ -243,7 +313,7 @@ public class MainFX extends Application {
 
 		InfoBox.infos.getChildren().addAll(InfoBox.position, InfoBox.spindelStatus, InfoBox.coolantStatus,
 				InfoBox.velocity, InfoBox.befehlZeile, InfoBox.xZeile, InfoBox.yZeile, InfoBox.iZeile, InfoBox.jZeile,
-				InfoBox.goClear, InfoBox.logdatei);
+				InfoBox.goClear, InfoBox.logdatei, InfoBox.commandsText);
 
 		Buttons.buttonsBox.getChildren().addAll(Buttons.stop, Buttons.buttonContinue, Buttons.abort, Buttons.startJSON,
 				Buttons.loadSettings);

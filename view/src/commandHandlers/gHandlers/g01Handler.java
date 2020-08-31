@@ -14,13 +14,13 @@ public class g01Handler {
 		double dx, dy;
 		
 		if (neuX > neuY) {
-			dy = (neuY - 50) / (neuX - 50);
-			dx = Math.signum(y);
+			dy = (neuY) / (neuX);
+			dx = Math.signum(neuX);
 		}
 		
 		else {
-			dx = (neuX - 50) / (neuY - 50);
-			dy = Math.signum(y);
+			dx = (neuX) / (neuY);
+			dy = Math.signum(neuY);
 		}
 		double hypo = Math.sqrt(dx*dx + dy*dy);
 		double temp = 3000/hypo;
