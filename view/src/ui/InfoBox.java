@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 public class InfoBox {
 	
@@ -24,6 +25,10 @@ public class InfoBox {
 	static Label velocity = new Label("Velocity: " + MillingCutter._getVelocity() + "m/min");
 
 	static Label logdatei = new Label("Ausgefuehrte Befehle:");
+	
+	public static String commandsList = "";
+	
+	public static Text commandsText = new Text(commandsList);
 	
 	static HBox befehlZeile = new HBox();
 	static Label befehl = new Label("Command: ");

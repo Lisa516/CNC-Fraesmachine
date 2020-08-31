@@ -1,21 +1,20 @@
 package CommandLogging;
 
-import javafx.scene.control.Label;
-import ui.MainFX;
+import ui.InfoBox;
 
 public class LogCommands {
 	public static void logCommands(String befehl) {
-	/**	Label loginfos = new Label(befehl);
-		MainFX.addLogInfo(loginfos);**/
+		InfoBox.commandsList += befehl;
+		InfoBox.commandsText.setText(InfoBox.commandsList);
 	}
 
-	public static void logCommands(String befehl, double x, double y) {/**
-		Label loginfos = new Label(befehl + ", X: " + x + ", Y: " + y);
-		MainFX.addLogInfo(loginfos);**/
+	public static void logCommands(String befehl, double x, double y) {
+		InfoBox.commandsList += "\n" + befehl + " X: " + x + " Y: " + y;
+		InfoBox.commandsText.setText(InfoBox.commandsList);
 	}
 
-	public static void logCommands(String befehl, double x, double y, double i, double j) {/**
-		Label loginfos = new Label(befehl + ", X: " + x + ", Y: " + y + ", I: " + i);
-		MainFX.addLogInfo(loginfos);**/
+	public static void logCommands(String befehl, double x, double y, double i, double j) {
+		InfoBox.commandsList += "\n" + befehl + " X: " + x + " Y: " + y + " I: " + i + " J: " + j;
+		InfoBox.commandsText.setText(InfoBox.commandsList);
 	}
 }
