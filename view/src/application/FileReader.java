@@ -7,18 +7,19 @@ import java.io.InputStreamReader;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+/*
+ * @author Lisa
+ */
+
 public class FileReader {
 
+	//A json file (Settings or Commands) is read in via the external library gson
 	public static JsonObject readIn(String file) throws FileNotFoundException {
 		Gson gson = new Gson();
-		// Datei file über einen Stream einlesen
 		FileInputStream input = new FileInputStream("src/application/" + file);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-
-		// Datei als JSON-Objekt einlesen
 		JsonObject json = gson.fromJson(reader, JsonObject.class);
 
 		return json;
 	}
-
 }

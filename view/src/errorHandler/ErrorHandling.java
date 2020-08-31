@@ -1,6 +1,6 @@
 package errorHandler;
 
-import application.MillingCutter;
+import components.MillingCutter;
 
 public class ErrorHandling extends Thread {
 

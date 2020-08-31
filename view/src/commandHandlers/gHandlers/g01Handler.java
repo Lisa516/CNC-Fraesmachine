@@ -1,31 +1,36 @@
 package commandHandlers.gHandlers;
 
-import CommandLogging.LogCommands;
+import commandLogging.LogCommands;
 import ui.MillingShapes;
 import ui.UI;
 
+/*
+ * @author Lisa
+ */
+
 public class g01Handler {
-	//Geraden (Linear) Interpolation
+	//This g-code is supposed to trigger a straight interpolation
 
 	public static void execute(double x, double y) {
-		double neuX = x - UI.drill.getLayoutX();
-		double neuY = y - UI.drill.getLayoutY();
+		double difX = x - UI.drill.getLayoutX();
+		double difY = y - UI.drill.getLayoutY();
 		
 		double dx, dy;
 		
-		if (neuX > neuY) {
-			dy = (neuY) / (neuX);
-			dx = Math.signum(neuX);
+		double amountX = Math.abs(difX);
+		double amountY = Math.abs(difY);
+		
+		if (amountX > amountY) {
+			dy = amountX / amountY * Math.signum(difY);
+			dx = Math.signum(difX);
 		}
 		
 		else {
-			dx = (neuX) / (neuY);
-			dy = Math.signum(neuY);
+			dx = amountX / amountY * Math.signum(difX);
+			dy = Math.signum(difY);
 		}
-		double hypo = Math.sqrt(dx*dx + dy*dy);
-		double temp = 3000/hypo;
-		double temp2 = 60/temp;
-		MillingShapes.fraesenLine(x, y, dx, dy, temp2);
+		
+		MillingShapes.fraesenLine(x, y, dx, dy, UI.velocity(Math.sqrt(dx*dx + dy*dy), true));
 		LogCommands.logCommands("G01", x, y);
 	}
 }

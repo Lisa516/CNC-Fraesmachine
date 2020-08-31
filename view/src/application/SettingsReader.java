@@ -9,11 +9,13 @@ import ui.UI;
 public class SettingsReader extends FileReader {
 
 	public static void setSettings() throws FileNotFoundException {
-		int velocityWithCoolant = readIn("Settings.json").get("velocityWithCoolant").getAsInt();
-		int velocityWithoutCoolant = readIn("Settings.json").get("velocityWithoutCoolant").getAsInt();
-		int velocityMillNotRunning = readIn("Settings.json").get("velocityMillNotRunning").getAsInt();
+		double velocityWithCoolant = readIn("Settings.json").get("velocityWithCoolant").getAsInt();
+		double velocityWithoutCoolant = readIn("Settings.json").get("velocityWithoutCoolant").getAsInt();
+		double velocityMillNotRunning = readIn("Settings.json").get("velocityMillNotRunning").getAsInt();
 
 		// TODO: Geschwindigkeit
+		
+		UI.velocityWithCoolantMM = readIn("Settings.json").get("velocityWithCoolant").getAsInt() * 1000;
 
 		UI.home.setCenterX(readIn("Settings.json").get("homePositionX").getAsInt() + 50);
 

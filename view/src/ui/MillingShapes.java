@@ -1,6 +1,6 @@
 package ui;
 
-import application.MillingCutter;
+import components.MillingCutter;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;

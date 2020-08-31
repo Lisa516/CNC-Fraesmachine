@@ -1,7 +1,7 @@
 package commandHandlers.mHandlers;
 
-import CommandLogging.LogCommands;
-import application.Coolant;
+import commandLogging.LogCommands;
+import components.Coolant;
 
 public class m08Handler {
 	//Kuehlmittel Ein

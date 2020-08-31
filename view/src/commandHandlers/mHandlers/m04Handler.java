@@ -1,7 +1,7 @@
 package commandHandlers.mHandlers;
 
-import CommandLogging.LogCommands;
-import application.Spindle;
+import commandLogging.LogCommands;
+import components.Spindle;
 
 public class m04Handler {
 	//Spindel Ein: Gegen den Uhrzeigersinn (Linkslauf)
