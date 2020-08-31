@@ -5,13 +5,17 @@ import components.Coolant;
 import components.MillingCutter;
 import components.Spindle;
 
+/*
+ * @author Lisa
+ */
+
 public class m00Handler {
-	//Programmhalt (Spindel, Kuehlmittel, Vorschub aus)
-	
+	// Programmhalt (Spindel, Kuehlmittel, Vorschub aus)
+
 	public static void test() {
-		
+
 	}
-	
+
 	public static void execute() {
 
 		Spindle.stopSpindle();

@@ -2,9 +2,14 @@ package commandLogging;
 
 import ui.InfoBox;
 
+/*
+ * @author Lisa
+ */
+
+//Overloading method so it fits for all of the commands
 public class LogCommands {
 	public static void logCommands(String befehl) {
-		InfoBox.commandsList += befehl;
+		InfoBox.commandsList += "\n" + befehl;
 		InfoBox.commandsText.setText(InfoBox.commandsList);
 	}
 

@@ -4,6 +4,10 @@ import commandLogging.LogCommands;
 import components.MillingCutter;
 import errorHandler.ErrorHandling;
 
+/*
+ * @author Lisa
+ */
+
 public class g03Handler {
 	//Vorschub mit Kreisbogen, gegen den Uhrzeigersinn
 	

@@ -2,6 +2,10 @@ package errorHandler;
 
 import components.MillingCutter;
 
+/*
+ * @author Lisa & Joshua
+ */
+
 public class ErrorHandling extends Thread {
 
 	public ErrorHandling() {

@@ -2,6 +2,10 @@ package application;
 
 import java.io.FileNotFoundException;
 
+/*
+ * @author Lisa
+ */
+
 public class TestHandler {
 	public boolean ProgrammEnde = false;
 	

@@ -8,8 +8,6 @@ import application.SettingsReader;
 import commandLogging.Log;
 import components.MillingCutter;
 import inputHandlers.InputReader;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -20,8 +18,12 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+
+/*
+ * @author Lisa
+ */
 
 @SuppressWarnings({ "rawtypes", "unused" })
 public class MainFX extends Application {
@@ -38,95 +40,65 @@ public class MainFX extends Application {
 	}
 
 	// Move milling head without milling
-	public static void moveLinePositive(double x, double y, double dx, double dy) {
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent t) {
-				if (UI.drill.getLayoutX() < x || UI.drill.getLayoutY() < y) {
-					if (UI.drill.getLayoutX() >= x) {
-						final int dx = 0;
-					} else if (UI.drill.getLayoutY() >= y) {
-						final int dy = 0;
-					}
-					UI.drill.setLayoutX(UI.drill.getLayoutX() + dx);
-					MillingCutter._setPositionX(UI.drill.getLayoutX());
-					UI.drill.setLayoutY(UI.drill.getLayoutY() + dy);
-					MillingCutter._setPositionY(UI.drill.getLayoutY());
-					UI.refreshLabel();
-				}
-			}
-		}));
-		timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.play();
-	}
+	/**
+	 * public static void moveLinePositive(double x, double y, double dx, double dy)
+	 * { Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new
+	 * EventHandler<ActionEvent>() { public void handle(ActionEvent t) { if
+	 * (UI.drill.getLayoutX() < x || UI.drill.getLayoutY() < y) { if
+	 * (UI.drill.getLayoutX() >= x) { final int dx = 0; } else if
+	 * (UI.drill.getLayoutY() >= y) { final int dy = 0; }
+	 * UI.drill.setLayoutX(UI.drill.getLayoutX() + dx);
+	 * MillingCutter._setPositionX(UI.drill.getLayoutX());
+	 * UI.drill.setLayoutY(UI.drill.getLayoutY() + dy);
+	 * MillingCutter._setPositionY(UI.drill.getLayoutY()); UI.refreshLabel(); } }
+	 * })); timeline.setCycleCount(Timeline.INDEFINITE); timeline.play(); }
+	 **/
 
-	public static void moveLineNegative(double x, double y, double dx, double dy) {
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent t) {
-				if (UI.drill.getLayoutX() > x || UI.drill.getLayoutY() > y) {
-					if (UI.drill.getLayoutX() <= x) {
-						final int dx = 0;
-					} else if (UI.drill.getLayoutY() <= y) {
-						final int dy = 0;
-					}
-					UI.drill.setLayoutX(UI.drill.getLayoutX() + dx);
-					MillingCutter._setPositionX(UI.drill.getLayoutX());
-					UI.drill.setLayoutY(UI.drill.getLayoutY() + dy);
-					MillingCutter._setPositionY(UI.drill.getLayoutY());
-					UI.refreshLabel();
-				}
-			}
-		}));
-		timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.play();
-	}
-
-	public static void moveLineXPositive(double x, double y, double dx, double dy) {
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent t) {
-				if (UI.drill.getLayoutX() < x || UI.drill.getLayoutY() > y) {
-					if (UI.drill.getLayoutX() >= x) {
-						final int dx = 0;
-					} else if (UI.drill.getLayoutY() <= y) {
-						final int dy = 0;
-					}
-					UI.drill.setLayoutX(UI.drill.getLayoutX() + dx);
-					MillingCutter._setPositionX(UI.drill.getLayoutX());
-					UI.drill.setLayoutY(UI.drill.getLayoutY() + dy);
-					MillingCutter._setPositionY(UI.drill.getLayoutY());
-					UI.refreshLabel();
-				}
-			}
-		}));
-		timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.play();
-	}
-
-	public static double thisX;
-	public static double thisY;
-
-	public static void moveLineYPositive(double x, double y, double dx, double dy) {
+	// Thread which moves the milling head
+	public static void moveLineX(double dx, double dy, double absNeuX, double speed) {
 		new Thread(() -> {
-			do {
+			for (double i = 0; i < Math.round(absNeuX); i = i + Math.abs(dx)) {
 				try {
-					Thread.sleep(50);// Thread.sleep((int) ((1000 - sc.gets.getAktuelleSchnittgeschwindigkeit()) /
-										// 100 * 1.5));
+					Thread.sleep((long) speed);
 
-				} catch (InterruptedException ex) {
-					ex.printStackTrace();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 				Platform.runLater(() -> {
-					UI.drill.setLayoutX(thisX);
-					System.out.println(dx + " " + dy);
-					UI.drill.setLayoutX(Math.round(UI.drill.getLayoutX() + dx));
-					System.out.println(UI.drill.getLayoutX());
+
+					UI.drill.setLayoutX(UI.drill.getLayoutX() + dx);
 					MillingCutter._setPositionX(UI.drill.getLayoutX());
-					UI.drill.setLayoutY(Math.round(UI.drill.getLayoutY() + dy));
-					System.out.println(UI.drill.getLayoutY());
+					UI.drill.setLayoutY(UI.drill.getLayoutY() + dy);
 					MillingCutter._setPositionY(UI.drill.getLayoutY());
+
 					UI.refreshLabel();
-					thisX = UI.drill.getLayoutX();
 				});
-			} while (UI.drill.getLayoutX() > x || UI.drill.getLayoutY() < y);
+			}
+			if (Thread.interrupted()) {
+				return;
+			}
+		}).start();
+	}
+	
+	public static void moveLineY(double dx, double dy, double absNeuY, double speed) {
+		new Thread(() -> {
+			for (double i = 0; i < Math.round(absNeuY); i = i + Math.abs(dy)) {
+				try {
+					Thread.sleep((long) speed);
+
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				Platform.runLater(() -> {
+
+					UI.drill.setLayoutX(UI.drill.getLayoutX() + dx);
+					MillingCutter._setPositionX(UI.drill.getLayoutX());
+					UI.drill.setLayoutY(UI.drill.getLayoutY() + dy);
+					MillingCutter._setPositionY(UI.drill.getLayoutY());
+
+					UI.refreshLabel();
+				});
+			}
 			if (Thread.interrupted()) {
 				return;
 			}
@@ -162,6 +134,7 @@ public class MainFX extends Application {
 				MillingCutter.stopMilling();
 				MillingCutter._setPositionX(0);
 				MillingCutter._setPositionY(0);
+				System.exit(0);
 			}
 		});
 
@@ -329,5 +302,3 @@ public class MainFX extends Application {
 		launch(args);
 	}
 };
-
-//Lisa

@@ -3,6 +3,10 @@ package commandHandlers.mHandlers;
 import commandLogging.LogCommands;
 import components.Spindle;
 
+/*
+ * @author Lisa
+ */
+
 public class m05Handler {
 	//Spindel Stopp
 

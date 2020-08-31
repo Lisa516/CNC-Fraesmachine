@@ -16,7 +16,7 @@ public class FileReader {
 	//A json file (Settings or Commands) is read in via the external library gson
 	public static JsonObject readIn(String file) throws FileNotFoundException {
 		Gson gson = new Gson();
-		FileInputStream input = new FileInputStream("src/application/" + file);
+		FileInputStream input = new FileInputStream("src/files/" + file);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 		JsonObject json = gson.fromJson(reader, JsonObject.class);
 
